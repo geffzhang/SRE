@@ -1,0 +1,52 @@
+How to resolve the "fatal server error: no screen found"
+Contents [hide] 
+1 Problem
+2 Solution
+2.1 becoming root
+2.2 editing /etc/X11/xorg.conf
+2.3 leaving root
+2.4 starting x
+2.5 Additional info for the solution
+
+Problem
+
+Solution
+
+The solution (written by the user A-dog of the GhostBSD forums)forums: topic [Solved] Fatal server error - no screens found was successfully working on a HP Compaq NX 6310 (laptop of Paolo).
+becoming root
+Load the cd/dvd and get to the cli to login.
+To becoming root by typing
+su
+. Of course you have to use the passphrase for your root-account.
+editing /etc/X11/xorg.conf
+To edit a file we need an editor. In this example we will use ee, which is installed by default.
+Open the file with the editor ee by typing
+ee /etc/X11/xorg.conf
+.
+Go down to where the driver is identified. This section of the file begins with
+Section "Device"
+.
+There you can change the driver to vesa by having
+        Driver      "vesa"
+in your file.
+For leaving ee and saving the file xorg.conf,
+press the key esc,
+press the key a and then
+press the key a
+.
+leaving root
+End the session as root, type
+exit
+and you are back as the formal user.
+starting x
+Initialize the X session by typing
+startx
+.
+Now you need to wait until the X server load for you.
+Additional info for the solution
+On a Acer Aspire One 532 (GMA 3150) you had to add the line 'Modes' to the /etc/X11/xorg.conf
+Section "Screen"
+SubSection "Display"
+	Depth	24
+	Modes	"1024x600" "800x600"
+EndSubSection 

@@ -1,0 +1,13 @@
+#AAG Hosts Begin
+
+#OAM Network
+10.192.28.65    omg1
+10.192.28.66    omg2
+
+#Cluster Network
+10.0.0.4        db1 jms1 germanium germanium-00 germanium-01 db jms
+10.0.0.5        db2 jms2 arsenic arsenic-00 arsenic-01
+
+#AAG Hosts End
+
+#__HOSTNAME_MAP__ germanium

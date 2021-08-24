@@ -1,0 +1,183 @@
+var topPanel = "Util - Roslyn - OnSave Compile Solution".popupWindow(1024,576)    
+					.insert_LogViewer();
+//var topPanel = panel.clear().add_Panel();	 	    
+var actionsPanel = topPanel.insert_Above(40,"");     
+var codeViewer = topPanel.title("Source Code").add_SourceCodeEditor(); 
+var solutionFiles = topPanel.insert_Left(300, "Source Files (in current solution)").add_TreeView_with_PropertyGrid().sort(); 
+var script = topPanel.insert_Right("Script Compiled Assembly").add_Script();
+var errorsList = topPanel.insert_Below(100,"Errors").add_TreeView(); 
+
+//var solutionFile = ""; 
+var compilerAvailable = true;
+var compileOnSave = false;
+var createUniqueAssemblies = false;
+
+IWorkspace workspace = null;
+ 
+solutionFiles.beforeExpand<ISolution>( 
+	(treeNode,solution)=>{
+							treeNode.add_Nodes(solution.Projects, (project)=>project.Name, 
+																  (project)=>project, 
+																  (project)=> project.HasDocuments, 
+																  (project)=> Color.Blue);
+						 });
+
+solutionFiles.beforeExpand<IProject>( 
+	(treeNode,project)=>{
+							var projectDirectory = project.FilePath.directoryName();
+							treeNode.add_Nodes(project.Documents, (document)=>document.FilePath.remove(projectDirectory), 
+																  (document)=> document, 
+																  (document)=> false,  
+																  (document)=> Color.DarkBlue);//.Name, (project)=>project, (project)=> project.HasDocuments);
+						 });
+
+solutionFiles.afterSelect<IDocument>(
+	(document)=>{
+					codeViewer.open(document.FilePath);
+					//document.details();
+				});
+
+																
+Action compile = 
+	()=>{	 
+			script.enabled(false);
+			solutionFiles.azure();
+			O2Thread.mtaThread( 
+				()=>{
+						var o2Timer = new O2Timer("Solution Compilation").start();
+						//IWorkspace workspace??=??Workspace.LoadSolution(solutionFile);						
+						ISolution solution = workspace.CurrentSolution;						
+						var compiledAssemblies = new List<Assembly>();
+						var allErrors = new List<CommonDiagnostic>();
+						foreach(var project in solution.Projects)
+						{		
+							"Compiling Project: {0}".info(project.Name);
+							var assembly = (createUniqueAssemblies)
+												? project.compile_And_ReturnUniqueAssembly((errors)=> allErrors.add(errors))
+												: project.compile((errors)=> allErrors.add(errors)); 
+							if (assembly.notNull())						
+								compiledAssemblies.add(assembly);
+						}
+						errorsList.clear()
+								  .add_Nodes(allErrors);
+						errorsList.backColor(errorsList.nodes().size() > 0 ? Color.LightPink : Color.Azure)
+								  .selectFirst()
+								  .focus()
+								  .parent<GroupBox>().set_Text("Compilation Errors: {0} : {1}".format(errorsList.nodes().size(), o2Timer.stop()));
+							//var assembly = compilation.create_Assembly();															
+												
+						if (errorsList.nodes().size() == 0)
+						{
+							script.InvocationParameters.Clear();
+							script.InvocationParameters.add("assemblies", compiledAssemblies.ToArray());						
+							script.enabled(true);
+							if(createUniqueAssemblies)
+							{
+								var uniqueId = "//Roslyn compiled assemblies".lineBeforeAndAfter();
+								var codeReferences = uniqueId;
+								foreach(var compiledAssembly in compiledAssemblies)
+								{
+									codeReferences+= "//O2Ref:{0}".format(compiledAssembly.Location).line();								
+								}
+								script.onCompileExecuteOnce();	
+								script.Code = script.Code.subString_Before(uniqueId)
+														 .append(codeReferences);
+							}	
+							else
+								script.execute();
+						}
+						compilerAvailable = true;
+						solutionFiles.white();
+					});
+	}; 
+
+EventHandler<WorkspaceEventArgs> workspaceChanged = 
+	(sender,e)=>{									
+					if (compilerAvailable)					
+						if (compileOnSave)
+						{
+							"Workspace changed, triggering compilation".debug();					
+							compilerAvailable = false;
+							compile();
+						}
+						else
+							"Workspace changed, but compileOnSave is set to false".debug();					
+				};
+
+Action<string> loadSolutionOrProject =
+	(target)=>{ 	
+					"Loading File: {0}".info(target);
+					if (target.extension(".sln"))
+						workspace = Workspace.LoadSolution(target, null,null, true);
+					else if (target.extension(".csproj"))
+							workspace = Workspace.LoadStandAloneProject(target, null,null,null, true);
+					else
+						return;
+					//solutionFile = _solutionFile;
+//					sourceCodeFiles.clear();
+					errorsList.clear().add_Node("Compiling solution or project....");
+					codeViewer.open("");
+					
+					topPanel.onClosed(()=>
+						{						
+							"On TopPanel closed".debug();
+							workspace.Dispose();
+							compilerAvailable = false;
+							//"Directly disposing the filetracker".info();
+							//var field = (FieldInfo)typeof(Roslyn.Services.Host.HostWorkspace).field("fileTracker");
+							//PublicDI.reflection.getFieldValue(field, workspace).invoke("Dispose");
+						});
+					workspace.WorkspaceChanged += workspaceChanged;
+					
+					solutionFiles.clear().add_Node(workspace.CurrentSolution.FilePath.fileName(), workspace.CurrentSolution,workspace.CurrentSolution.HasProjects).color(Color.Orange);
+					solutionFiles.expand();
+					compile();
+/*					var files = (from project in workspace.CurrentSolution.Projects
+								from document in project.Documents
+								select document).toList();
+					sourceCodeFiles.add_Nodes(files, (file)=>file.Name);
+					actionsPanel.control<TextBox>(true).set_Text(solutionFile);
+					*/
+				};
+		
+errorsList.afterSelect<Diagnostic>(  
+	(diagnostic)=>{
+					var lineSpan = diagnostic.Location.GetLineSpan(true);
+					codeViewer.open(lineSpan.Path);
+					codeViewer.gotoLine(lineSpan.StartLinePosition.Line + 1);					 
+					errorsList.focus();
+			      });
+
+actionsPanel.add_Link("Re-compile loaded solution", ()=> compile())
+			.append_CheckBox("Create Unique Assemblies", (value)=> createUniqueAssemblies = value)
+			.append_CheckBox("Compile on Save", (value)=>compileOnSave = value).@check()
+	     	.append_Label("Current Solution File (you can drop a *.sln file here to load it):").autoSize()
+	     	.append_TextBox("").align_Right();
+
+topPanel.onDrop(loadSolutionOrProject);	
+//sourceCodeFiles.onDrop(loadSolution);
+errorsList.parentForm().onDrop(loadSolutionOrProject);
+script.InvocationParameters.Add("assemblies",new List<Assembly>().ToArray());
+script.Code = 
+@"var assembly = assemblies.first(); 
+return assembly;"; 
+
+loadSolutionOrProject(@"E:\o2_v4\O2.FluentSharp\O2.FluentSharp.CoreLib\O2.FluentSharp.CoreLib.sln");
+return codeViewer.open(workspace.file("o2.cs").FilePath);
+
+//O2File:_Extra_methods_Roslyn_API.cs
+//O2File:Findings_ExtensionMethods.cs
+
+//using FluentSharp.FluentRoslyn
+
+//using O2.XRules.Database.Findings;
+//using Roslyn.Compilers.CSharp
+//using Roslyn.Compilers.Common
+//using System.Threading
+//using System.Reflection
+//using Roslyn.Services
+//O2Ref:Roslyn.Services.dll
+//O2Ref:Roslyn.Compilers.dll
+//O2Ref:Roslyn.Compilers.dll
+//O2Ref:Roslyn.Compilers.CSharp.dll
+//O2Ref:FluentSharp.Roslyn.dll 

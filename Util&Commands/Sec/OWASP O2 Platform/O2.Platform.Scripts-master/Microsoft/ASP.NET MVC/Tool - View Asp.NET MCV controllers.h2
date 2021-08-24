@@ -1,0 +1,118 @@
+//var topPanel = panel.add_Panel(true); 
+var topPanel = O2Gui.open<Panel>("Tool - View Asp.NET MVC Controllers", 800,600);
+var useCachedData = false;
+//var manualMethodStreams = topPanel.add_Control<ascx_ManualMethodStreams>();
+var menu = topPanel.insert_MenuStrip();
+var sourceCodeViewer = topPanel.add_SourceCodeViewer();
+var astData = (O2MappedAstData)O2LiveObjects.get("astData");
+
+List<IClass> controllers = null;
+
+var treeView = sourceCodeViewer.insert_Left<TreeView>(400) 
+							   .showSelection();
+							   
+
+menu.add_Menu("REPL").add_MenuItem("REPL parent Form" 	, ()=> topPanel.parentForm().script_Me())
+					 .add_MenuItem("REPL controllers"	, ()=> controllers.ToArray().script_Me("controllers"))
+					 .add_MenuItem("REPL astData"		, ()=> astData.script_Me("astData"));
+			
+treeView.afterSelect<MethodDeclaration>(
+	   		(methodDeclaration)=>
+	   			{
+	   				//sourceCodeViewer.set_Text(methodDeclaration.csharpCode(),".cs")
+	   				var file = astData.file(methodDeclaration);
+	   				if (file.exists())
+	   				{
+	   					sourceCodeViewer.open(file); 
+	   					sourceCodeViewer.editor().caret(methodDeclaration.StartLocation.Line + 5,methodDeclaration.StartLocation.Column);
+	   					sourceCodeViewer.editor().gotoLine(methodDeclaration.StartLocation.Line);
+	   				}
+	   				treeView.focus(); 
+	   			});
+
+
+
+Action<string> loadFilesFromFolder = 
+	(folder) => {
+					treeView.backColor(Color.LightPink);
+					//astData = null;
+					if (useCachedData.isFalse() || astData == null)
+					{
+						"Loading AstData".info();
+						astData = new O2MappedAstData();
+						astData.O2AstResolver.addReference("System.Web.Mvc");
+						astData.loadFiles(folder.files("*.cs",true));	
+						O2LiveObjects.set("astData",astData);
+					}	
+										
+					controllers = new List<IClass>();
+					foreach(var iClass in astData.iClasses())
+					{	
+						if (iClass.BaseTypes.Count  >0)
+						{	
+							foreach(var baseType in iClass.BaseTypes)		
+							{
+								"iClass.baseType : {0}.{1}".debug(iClass.Name, baseType);
+								if(baseType.FullyQualifiedName == "System.Web.Mvc.Controller" || baseType.FullyQualifiedName == "Controller")   
+									controllers.Add(iClass);
+								else
+								{ 
+									"bc: {0}".info(baseType.FullyQualifiedName);
+									//show.info(baseType);
+								/*	foreach(var baseBaseType in baseType.BaseTypes)								
+										if(baseBaseType.FullyQualifiedName == "System.Web.Mvc.Controller")   
+											controllers.Add(iClass);
+										else
+											"base.base class:{0}".info(baseBaseType.FullyQualifiedName);
+								*/			
+								}
+							}
+						}	
+					}
+					treeView.clear();						
+					foreach(var controller  in controllers)
+						foreach(var method in controller.Methods) 
+							if (method.IsConstructor.isFalse() && method.IsPublic) 
+							{
+								if (astData.MapAstToNRefactory.IMethodToMethodDeclaration.hasKey(method))
+								{
+									var methodDeclaration = astData.MapAstToNRefactory.IMethodToMethodDeclaration[method];
+									treeView.add_Node(method.fullName(), methodDeclaration);
+								}
+							}
+					treeView.backColor(Color.White);
+					treeView.selectFirst();
+				};
+
+
+treeView.onDrop(
+		(folder)=>{
+					useCachedData = false;
+					loadFilesFromFolder(folder);
+				  });
+
+var sourceFolder = @"C:\__Tests\Demos_Files\NerdDinner_2.0\NerdDinner";
+loadFilesFromFolder(sourceFolder);
+
+return astData; 
+
+//manualMethodStreams.buildGui();
+
+//using FluentSharp.CSharpAST
+//using FluentSharp.CSharpAST.Utils
+
+//using ICSharpCode.SharpDevelop.Dom; 
+//using ICSharpCode.NRefactory;
+//using ICSharpCode.NRefactory.Ast;
+
+//using O2.XRules.Database.Languages_and_Frameworks.DotNet
+ 
+//O2File:ascx_ManualMethodStreams.cs
+//O2File:Ast_Engine_ExtensionMethods.cs
+//O2Ref:FluentSharp.Ast.dll
+//O2Ref:Quickgraph.dll
+//O2Ref:GraphSharp.dll
+//O2Ref:GraphSharp.Controls.dll
+
+
+//O2File:_Extra_methods_To_Add_to_Main_CodeBase.cs

@@ -1,0 +1,150 @@
+SCRIPT PARA ADICIONAR USUÁRIOS EM MASSA NO LINUX
+ 
+Quem nunca precisou criar usuários em massa em um servidor linux?
+
+ 
+
+Muitas vezes para fazer isso, os administradores adicionam um usuário no sistema, executam o comando shadowconfig off para desabilitar as senhas em shadow e passá-las para o arquivo passwd. Após isso, copiam a linha e apenas alteram o uid, e o nome da conta, ou seja, facilita a criação de usuários, porém tem-se a desvantagem de exigir algum trabalho manual e criar uma senha padrão.
+
+ 
+
+Pesquisando a documentação do linux referente ao comando useradd, percebemos que existe como passar a senha através do comando useradd -p, porém esta deve estar no formato shadow-MD5.
+
+ 
+
+Para resolver esse empecilho na universidade onde trabalho, criamos um script que adiciona usuários no sistema automaticamente utilizando para isso um arquivo de texto, o qual conterá o seguinte formato: conta,senha.
+
+ 
+
+Para isso, criamos um arquivo em bash script chamado adiciona_usuarios.sh conforme abaixo:
+
+ 
+
+#!/bin/bash
+
+ 
+
+IFS='
+
+'
+
+ 
+
+for LISTA in `cat usuarios.txt | cut -d , -f 1`
+
+do
+
+senhausuario=`cat usuarios.txt | grep $LISTA | cut -d , -f 2`
+
+senhacript=`/usr/bin/perl senha.pl $senhausuario`
+
+varinvalido=`echo $senhacript | egrep '[ ]'`
+
+# Adiciona usuario no sistema sem shell, cria a pasta e dá permissao
+
+/usr/sbin/useradd $LISTA -s /bin/false -d /home/$LISTA -p $senhacript
+
+/bin/mkdir -p /home/$LISTA
+
+/bin/chown $LISTA /home/$LISTA -R
+
+done
+
+ 
+
+exit 0
+
+ 
+
+Além disso ainda temos que ter 2 arquivos: usuarios.txt (arquivo que conterá a exportação das contas dos usuários com suas respectivas senhas em texto plano) e o arquivo senha.pl (arquivo que irá transformar as senhas em texto plano dos usuários para o formato Shadow-MD5.
+
+ 
+
+O arquivo usuarios.txt terá o seguinte conteúdo:
+
+ 
+
+usuario1,senha1
+
+usuario2,senha2
+
+usuario3,senha3
+
+usuario4,senha4
+
+ 
+
+Para o script senha.pl funcionar, será necessário ter instalado no sistema o perl e o módulo do perl chamado Crypt::PasswdMD5, o qual pode ser instalado via cpan (www.cpan.org). A base para a construção deste script foi obtida na internet através de uma mensagem do Henrique Pedroni Neto para uma lista de discussão.
+
+ 
+
+O script senha.pl será assim:
+
+ 
+
+#!/usr/bin/perl
+
+ 
+
+use Crypt::PasswdMD5;
+
+ 
+
+# Criptografa a senha do usario
+
+#
+
+ 
+
+@itoa64=split(//,"./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+
+ 
+
+srand();
+
+$salt="";
+
+for($i=0;$i<8;$i++){
+
+$salt .= "$itoa64[rand(64)]";
+
+}
+
+$password=$ARGV[0];
+
+$md5_crypted_passwd = unix_md5_crypt($password,$salt);
+
+ 
+
+print("$md5_crypted_passwd");
+
+ 
+
+Junte todos esses arquivos no mesmo diretório, torne executável os arquivos senha.pl e adiciona_usuarios.sh, com os comandos abaixo:
+
+ 
+
+# chmod 755 adiciona_usuarios.sh senha.pl
+
+ 
+
+Após ter adicionado os usuários e suas senhas no arquivo usuarios.txt, execute o comando abaixo para adicionar os usuários no sistema:
+
+ 
+
+# ./adiciona_usuarios.sh
+
+ 
+
+Esse script serve apenas como exemplo simples de adição de usuários no sistema de forma mais automatizada. Altere conforme suas necessidades e não esqueça de enviar uma cópia para mim. :)
+
+ 
+
+Agradecimentos especiais a Fabrício Paloschi, meu colega que me ajudou a criar este script.
+
+
+
+
+http://www.dicas-l.com.br/arquivo/script_para_adicionar_usuarios_em_massa_no_linux.php#.T5ge5uKA-Bt
+
+Last modified: Wednesday, 25 April 2012, 12:54 PM

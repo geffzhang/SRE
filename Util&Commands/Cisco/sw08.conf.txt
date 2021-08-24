@@ -1,0 +1,498 @@
+
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *               TIM                *
+ *              Brazil              *
+ *             RBRBT41              *
+ *             BB 2811              *
+ *        Cabinet 4, U42            *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+
+
+User Access Verification
+
+Username: CMG$VTP
+Password: 
+% Login invalid
+
+Username: admin
+Password: 
+********************** Acision ************************
+                  Messaging Solution
+                      TIM Brazil                         
+                       RBRBT41 
+
+                      MAIN MENU
+******************************************************* 
+
+    1          BLBRBT4 (BL-01-OA1)
+    2          BLBRBT4 (BL-01-OA2)
+    3          BSBRBT41 (SW-01)
+    4          BSBRBT42 (SW-02)
+    5          BSBRBT45 (SW-03)
+    6          BSBRBT46 (SW-04)
+    7          BSBRBT47 (SW-05)
+    8          BSBRBT48 (SW-06)
+    9          SBRBT41 (SW-07)
+    a          SBRBT41 (SW-08)
+    x          Exit
+
+ 
+Please enter your selection:a
+Trying SW-08 (192.168.254.1, 2067)... Open
+
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *               TIM                *
+ *              Brazil              *
+ *             RBRBT41              *
+ *             BB 2811              *
+ *        Cabinet 4, U42            *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+
+[Connection to 10.192.14.221 closed by foreign host]
+SBRBT41#
+SBRBT41#
+SBRBT41#
+SBRBT41#
+SBRBT41#
+SBRBT41#sh run
+Building configuration...
+
+Current configuration : 8971 bytes
+!
+! Last configuration change at 17:16:35 GMT-3 Wed Mar 16 2011 by admin
+! NVRAM config last updated at 19:08:59 GMT-3 Wed Mar 16 2011 by admin
+!
+version 12.2
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname SBRBT41
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!         
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+no aaa new-model
+clock timezone GMT -3
+clock summer-time GMT-3 recurring
+switch 1 provision ws-c3750g-24ts-1u
+switch 2 provision ws-c3750g-24ts-1u
+system mtu routing 1500
+ip subnet-zero
+ip routing
+no ip domain-lookup
+ip domain-name tim.br
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-872935296
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-872935296
+ revocation-check none
+ rsakeypair TP-self-signed-872935296
+!
+!
+crypto pki certificate chain TP-self-signed-872935296
+ certificate self-signed 01
+  30820244 308201AD A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 38373239 33353239 36301E17 0D393330 33313030 30353732 
+  385A170D 32303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3837 32393335 
+  32393630 819F300D 06092A86 4886F70D 01010105 0003818D 00308189 02818100 
+  A0280FEC 56D6F1DA EA38F51B 323C4799 41F95103 A5C3FC6C 2AAE9562 2BB0645B 
+  1B0BAD5C 272A3F90 9FD81FC0 DBF50DB6 9F190AD3 181CEEE7 7F50DBE4 2F4684D8 
+  BE74DCEA 98501C03 9C4AA58D 1B2A490D C1B6151A 7AAFE61C 80A32A23 61E582AD 
+  DDF2CC3D 435FD664 D4F5539C 0DDD4DE8 DB406BFF 488AFB78 8C52330E 64BAAA03 
+  02030100 01A36E30 6C300F06 03551D13 0101FF04 05300301 01FF3019 0603551D 
+  11041230 10820E53 42524254 34312E74 696D2E62 72301F06 03551D23 04183016 
+  8014C525 49AB9B6A 175461DA 15514471 66CB7B20 5C7B301D 0603551D 0E041604 
+  14C52549 AB9B6A17 5461DA15 51447166 CB7B205C 7B300D06 092A8648 86F70D01 
+  01040500 03818100 01F1F1E2 D80648ED AB168CD4 C3C610B0 A658E457 30FACFA0 
+  A2D304DA 8255417D 9BFCDE12 E91D1960 BEC68552 C4A3BAEE 5C575610 052AB95E 
+  A9947386 1B6BC827 966E0403 7832433C 6458F68F F404A70D 622E8A01 3CC83CFF 
+  9F44045E 75117392 3BD01D9C 9E9F8C7D 54DB1E2D C465190C 6BDA0BC8 DC168A90 
+  C75A6D31 55815354
+  quit
+!
+!         
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+spanning-tree backbonefast
+!
+vlan internal allocation policy ascending
+!
+!
+!
+interface GigabitEthernet1/0/1
+ description RT01-P0 - Traffic
+ switchport access vlan 4
+ switchport mode access
+ duplex full
+!
+interface GigabitEthernet1/0/2
+ description ST05-MGT - OAM
+ switchport access vlan 7
+ switchport mode access
+!
+interface GigabitEthernet1/0/3
+ description SW01-P17 - OAM
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 1,7,12,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/4
+ description SW03-P17 
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2-4,13,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/5
+!
+interface GigabitEthernet1/0/6
+!
+interface GigabitEthernet1/0/7
+ switchport access vlan 12
+ switchport trunk native vlan 12
+ switchport mode access
+ speed 100
+ duplex full
+!
+interface GigabitEthernet1/0/8
+!
+interface GigabitEthernet1/0/9
+ switchport access vlan 7
+ switchport trunk native vlan 7
+ switchport mode access
+ speed 100
+ duplex full
+!
+interface GigabitEthernet1/0/10
+!
+interface GigabitEthernet1/0/11
+!
+interface GigabitEthernet1/0/12
+!
+interface GigabitEthernet1/0/13
+!
+interface GigabitEthernet1/0/14
+!
+interface GigabitEthernet1/0/15
+!
+interface GigabitEthernet1/0/16
+!
+interface GigabitEthernet1/0/17
+!
+interface GigabitEthernet1/0/18
+!
+interface GigabitEthernet1/0/19
+!
+interface GigabitEthernet1/0/20
+!
+interface GigabitEthernet1/0/21
+!
+interface GigabitEthernet1/0/22
+!
+interface GigabitEthernet1/0/23
+!
+interface GigabitEthernet1/0/24
+ description External Port with Tim Network
+ switchport access vlan 91
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/25
+!
+interface GigabitEthernet1/0/26
+!
+interface GigabitEthernet1/0/27
+!
+interface GigabitEthernet1/0/28
+!
+interface GigabitEthernet2/0/1
+ description RT01-P1 - OAM
+ switchport access vlan 7
+ switchport mode access
+!
+interface GigabitEthernet2/0/2
+ description SW02-P17
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 1,7,12,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet2/0/3
+ description SW04-P17:UMb
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2-4,13,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet2/0/4
+!
+interface GigabitEthernet2/0/5
+!
+interface GigabitEthernet2/0/6
+!
+interface GigabitEthernet2/0/7
+!
+interface GigabitEthernet2/0/8
+!
+interface GigabitEthernet2/0/9
+!
+interface GigabitEthernet2/0/10
+!
+interface GigabitEthernet2/0/11
+!
+interface GigabitEthernet2/0/12
+!
+interface GigabitEthernet2/0/13
+!
+interface GigabitEthernet2/0/14
+!
+interface GigabitEthernet2/0/15
+!
+interface GigabitEthernet2/0/16
+!
+interface GigabitEthernet2/0/17
+!
+interface GigabitEthernet2/0/18
+!
+interface GigabitEthernet2/0/19
+!
+interface GigabitEthernet2/0/20
+!
+interface GigabitEthernet2/0/21
+!
+interface GigabitEthernet2/0/22
+!
+interface GigabitEthernet2/0/23
+!         
+interface GigabitEthernet2/0/24
+ description External Port with Tim Network
+ switchport access vlan 91
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/25
+!
+interface GigabitEthernet2/0/26
+!
+interface GigabitEthernet2/0/27
+!
+interface GigabitEthernet2/0/28
+!
+interface Vlan1
+ ip address dhcp
+!
+interface Vlan2
+ ip address 10.192.14.238 255.255.255.248
+ no ip route-cache cef
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan3
+ ip address 10.192.14.246 255.255.255.248
+ no ip route-cache cef
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan4
+ ip address 10.192.14.230 255.255.255.248
+ no ip route-cache cef
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan7
+ ip address 10.192.14.222 255.255.255.224
+ no ip route-cache cef
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan12
+ ip address 10.192.28.94 255.255.255.224
+ no ip route-cache cef
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan13
+ ip address 10.192.28.126 255.255.255.224
+ no ip route-cache cef
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan91
+ description External Vlan with Tim Network
+ ip address 10.192.14.188 255.255.255.224
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.192.14.185
+ip http server
+ip http secure-server
+!
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown snmpTargetMIB excluded
+snmp-server view cutdown snmpNotificationMIB excluded
+snmp-server view cutdown snmpVacmMIB excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server community Acision RO
+snmp-server queue-length 100
+snmp-server location Brazil
+snmp-server contact Tim
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps license
+snmp-server enable traps config
+snmp-server enable traps hsrp
+snmp-server host 10.221.21.26 version 2c Acision 
+!
+control-plane
+!         
+banner motd ^C
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *               TIM                *
+ *              Brazil              *
+ *             SBRBT41              *
+ *          BB2.0 3750G-24          *
+ *        Cabinet 4,  SW-07         *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ password 7 13263A354F3A301A
+ login local
+ transport preferred none
+ flowcontrol hardware
+line vty 0 4
+ exec-timeout 480 0
+ password 7 0625220608783D29
+ login local
+line vty 5 15
+ exec-timeout 480 0
+ password 7 0225297C4F303B11
+ login local
+!
+ntp clock-period 36028877
+ntp server 10.192.14.221 prefer
+end
+
+SBRBT41#   sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi1/0/5, Gi1/0/6, Gi1/0/8
+                                                Gi1/0/10, Gi1/0/11, Gi1/0/12
+                                                Gi1/0/13, Gi1/0/14, Gi1/0/15
+                                                Gi1/0/16, Gi1/0/17, Gi1/0/18
+                                                Gi1/0/19, Gi1/0/20, Gi1/0/21
+                                                Gi1/0/22, Gi1/0/23, Gi1/0/25
+                                                Gi1/0/26, Gi1/0/27, Gi1/0/28
+                                                Gi2/0/4, Gi2/0/5, Gi2/0/6
+                                                Gi2/0/7, Gi2/0/8, Gi2/0/9
+                                                Gi2/0/10, Gi2/0/11, Gi2/0/12
+                                                Gi2/0/13, Gi2/0/14, Gi2/0/15
+                                                Gi2/0/16, Gi2/0/17, Gi2/0/18
+                                                Gi2/0/19, Gi2/0/20, Gi2/0/21
+                                                Gi2/0/22, Gi2/0/23, Gi2/0/25
+                                                Gi2/0/26, Gi2/0/27, Gi2/0/28
+2    Signalling 1                     active    
+3    Signaling 2                      active    
+4    Messaging                        active    Gi1/0/1
+7    Operations,ILO                   active    Gi1/0/2, Gi1/0/9, Gi2/0/1
+12   VLAN0012                         active    Gi1/0/7
+          
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+13   VLAN0013                         active    
+91   VLAN0091                         active    Gi1/0/24, Gi2/0/24
+1002 fddi-default                     act/unsup 
+1003 trcrf-default                    act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trbrf-default                    act/unsup 
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0   
+2    enet  100002     1500  -      -      -        -    -        0      0   
+3    enet  100003     1500  -      -      -        -    -        0      0   
+4    enet  100004     1500  -      -      -        -    -        0      0   
+7    enet  100007     1500  -      -      -        -    -        0      0   
+12   enet  100012     1500  -      -      -        -    -        0      0   
+13   enet  100013     1500  -      -      -        -    -        0      0   
+91   enet  100091     1500  -      -      -        -    -        0      0   
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 trcrf 101003     4472  1005   3276   -        -    srb      0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trbrf 101005     4472  -      -      15       ibm  -        0      0   
+
+
+VLAN AREHops STEHops Backup CRF
+---- ------- ------- ----------
+1003 7       7       off
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
+SBRBT41#       

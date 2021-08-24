@@ -1,0 +1,55 @@
+var visualStudio = new API_VisualStudio_2010();
+//var topPanel = panel.clear().add_Panel();
+var topPanel = visualStudio.VsAddIn.add_WinForm_Panel("PoC - View ActiveDocument CodeElements");
+
+var vsDTE = visualStudio.VsAddIn.VS_Dte;
+
+var document = (Document)vsDTE.ActiveDocument;
+
+var codeModel = document.ProjectItem.FileCodeModel;
+var textSelection = (TextSelection)vsDTE.ActiveDocument.Selection;
+var elements = codeModel.CodeElements;
+
+
+var treeView = topPanel.add_TreeView_with_PropertyGrid(false);
+
+Action<TreeNode, CodeElement> add_CodeElement =
+	(treeNode, element) => {
+									treeNode.add_Node(element.comObject_TypeName(),
+													  element,
+	  				  								  element.Children.size() > 0);
+							   };
+
+treeView.afterSelect<CodeElement>(
+	(element)=>{									
+					textSelection.GotoLine(element.StartPoint.Line);
+					textSelection.SelectLine();
+					var selectedNode = treeView.selected();
+			   });
+			   
+treeView.beforeExpand<CodeElement>(
+	(treeNode,element)=>{
+							foreach(CodeElement childElement in element.Children)
+								add_CodeElement(treeNode,childElement);
+						});
+
+foreach(CodeElement element in elements)
+	add_CodeElement(treeView.rootNode(),element);
+
+treeView.selectFirst();
+
+return "ok";
+
+//using EnvDTE80
+//using EnvDTE
+
+//using O2.XRules.Database.APIs
+
+//using FluentSharp.VisualStudio
+//using FluentSharp.VisualStudio.Utils
+
+//O2File:API_VisualStudio_2010.cs
+//O2File:O2_VS_AddIn.cs
+//O2Ref:EnvDTE.dll
+//O2Ref:EnvDTE80.dll
+//O2Ref:Microsoft.VisualStudio.CommandBars.dll

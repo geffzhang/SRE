@@ -1,0 +1,14 @@
+AAG
+https://10.192.28.65:8443/maya (maia)
+
+
+AAGP
+
+user
+admin
+senha
+aagp123
+
+http://10.192.28.65:8888/GUI
+
+

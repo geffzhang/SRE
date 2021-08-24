@@ -1,0 +1,389 @@
+
+#
+BSECCC12#
+BSECCC12#sh vlan
+VLAN                Name                Status            Ports
+----  --------------------------------  ------  -------------------------
+1     Default VLAN                      ena     1-18 21-23
+7     oam                               ena     1 2 9 10 17 18 20 21 24
+8     backup                            ena     1 2 9 10 17 18 21
+4095  Mgmt VLAN                         ena     19
+BSECCC12#exit
+Connection closed by remote host.
+BSECCC11#sh vlan
+VLAN                Name                Status            Ports
+----  --------------------------------  ------  -------------------------
+1     Default VLAN                      ena     1-18 21-23
+7     oam                               ena     1 2 9 10 17 18 20 21 24
+8     backup                            ena     1 2 9 10 17 18 21
+4095  Mgmt VLAN                         ena     19
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#sh vlan
+VLAN                Name                Status            Ports
+----  --------------------------------  ------  -------------------------
+1     Default VLAN                      ena     1-18 21-23
+7     oam                               ena     1 2 9 10 17 18 20 21 24
+8     backup                            ena     1 2 9 10 17 18 21
+4095  Mgmt VLAN                         ena     19
+BSECCC11#shint vlan1 
+           ^
+% Invalid input detected at '^' marker.
+BSECCC11#sh int vlan1
+                ^
+% Invalid input detected at '^' marker.
+BSECCC11#sh int ?
+Show interface configuration and information
+  GigabitEthernet     GigabitEthernet IEEE 802.3z interface port
+  information         Show port information of all interfaces
+  ip                  Show IP interface configuration
+  link                Show link information of all interfaces
+BSECCC11#sh ip int bri
+                 ^
+% Invalid input detected at '^' marker.
+BSECCC11#sh ip ?       
+Show IP information
+  arp              IP ARP table
+  bootp-relay      Show Bootstrap Protocol configuration
+  counters         Show IP statistics
+  dns              Show domain name server 
+  gateway          Show gateway configuration
+  gea              Show GEA IP statistics
+  icmp             Show ICMP statistics
+  igmp             IGMP Snooping Multicast Group information
+  information      Show all IP information
+  match-address    Show IP network filter configuration
+  ospf             OSPF information
+  rip              IP RIP information
+  route            IP routing table
+  routing          IP route forwarding information
+  tcp              Show TCP statistics
+  udp              Show UDP statistics
+  vrrp             Virtual Router Redundancy Protocol configuration and information
+BSECCC11#sh ip route
+Status code: * - best
+    Destination         Mask          Gateway        Type      Tag    Metr If
+  --------------- --------------- --------------- --------- --------- ---- --
+* 0.0.0.0         0.0.0.0         10.51.7.60      indirect  static          1
+* 10.51.7.0       255.255.255.192 10.51.7.4       direct    fixed           1
+* 10.51.7.4       255.255.255.255 10.51.7.4       local     addr            1
+* 10.51.7.63      255.255.255.255 10.51.7.63      broadcast broadcast       1
+* 127.0.0.0       255.0.0.0       0.0.0.0         martian   martian        
+* 224.0.0.0       224.0.0.0       0.0.0.0         martian   martian        
+* 224.0.0.0       240.0.0.0       0.0.0.0         multicast addr           
+* 255.255.255.255 255.255.255.255 255.255.255.255 broadcast broadcast      
+BSECCC11#sh ip ospf
+Current OSPF settings: OFF
+  Default route none
+  lsdb limit 0
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#
+BSECCC11#sh vlan
+VLAN                Name                Status            Ports
+----  --------------------------------  ------  -------------------------
+1     Default VLAN                      ena     1-18 21-23
+7     oam                               ena     1 2 9 10 17 18 20 21 24
+8     backup                            ena     1 2 9 10 17 18 21
+4095  Mgmt VLAN                         ena     19
+BSECCC11#telnet 10.51.7.5
+Connecting 10.51.7.5...
+Connected to 10.51.7.5.
+Escape character is '^]'.
+
+GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem.
+
+Copyright(C)2003 Hewlett-Packard Development Company, L.P.
+
+
+Enter password: 
+
+Ecuador - BSECCC12 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn2
+
+BSECCC12>
+Jun 17 12:38:30 BSECCC12 NOTICE  mgmt: admin(admin) login from host 10.51.7.4
+
+BSECCC12>en
+Enable Password: 
+
+Enable privilege granted.
+BSECCC12#
+BSECCC12#
+BSECCC12#
+BSECCC12#
+BSECCC12#sh run
+Current configuration:
+!
+version "5.1.3"
+switch-type "GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem"
+!
+!
+ssh enable
+!
+
+snmp-server target-address 1 name "v1v2_host1" address 192.168.46.70
+snmp-server target-address 1 taglist "v1v2_tag"
+snmp-server target-address 1 parameters-name "v1v2_pname"
+!
+snmp-server target-parameters 1 name "v1v2_pname"
+snmp-server target-parameters 1 message snmpv2c
+snmp-server target-parameters 1 user-name "v1v2only"
+snmp-server target-parameters 1 security snmpv2
+!
+snmp-server notify 1 name "v1v2_notify1"
+snmp-server notify 1 tag "v1v2_tag"
+!
+snmp-server community 1 index "comm1"
+snmp-server community 1 name "public"
+snmp-server community 1 user-name "v1v2only"
+!       
+hostname "BSECCC12"
+no system dhcp
+system idle 60
+banner "Ecuador - BSECCC12 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn2"
+!
+access user administrator-password "eb12fab9aa00aaa8a6b6b3f269b0095ac8bdc1d9a19b56622c4a13555f4e79ac"
+enable password "e120f08ba000a08aacb6b3e263b00378b841254a3f908d58e1e6d72c83548bce"
+!
+!
+spanning-tree mode rstp
+!
+interface GigabitEthernet  1
+        name "oeccc11 port Eth2 at 1:03-Half01 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet  2
+        name "oeccc13 port Eth2 at 1:03-Half02 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet  3
+        shutdown
+        exit
+!
+interface GigabitEthernet  4
+        shutdown
+        exit
+!
+interface GigabitEthernet  5
+        shutdown
+        exit
+!
+interface GigabitEthernet  6
+        shutdown
+        exit
+!
+interface GigabitEthernet  7
+        shutdown
+        exit
+!       
+interface GigabitEthernet  8
+        shutdown
+        exit
+!
+interface GigabitEthernet  9
+        name "oeccc12 port Eth2 at 1:03-Half09 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 10
+        name "jeccc11 port Eth2 at 1:03-Half10 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 11
+        shutdown
+        exit
+!       
+interface GigabitEthernet 12
+        shutdown
+        exit
+!
+interface GigabitEthernet 13
+        shutdown
+        exit
+!
+interface GigabitEthernet 14
+        shutdown
+        exit
+!
+interface GigabitEthernet 15
+        shutdown
+        exit
+!
+interface GigabitEthernet 16
+        shutdown
+        exit
+!
+interface GigabitEthernet 17
+        name "BSECCC11 port EthInt17 at 1:03-IConn1 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 18
+        name "BSECCC11 port EthInt18 at 1:03-IConn1 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 19
+        shutdown
+        exit
+!
+interface GigabitEthernet 20
+        name "BLECCC1 port OA2-ILO at 1:03 - oam"
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 21
+        name "SW-08 port Eth5 at 1:40 - Trunk"
+        tagging
+        exit
+!
+interface GigabitEthernet 22
+        shutdown
+        exit
+!
+interface GigabitEthernet 23
+        shutdown
+        exit
+!
+interface GigabitEthernet 24
+        name "oam network for Laptop access"
+        no tag-pvid
+        pvid 7
+        exit
+!
+vlan 1
+        member  1
+        member  2
+        member  3
+        member  4
+        member  5
+        member  6
+        member  7
+        member  8
+        member  9
+        member 10
+        member 11
+        member 12
+        member 13
+        member 14
+        member 15
+        member 16
+        member 17
+        member 18
+        no member 20
+        member 21
+        member 22
+        member 23
+        no member 24
+!
+vlan 7
+        enable
+        name "oam"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 20
+        member 21
+        member 24
+!
+vlan 8
+        enable
+        name "backup"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 21
+!       
+vlan 4095
+        member 19
+!
+spanning-tree stp 1 bridge priority 36864
+spanning-tree stp 1 vlan 1
+spanning-tree stp 1 vlan 7
+spanning-tree stp 1 vlan 8
+spanning-tree stp 1 vlan 4095
+
+interface GigabitEthernet 20
+        spanning-tree stp 1 edge
+        exit
+!
+interface GigabitEthernet 24
+        spanning-tree stp 1 edge
+        exit
+!
+
+!
+snmp-server location "Acision Messaging Solution at Ecuador"
+snmp-server contact "Conecel"
+snmp-server ufd-trap
+!
+interface ip 1
+        ip address 10.51.7.5  255.255.255.192
+        enable
+        vlan 7
+        exit
+!
+ip gateway 1 address 10.51.7.60
+ip gateway 1 enable
+!
+ip dns domain-name acision.com
+!
+ntp enable
+ntp primary-server 10.51.7.1  
+ntp interval 60
+!
+end
+
+BSECCC12#sh vlan
+VLAN                Name                Status            Ports
+----  --------------------------------  ------  -------------------------
+1     Default VLAN                      ena     1-18 21-23
+7     oam                               ena     1 2 9 10 17 18 20 21 24
+8     backup                            ena     1 2 9 10 17 18 21
+4095  Mgmt VLAN                         ena     19
+BSECCC12#

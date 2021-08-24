@@ -1,0 +1,10 @@
+# kubectl create -f StorageClass.yaml
+
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: demo-sc-vsan
+provisioner: kubernetes.io/vsphere-volume
+parameters:
+  storagePolicyName: gold
+  datastore: vsanDatastore

@@ -1,0 +1,10 @@
+var wikiPageEditor = O2Gui.open<ascx_MediaWiki_PageEditor_Simple>("OWASP Wiki Page Editor", 500,500);
+var wikiApi = new OwaspWikiAPI();
+wikiPageEditor.buildGui(wikiApi);
+
+return "ok";
+
+//using O2.XRules.Database.APIs
+
+//O2File:OwaspWikiAPI.cs
+//O2File:ascx_MediaWiki_PageEditor_Simple.cs

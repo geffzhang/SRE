@@ -1,0 +1,83 @@
+
+Quetions
+
+?????????????/
+You need to target policies and review spend budgets across several subscriptions you manage. What
+
+should you do?
+Create management groups. Management groups can be used to organize and manage subscriptions
+
+
+Resource groups cannot be nested.
+
+An ExpressRoute circuit with connectivity back to your on-premises network. 
+Resource locks prevent other users in your organization from accidentally deleting or
+ modifying critical resources
+
+Pergunta 5:
+Which of the following would be good example of when to use a resource lock?
+
+
+
+Assign her as a Resource Group owner. The new IT administrator needs to be able to assign permissions.
+
+Pergunta 6:
+Your company hires a new IT administrator. She needs to manage a resource group with first-tier web
+
+servers including assigning permissions . However, she should not have access to other resource groups
+
+inside the subscription. You need to configure role-based access. What should you do?
+
+
+
+Assign the user to the Contributor role on VM3. This means the user will not have access to VM1 or VM2. 
+The Contributor role will allow the user to change the settings on VM1.
+
+Pergunta 7:
+You have three virtual machines (VM1, VM2, and VM3) in a resource group. The Helpdesk hires a new
+
+employee. The new employee must be able to modify the settings on VM3, but not on VM1 and VM2.
+
+Your solution must minimize administrative overhead. What should you do?
+
+
+
+
+
+Each user account can be assigned multiple machines, is not true. The cloud shell is assigned one machine per user account.
+
+Pergunta 1:
+Which of the following is not true about the Cloud Shell?
+
+
+Connect-AzAccount. When you are working locally you are not automatically logged in to Azure. So, the first thing you should do is to connect to Azure and provide your credentials.
+
+Pergunta 2:
+You are managing Azure locally using PowerShell. You have launched the app as an Administrator. Which
+
+of the following commands would you do first?
+
+
+
+Tenant. A tenant cannot be moved between subscriptions
+
+Pergunta 3:
+You have a new Azure subscription and need to move resoures to that subscription. Which of the following
+
+resources cannot be moved?
+
+
+Inputs. Inputs is not a part of the template schema.
+
+Pergunta 4:
+Which of the following is not an element in the template schema?
+
+
+
+Request support increase your limit. If you need to increase a default limit, there is a Request Increase link. You will complete and submit the support request.
+
+Pergunta 6:
+You are reviewing your virtual machine usage. You notice that you have reached the limit for virtual
+
+machines in the US East region. Which of the following provides the easiest solution?
+

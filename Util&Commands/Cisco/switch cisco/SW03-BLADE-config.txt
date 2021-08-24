@@ -1,0 +1,198 @@
+BSBROI35#SHOW RUnning-config
+Current configuration:
+!
+version 2.0.60
+switch-type "GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem"
+!
+system timezone 64
+! America/US/Pacific
+no system daylight
+no system olddaylight
+!
+ssh enable
+!
+
+snmp-server target-address 1 name "v1v2_host1" address 10.10.2.1
+snmp-server target-address 1 taglist "v1v2_tag"
+snmp-server target-address 1 parameters-name "v1v2_pname"
+!
+snmp-server target-parameters 1 name "v1v2_pname"
+snmp-server target-parameters 1 message snmpv2c
+snmp-server target-parameters 1 user-name "v1v2only"
+snmp-server target-parameters 1 security snmpv2
+!
+snmp-server notify 1 name "v1v2_notify1"
+snmp-server notify 1 tag "v1v2_tag"
+!
+snmp-server community 1 index "comm1"
+snmp-server community 1 name "public"
+snmp-server community 1 user-name "v1v2only"
+hostname "BSBROI35"
+!
+system idle 60
+banner "Bento Riberiro - BSBROI35 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn5"
+!
+access user administrator-password "0ed6ff0e0a52aa0ae697b6e7c9e209f8163407cee341867e8fee42d33b1da665"
+enable password "0c36fdee0832a8aae4f7b6a7cb820b581c71bf8a4c1e4b34eb791c4178b14589"
+!
+!
+spanning-tree mode rstp
+!
+interface GigabitEthernet 1
+        name "SMOI31 port Eth5 at 1:03-Full1 - traffic"
+        no tag-pvid
+        pvid 4
+        exit
+!
+interface GigabitEthernet 2
+        name "SMOI32 port Eth5 at 1:03-Full2 - traffic"
+        no tag-pvid
+        pvid 4
+        exit
+!
+interface GigabitEthernet 3
+        name "SMOI51 port Eth3 at 1:03-Full1 - traffic"
+        no tag-pvid
+        pvid 4
+        exit
+!
+interface GigabitEthernet 4
+        name "SMOI52 port Eth3 at 1:03-Full2 - traffic"
+        no tag-pvid
+        pvid 4
+        exit
+!
+interface GigabitEthernet 9
+        name "SMOI31 port Eth11 at 1:03-Full1 - sig1"
+        no tag-pvid
+        pvid 2
+        exit
+!
+interface GigabitEthernet 10
+        name "SMOI32 port Eth11 at 1:03-Full2 - sig1"
+        no tag-pvid
+        pvid 2
+        exit
+!
+interface GigabitEthernet 11
+        name "SMOI51 port Eth3 at 1:03-Full1 - sig1"
+        no tag-pvid
+        pvid 2
+        exit
+!
+interface GigabitEthernet 12
+        name "SMOI52 port Eth3 at 1:03-Full2 - sig1"
+        no tag-pvid
+        pvid 2
+        exit
+!
+interface GigabitEthernet 17
+        name "BSBROI36 port EthInt17 at 1:03-IConn6 - Trunk"
+        no shutdown
+        pvid 4
+        exit
+!
+interface GigabitEthernet 18
+        name "BSBROI36 port EthInt18 at 1:03-IConn6 - Trunk"
+        no shutdown
+        pvid 4
+        exit
+!
+interface GigabitEthernet 20
+        shutdown
+        exit
+!
+interface GigabitEthernet 21
+        name "SBROI31 port Eth7 at 1:40 - Trunk"
+        tagging
+        exit
+!
+interface GigabitEthernet 22
+        shutdown
+        exit
+!
+interface GigabitEthernet 23
+        shutdown
+        exit
+!
+interface GigabitEthernet 24
+        shutdown
+        exit
+!
+!
+vlan 1
+        no member  1
+        no member  2
+        no member  3
+        no member  4
+        member  5
+        member  6
+        member  7
+        member  8
+        no member  9
+        no member 10
+        no member 11
+        no member 12
+        member 13
+        member 14
+        member 15
+        member 16
+        no member 17
+        no member 18
+        member 20
+        member 21
+        member 22
+        member 23
+        member 24
+!
+vlan 2
+        enable
+        name "sig1"
+        member  9
+        member 10
+        member 11
+        member 12
+        member 21
+!
+vlan 4
+        enable
+        name "traffic"
+        member  1
+        member  2
+        member  3
+        member  4
+        member 17
+        member 18
+        member 21
+!
+vlan 4095
+        member 19
+spanning-tree stp 1 bridge priority 36864
+spanning-tree stp 1 vlan 1
+spanning-tree stp 1 vlan 2
+spanning-tree stp 1 vlan 4
+spanning-tree stp 1 vlan 4095
+
+
+!
+snmp-server location "Acision Messaging Solution at Bento Riberiro"
+snmp-server contact "Telemar(Oi)"
+snmp-server ufd-trap
+!
+interface ip 256
+!       enable
+!       addr <dhcp>
+!
+ip gateway 1 address 10.125.126.123
+ip gateway 1 enable
+!
+!ip gateway 4 addr <dhcp>
+!ip gateway 4 enable
+ip dns domain-name oi.net.br
+!
+ntp enable
+ntp primary-server 10.10.2.253
+ntp secondary-server 10.10.2.252
+ntp interval 60
+!
+end

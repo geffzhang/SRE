@@ -1,0 +1,50 @@
+<AzVpnProfile xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/">
+  <any xmlns:d2p1="http://schemas.datacontract.org/2004/07/System.Xml"
+    i:nil="true" />
+  <clientauth>
+    <aad
+      i:nil="true" />
+    <cert>
+      <hash
+        i:nil="true" />
+      <issuer>145234081290aea3e17e524ba9ccd1e2db87a945</issuer>
+    </cert>
+    <type>cert</type>
+    <usernamepass
+      i:nil="true" />
+  </clientauth>
+  <clientconfig>
+    <dnsservers>
+      <DnsServerEntry>
+        <dnsserver>10.2.1.3</dnsserver>
+      </DnsServerEntry>
+    </dnsservers>
+    <excluderoutes
+      i:nil="true" />
+    <includeroutes
+      i:nil="true" />
+  </clientconfig>
+  <name>VNetData</name>
+  <protocolconfig>
+    <sslprotocolConfig>
+      <transportprotocol>tcp</transportprotocol>
+    </sslprotocolConfig>
+  </protocolconfig>
+  <serverlist>
+    <ServerEntry>
+      <displayname
+        i:nil="true" />
+      <fqdn>azuregateway-3ae20077-880c-44d1-aa01-0aec2321bd4f-1180a2a251de.vpn.azure.com</fqdn>
+    </ServerEntry>
+  </serverlist>
+  <servervalidation>
+    <cert>
+      <hash>A8985D3A65E5E5C4B2D7D66D40C6DD2FB19C5436</hash>
+      <issuer
+        i:nil="true" />
+    </cert>
+    <serversecret>790a642a9924aec4abb90b02a501022b37c4faac5c81317368094364a415a69764012cf2bb9a491440bceb34a5241cc28ef384b0b076c660f7fd78e9222fce963116ecaa6782ef1799e3a523deeaaea8006315995fdb6557d466a0304cc99f82fdf8fb1824c6a7a3fd4aa0ca4fecb44740f8d8282d4c529b468dff2dac897eabd7ac0e658de0e3a45b797a1cbee6466a2933831da3165419f22b4ab7809b2584f781bbfbdfeb779aaaab960464faae9cf79d83180e379e628c6f7fa2be11225d5ba0970c17782ef7a5f3b02810c27e424103476834f6516c17f3763f13997f1890863301318c4206601da0c82ec2b08a0aeb8bc4adc07528e1c82d2e638f9833</serversecret>
+    <type>cert</type>
+  </servervalidation>
+  <version>1</version>
+</AzVpnProfile>

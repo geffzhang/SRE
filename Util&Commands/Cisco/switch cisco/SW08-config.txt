@@ -1,0 +1,332 @@
+SBROI32#SHOW CONFiguration
+Using 7999 out of 524288 bytes
+!
+version 12.2
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname SBROI32
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$xRFF$tCwej.tGlRK8JcoeEDq0S.
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+username proteus password 7 105E1B1611120718
+no aaa new-model
+clock summer-time GMT-2 recurring last Sun Mar 2:00 last Sun Oct 3:00
+system mtu routing 1500
+vtp domain NGP-INTERNAL-DOMAIN
+vtp mode transparent
+ip subnet-zero
+ip routing
+no ip domain-lookup
+ip domain-name oi.net.br
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3284798848
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3284798848
+ revocation-check none
+ rsakeypair TP-self-signed-3284798848
+!
+!
+crypto pki certificate chain TP-self-signed-3284798848
+ certificate self-signed 01 nvram:IOS-Self-Sig#3838.cer
+!
+!
+!
+!
+!
+!
+spanning-tree mode mst
+spanning-tree extend system-id
+spanning-tree mst 0 priority 8192
+!
+vlan internal allocation policy ascending
+!
+vlan 2
+ name sig1
+!
+vlan 3
+ name sig2
+!
+vlan 4
+ name traffic
+!
+vlan 5
+!
+vlan 7
+ name oam
+!
+vlan 9
+!
+vlan 10
+ name cluster
+!
+vlan 12
+!
+!
+!
+interface Port-channel1
+ description "p23,p24"
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1-5,7,9,10,12,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet0/1
+ description "ubroi31 port Eth2 at 1:13 (CN-03, HP DL380-G5) - "
+ switchport access vlan 5
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/2
+ description "BSBROI32 port Eth21 at 1:03-IConn2 (SW-02, HP GbE2c L2/3 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 5,7,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet0/3
+ description "BSBROI36 port Eth21 at 1:03-IConn6 (SW-04, HP GbE2c L2/3 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 3,4,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet0/4
+ description "BSBROI38 port Eth21 at 1:03-IConn8 (SW-06, HP GbE2c L2/3 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 9,12,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet0/5
+ shutdown
+!
+interface GigabitEthernet0/6
+ description "ITP  IBROI31 - interface FastEthernet4/1/0
+ switchport access vlan 3
+ switchport trunk native vlan 3
+ switchport mode access
+ speed 100
+ duplex full
+!
+interface GigabitEthernet0/7
+ shutdown
+!
+interface GigabitEthernet0/8
+ shutdown
+!
+interface GigabitEthernet0/9
+ shutdown
+!
+interface GigabitEthernet0/10
+ shutdown
+!
+interface GigabitEthernet0/11
+ shutdown
+!
+interface GigabitEthernet0/12
+ description Link-2 to SBROI21
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1-5,7
+ switchport mode trunk
+!
+interface GigabitEthernet0/13
+ shutdown
+!
+interface GigabitEthernet0/14
+!
+interface GigabitEthernet0/15
+ shutdown
+!
+interface GigabitEthernet0/16
+ shutdown
+!
+interface GigabitEthernet0/17
+ shutdown
+!
+interface GigabitEthernet0/18
+ shutdown
+!
+interface GigabitEthernet0/19
+ shutdown
+!
+interface GigabitEthernet0/20
+ shutdown
+!
+interface GigabitEthernet0/21
+ shutdown
+!
+interface GigabitEthernet0/22
+ description "oam network for Laptop access"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/23
+ description "SBROI31 port Eth23 at 1:40 (SW-07, Cisco 3560-24) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1-5,7,9,10,12,1002-1005
+ switchport mode trunk
+ channel-group 1 mode on
+!
+interface GigabitEthernet0/24
+ description "SBROI31 port Eth24 at 1:40 (SW-07, Cisco 3560-24) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1-5,7,9,10,12,1002-1005
+ switchport mode trunk
+ channel-group 1 mode on
+!
+interface GigabitEthernet0/25
+!
+interface GigabitEthernet0/26
+!
+interface GigabitEthernet0/27
+!
+interface GigabitEthernet0/28
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan2
+ description "sig1"
+ ip address 10.125.126.25 255.255.255.224
+ no ip redirects
+ standby 2 ip 10.125.126.27
+ standby 2 priority 90
+!
+interface Vlan3
+ description "sig2"
+ ip address 10.125.126.57 255.255.255.224
+ no ip redirects
+ standby 3 ip 10.125.126.59
+ standby 3 priority 90
+!
+interface Vlan4
+ description "traffic"
+ ip address 10.125.126.121 255.255.255.192
+ no ip redirects
+ standby 4 ip 10.125.126.123
+ standby 4 priority 90
+!
+interface Vlan5
+ description ""
+ ip address 10.125.126.251 255.255.255.128
+ no ip redirects
+ standby 5 ip 10.125.126.253
+ standby 5 priority 90
+!
+interface Vlan7
+ description "oam"
+ ip address 10.125.127.119 255.255.255.128
+ no ip redirects
+ standby 7 ip 10.125.127.121
+ standby 7 priority 90
+!
+interface Vlan9
+ description ""
+ no ip address
+ no ip redirects
+!
+interface Vlan10
+ description "cluster"
+ no ip address
+ no ip redirects
+!
+interface Vlan12
+ description ""
+ no ip address
+ no ip redirects
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.125.126.126
+no ip http server
+no ip http secure-server
+!
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown snmpTargetMIB excluded
+snmp-server view cutdown snmpNotificationMIB excluded
+snmp-server view cutdown snmpVacmMIB excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public RO
+snmp-server community DCNplat! RO
+snmp-server community Ik0n0graf1c0 RW
+snmp-server community lk0n0graf1c0 RW
+snmp-server trap-source Vlan7
+snmp-server queue-length 100
+snmp-server location RIO-B.Ribeiro
+snmp-server contact Acision
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps tty
+snmp-server enable traps cluster
+snmp-server enable traps entity
+snmp-server enable traps cpu threshold
+snmp-server enable traps vtp
+snmp-server enable traps vlancreate
+snmp-server enable traps vlandelete
+snmp-server enable traps flash insertion removal
+snmp-server enable traps port-security
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps hsrp
+snmp-server enable traps bridge newroot topologychange
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps syslog
+snmp-server enable traps mac-notification change move threshold
+snmp-server enable traps vlan-membership
+snmp-server host 10.21.4.104 Ik0n0graf1c0
+snmp-server host 10.21.4.104 version 2c public
+!
+control-plane
+!
+banner motd ^C
+  +------------------------------------------------------+
+  |                                                      |
+  |           Rede de Engenharia Telemar - DCN           |
+  |                                                      |
+  |           Switch SMSC SBROI32 -  CPD - IPA           |
+  |                                                      |
+  |           Ipanema  -  Rio de Janeiro  -  RJ          |
+  |                                                      |
+  |  Acesso monitorado e restrito a pessoas autorizadas  |
+  |                                                      |
+  +------------------------------------------------------+^C
+privilege exec level 1 show running-config
+privilege exec level 1 show startup-config
+!
+line con 0
+ password 7 13263A354F3A301A
+ login local
+ transport preferred none
+ flowcontrol hardware
+line vty 0 4
+ exec-timeout 480 0
+ password 7 0625220608783D29
+ login local
+ transport preferred ssh
+ transport input telnet ssh
+line vty 5 15
+ exec-timeout 480 0
+ password 7 0225297C4F303B11
+ login local
+ transport input telnet
+!
+ntp source Vlan7
+ntp server 127.0.0.1 prefer
+end

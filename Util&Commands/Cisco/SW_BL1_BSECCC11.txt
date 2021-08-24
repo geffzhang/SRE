@@ -1,0 +1,831 @@
+
+#
+BSECCC11#sh run 
+Current configuration:
+!
+version "5.1.3"
+switch-type "GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem"
+!
+!
+ssh enable
+!
+
+snmp-server target-address 1 name "v1v2_host1" address 192.168.46.70
+snmp-server target-address 1 taglist "v1v2_tag"
+snmp-server target-address 1 parameters-name "v1v2_pname"
+!
+snmp-server target-parameters 1 name "v1v2_pname"
+snmp-server target-parameters 1 message snmpv2c
+snmp-server target-parameters 1 user-name "v1v2only"
+snmp-server target-parameters 1 security snmpv2
+!
+snmp-server notify 1 name "v1v2_notify1"
+snmp-server notify 1 tag "v1v2_tag"
+!
+snmp-server community 1 index "comm1"
+snmp-server community 1 name "public"
+snmp-server community 1 user-name "v1v2only"
+!       
+hostname "BSECCC11"
+no system dhcp
+system idle 60
+banner "Ecuador - BSECCC11 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn1"
+!
+access user administrator-password "3d983c492818280834d4f7a2eba88bfa753e348becf20cd9c2a44cc640772f34"
+enable password "3ba03a712a202a2036ecf3b2e99089d2f662f22c5703f674da8c5a52eef95f0c"
+!
+!
+spanning-tree mode rstp
+!
+interface GigabitEthernet  1
+        name "oeccc11 port Eth1 at 1:03-Half01 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet  2
+        name "oeccc13 port Eth1 at 1:03-Half02 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet  3
+        shutdown
+        exit
+!
+interface GigabitEthernet  4
+        shutdown
+        exit
+!
+interface GigabitEthernet  5
+        shutdown
+        exit
+!
+interface GigabitEthernet  6
+        shutdown
+        exit
+!
+interface GigabitEthernet  7
+        shutdown
+        exit
+!       
+interface GigabitEthernet  8
+        shutdown
+        exit
+!
+interface GigabitEthernet  9
+        name "oeccc12 port Eth1 at 1:03-Half09 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 10
+        name "jeccc11 port Eth1 at 1:03-Half10 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 11
+        shutdown
+        exit
+!       
+interface GigabitEthernet 12
+        shutdown
+        exit
+!
+interface GigabitEthernet 13
+        shutdown
+        exit
+!
+interface GigabitEthernet 14
+        shutdown
+        exit
+!
+interface GigabitEthernet 15
+        shutdown
+        exit
+!
+interface GigabitEthernet 16
+        shutdown
+        exit
+!
+interface GigabitEthernet 17
+        name "BSECCC12 port EthInt17 at 1:03-IConn2 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 18
+        name "BSECCC12 port EthInt18 at 1:03-IConn2 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 19
+        shutdown
+        exit
+!
+interface GigabitEthernet 20
+        name "BLECCC1 port OA1-ILO at 1:03 - oam"
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 21
+        name "SECCC11 port Eth7 at 1:39 - Trunk"
+        tagging
+        exit
+!
+interface GigabitEthernet 22
+        shutdown
+        exit
+!
+interface GigabitEthernet 23
+        shutdown
+        exit
+!
+interface GigabitEthernet 24
+        name "oam network for Laptop access"
+        no tag-pvid
+        pvid 7
+        exit
+!
+vlan 1
+        member  1
+        member  2
+        member  3
+        member  4
+        member  5
+        member  6
+        member  7
+        member  8
+        member  9
+        member 10
+        member 11
+        member 12
+        member 13
+        member 14
+        member 15
+        member 16
+        member 17
+        member 18
+        no member 20
+        member 21
+        member 22
+        member 23
+        no member 24
+!
+vlan 7
+        enable
+        name "oam"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 20
+        member 21
+        member 24
+!
+vlan 8
+        enable
+        name "backup"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 21
+!       
+vlan 4095
+        member 19
+!
+spanning-tree stp 1 bridge priority 36864
+spanning-tree stp 1 vlan 1
+spanning-tree stp 1 vlan 7
+spanning-tree stp 1 vlan 8
+spanning-tree stp 1 vlan 4095
+
+interface GigabitEthernet 20
+        spanning-tree stp 1 edge
+        exit
+!
+interface GigabitEthernet 24
+        spanning-tree stp 1 edge
+        exit
+!
+
+!
+snmp-server location "Acision Messaging Solution at Ecuador"
+snmp-server contact "Conecel"
+snmp-server ufd-trap
+!
+interface ip 1
+        ip address 10.51.7.4  255.255.255.192
+        enable
+        vlan 7
+        exit
+!
+ip gateway 1 address 10.51.7.60
+ip gateway 1 enable
+!
+ip dns domain-name acision.com
+!
+ntp enable
+ntp primary-server 10.51.7.1  
+ntp interval 60
+!
+end
+
+BSECCC11#
+
+
+BSECCC11#sh vlan
+VLAN                Name                Status            Ports
+----  --------------------------------  ------  -------------------------
+1     Default VLAN                      ena     1-18 21-23
+7     oam                               ena     1 2 9 10 17 18 20 21 24
+8     backup                            ena     1 2 9 10 17 18 21
+4095  Mgmt VLAN                         ena     19
+BSECCC11#
+
+
+
+BSECCC11#sh boot
+Currently set to boot software image1, active config block.
+Current CLI mode set to ISCLI with selectable prompt disabled.
+Current FLASH software:
+  image1: version 5.1.3
+          NormalPanel
+  image2: version 5.1.3
+          NormalPanel
+  boot kernel: version 5.1.3
+
+
+
+######################################################################################3
+
+
+
+
+CC11#
+BSECCC11#
+BSECCC11#sh information-dump 
+System Information at 15:15:35 Thu Jul 14, 2011
+Time zone: America/US/Pacific
+Daylight Savings Time Status: Disabled
+
+GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem
+sysName:     BSECCC11
+sysLocation: Acision Messaging Solution at Ecuador
+RackId: Default RUID
+RackName: Rack1
+EnclosureSerialNumber: GB8111FV8L
+EnclosureName: BLECCC1
+BayNumber:  1
+
+Switch has been up for 36 days, 1 hour, 12 minutes and 12 seconds.
+Last boot reason: power cycle
+
+MAC address: 08:17:f4:15:ff:00    IP (If 1) address: 10.51.7.4
+Revision: 0A
+Switch Serial No: MY31034RM0
+Hardware Part No: 438030-B21        Spare Part No: 438475-001
+Software Version 5.1.3 (FLASH image1), active configuration.
+
+                                          
+Banner:
+Ecuador - BSECCC11 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn1
+
+System CPU information:
+
+------------------------------------------------------------------
+CPU utilization:
+cpuUtil1Second:             1%
+cpuUtil4Seconds:            4%
+cpuUtil64Seconds:           5%
+------------------------------------------------------------------
+
+Memory utilization:
+        total:    used:    free:  shared: buffers:  cached:
+Mem:  101281792 63422464 37859328 24104960 33554432 15872000
+Swap:        0        0        0
+MemTotal:        98908 kB
+MemFree:         36972 kB
+MemShared:       23540 kB
+Buffers:         32768 kB
+Cached:          15500 kB
+Active:          48268 kB
+Inact_dirty:         0 kB
+Inact_clean:         0 kB
+Inact_target:        4 kB
+HighTotal:           0 kB
+HighFree:            0 kB
+LowTotal:        98908 kB
+LowFree:         36972 kB
+SwapTotal:           0 kB
+SwapFree:            0 kB
+Percentage used            62
+
+Memory tracing:                enabled
+Extended Memory tracing:       enabled
+High-water monitoring:         enabled
+
+Memory high-water:  63 percent (at 63 seconds from boot)
+
+Memory stats:
+ allocs:         1639402
+ frees:          1637125
+ current:           2285
+ alloc fails:          0
+
+STEM thread memory stats:
+  thid  name      allocs       frees     current     largest
+    1   STEM     1546912           0           0        1510
+    2   STP            0     1546912           0           0
+    3   MFDB           0           0           0           0
+    4   TND        48583       48576         491         276
+    5   CONS           1           0        5351        5351
+    6   TNET       39937        9382      704127      690944
+    7   TNET           1           0        5351        5351
+    8   TNET           1           0        5351        5351
+    9   TNET           1           0        5351        5351
+   10   LOG            5           2           0         204
+   11   TRAP        1248        1248           0         476
+   13   NTP            0           0           0           0
+   14   RMON           0           0           0           0
+   17   IP            47           8        1852         184
+   18   RIP            0           0           0           0
+   19   AGR          834           0       43158        5351
+   20   EPI          406       30804         312      525272
+   22   PORT           0           1           0           0
+   32   SCAN           0           0           0           0
+   34   OSPF           0           0           0           0
+   36   VRRP           1           0          16          16
+   37   SNMP           3           0        5422        5351
+   38   SNMP           1           0        5351        5351
+   40   SSHD          73          53        3510        2068
+   41   RSA            0           0           0           0
+   43   DT1X           0           0           0           0
+   58   I2C            0           0           0           0
+   59   LACP           0           0           0           0
+   60   SFP            0           0           0           0
+   64   UFDF           0           0           0           0
+   71   SWKY           0           0           0           0
+   88   MEMM           0           0           0           0
+   97   DONE          77          19     1752046     1048560
+   Total         1638151     1637005     2539191
+
+   Non-STEM allocs             0
+   Non-STEM frees              0
+   Overhead                 6624
+
+Memory tracing:                enabled
+Extended Memory tracing:       enabled
+High-water monitoring:         enabled
+Critical action:               "Panic"
+
+Memory high-water:  63 percent (at 63 seconds from boot)
+
+hiwat-low   hiwat-mid   hiwat-high   hiwat-critcal
+---------   ---------   ----------   -------------
+    90         93           95            96
+
+------------------------------------------------------------------
+STEM thread stats:
+  thid  name        stack     pathlen      message          pathlen      count        status
+                 size   used max uSecs  cmd      body     total uSecs
+    1   STEM                        0 00000000 00000000             0        0        idle
+    2   STP      8172   3660    69536 00010008 00665124    2171268170  4628802        idle
+    3   MFDB     4076   1260    73138 00aa0002 0000fffb    32120370951200521985        idle
+    4   TND                      6633 00aa0002 00000001      18650046   356776        idle
+    5   CONS    25336   1624     6467 00aa0001 00000000      14115568  1539765        suspended
+    6   TNET    25336  12192    27680 00050001 10265124       5542005    88247        running
+    7   TNET    25336    240        0 00aa0001 00000000           191        1        idle
+    8   TNET    25336    240        0 00aa0001 00000000           147        1        idle
+    9   TNET    25336    192        0 00aa0001 00000000           116        1        idle
+   10   LOG      4076   2044      878 00060001 001400c5        195432     1859        idle
+   11   TRAP     4076   2300    12782 00070002 00000000         61069       81        idle
+   13   NTP      4076   2220    10266 00aa0002 00000000       3980334    51365        idle
+   14   RMON     2028   1436     7034 00aa0002 00000010    1340127041  3081854        idle
+   17   IP       4076   1628    10462 00aa0002 00000000    3409135625  4622950        idle
+   18   RIP      4076   1276      106 00000005 00000000           362       35        idle
+   19   AGR     16364    316     5449 00aa0002 00000000       2431896   308186        idle
+   20   EPI      8172   1900   198725 00000000 10265124    1816280690 53362779        idle
+   22   PORT     4076   1708    29211 00000005 00000015         97320      205        idle
+   32   SCAN     4076    988    58161 00aa0002 00000000      20134353  3081862        idle
+   34   OSPF     8172   1500     6265 00000018 10f48e00       4887707   616544        idle
+   36   VRRP     4076    204        0 00aa0001 00000000           286        1        idle
+   37   SNMP     8172   1060      864 00aa0002 00000005       2154690    51499        idle
+   38   SNMP    32768    192        0 00aa0001 00000000           247        1        idle
+   40   SSHD     4076    988     1131 00050015 3166c008         13192      199        idle
+   41   RSA      4076     28        0 00aa0001 00000000             6        1        idle
+   43   DT1X     4076    220     6577 00000001 00000000      97341701  3079390        idle
+   58   I2C      8172   1548    72136 00aa0002 00000065    3965670271  3081852        idle
+   59   LACP     8172    188    62888 001a0003 10265124     3287342462171713950        runnable
+   60   SFP      4076    620    76302 00aa0002 00000000     518049655  3081854        idle
+   64   UFDF     4076    140    58417 00aa0002 00000000      14480986  3081854        idle
+   71   SWKY     4076     28        0 00aa0001 00000000            49        1        idle
+   88   MEMM     4076    884    70624 00aa0002 00000000     328714969    51365        idle
+   97   DONE     4076   4076   574701 00aa0001 00000000       2333756      500        idle
+
+Function     Last        Highest              Time              Interval
+--------  -----------  -----------  ------------------------  -----------
+ htimer       3 usecs  59385 usecs  Sat Jul  2 00:26:45 2011   1233 usecs
+ dma         16 usecs    0.14 secs  Sun Jan  1 15:00:30 2006     33 usecs
+ hstem       10 usecs    0.19 secs  Fri Jun 17 20:05:56 2011     27 usecs
+ lscan        0 usecs      0 usecs  Thu Jan  1 00:00:00 1970      0 usecs
+ disp        37 usecs    0.19 secs  Fri Jun 17 20:05:56 2011     97 usecs
+
+ Longest run thread: 20
+
+------------------------------------------------------------------
+
+Software build information:
+  FW_VERSION: #1 Thu Oct 29 22:08:43 PDT 2009
+  FW_COMPILE_TIME: 22:08:43
+  FW_COMPILE_BY: devrcs
+  FW_COMPILE_HOST: bldsvr
+  FW_COMPILE_DOMAIN: 
+  FW_COMPILER: gcc version 2.95.2 19991030 (2.95.3 prerelease/franzo)
+  FW_VIEW: devrcs_angus_build 
+  FW_CONTEXT: ALT-HW_ANGUS-1 / pass2 
+  FW_KERNEL_ID: 5.1.3
+
+------------------------------------------------------------------
+
+ I2C fault monitoring :                enabled
+ I2C current-error threshold :              10
+ I2C cumulative-error threshold :          100
+ 
+I2C access states:
+
+       Device        Address   State   Probation    Errors     Current        First Error          Last Error
+ ------------------  -------  -------  ---------  ----------  ----------  -------------------  -------------------
+ CPLD                   0x40  RUN              0           0           0                                          
+ FRU / SFP              0xa0  RUN              0           0           0                                          
+ BCK                    0xa4  RUN              0           0           0                                          
+ MUX                    0xe0  RUN              0           0           0                                          
+ ISMIC                  0xfc  RUN              0           0           0                                          
+------------------------------------------------------------------
+ I2C access counts:
+
+        Device          Address    Reads       Errors      Writes      Errors      Locks      Released    Denied
+ ---------------------  -------  ----------  ----------  ----------  ----------  ----------  ----------  ----------
+ CPLD                     0x40     12327450           0          36           0    12327486    12327486           0
+ FRU / SFP                0xa0           43           0           2           0          38          38           0
+ BCK                      0xa4            1           0           0           0           1           1           0
+ MUX                      0xe0            0           0           2           0           0           0           0
+ ISMIC                    0xfc      3081863           0           4           0     3081867     3081867           0
+
+
+ I2C bus resets:         3081901
+ Last I2C lock:             0xfc
+ Non-stem I2C locks:           0
+ Non-stem I2C reads:           0
+ Non-stem I2C writes:          0
+ MPM grants:                   0
+ MPM-grant clears:             0
+
+------------------------------------------------------------------
+l 14 15:12:27 BSECCC11 NOTICE  ntp: System clock updated
+Jul 14 15:13:26 BSECCC11 NOTICE  mgmt: admin(admin) login from host 10.51.7.61
+Engine ID = 80:00:07:50:03:08:17:F4:15:FF:00
+
+usmUser Table: 
+User Name                        Protocol                        
+-------------------------------- --------------------------------
+adminmd5                         HMAC_MD5, DES PRIVACY           
+adminsha                         HMAC_SHA, DES PRIVACY           
+v1v2only                         NO AUTH,  NO PRIVACY            
+
+vacmAccess Table:
+Group Name Model   Level        ReadV      WriteV     NotifyV   
+---------- ------- ------------ ---------- ---------- ----------
+v1v2grp    snmpv1  noAuthNoPriv iso        iso        v1v2only  
+admingrp   usm     authPriv     iso        iso        iso       
+
+vacmViewTreeFamily Table:
+View Name            Subtree                          Mask            Type      
+-------------------- -------------------------------- --------------  --------- 
+iso                  1                                                included  
+v1v2only             1                                                included  
+v1v2only             1.3.6.1.6.3.15                                   excluded  
+v1v2only             1.3.6.1.6.3.16                                   excluded  
+v1v2only             1.3.6.1.6.3.18                                   excluded  
+
+vacmSecurityToGroup Table:
+Sec Model  User Name                        Group Name                      
+---------- -------------------------------  ------------------------------- 
+snmpv1     v1v2only                         v1v2grp                         
+usm        adminmd5                         admingrp                        
+usm        adminsha                         admingrp                        
+
+snmpCommunity Table:
+Index      Name       User Name            Tag       
+---------- ---------- -------------------- ----------
+comm1      public     v1v2only                       
+
+snmpNotify Table:
+Name                 Tag                 
+-------------------- --------------------
+v1v2_notify1         v1v2_tag            
+
+snmpTargetAddr Table:
+Name       Transport Addr  Port Taglist    Params         
+---------- --------------- ---- ---------- ---------------
+v1v2_host1 192.168.46.70   162  v1v2_tag   v1v2_pname
+
+snmpTargetParams Table:
+Name                 MP Model User Name            Sec Model Sec Level
+-------------------- -------- -------------------- --------- ---------
+v1v2_pname           snmpv2c  v1v2only             snmpv2    noAuthNoPriv
+
+
+----------------------------------------------------------------------------
+   Port     Device  TX-Ena   RX-Sig TX-Flt Vendor           Serial
+----------- ------- -------- ------ ------ ---------------- ----------------
+ 21 - SFP21 NO Device
+ 22 - SFP22 NO Device
+ 23 - SFP23 NO Device
+ 24 - SFP24 NO Device
+
+Current priority to COS queue information:
+Priority  COSq  Weight
+--------  ----  ------
+    0       0      1
+    1       0      1
+    2       0      1
+    3       0      1
+    4       1      2
+    5       1      2
+    6       1      2
+    7       1      2
+
+Current port priority information:
+Port   Priority  COSq  Weight
+-----  --------  ----  ------
+   1       0       0      1
+   2       0       0      1
+   3       0       0      1
+   4       0       0      1               
+   5       0       0      1
+   6       0       0      1
+   7       0       0      1
+   8       0       0      1
+   9       0       0      1
+  10       0       0      1
+  11       0       0      1
+  12       0       0      1
+  13       0       0      1
+  14       0       0      1
+  15       0       0      1
+  16       0       0      1
+  17       0       0      1
+  18       0       0      1
+  19       0       0      1
+  20       0       0      1
+  21       0       0      1
+  22       0       0      1
+  23       0       0      1
+  24       0       0      1
+
+------------------------------------------------------------------
+
+upfast disabled, update 40
+
+Pvst+ compatibility mode enabled          
+
+------------------------------------------------------------------
+Spanning Tree Group 1: On (RSTP)
+VLANs:  1 7 8 4095
+
+Current Root:            Path-Cost  Port Hello MaxAge FwdDel
+ 2000 9c:4e:20:99:f2:00    20000      21    2     20     15
+
+Parameters:  Priority  Hello  MaxAge  FwdDel  Aging
+              36864      2      20      15     300
+
+Port  Prio  Cost     State  Role Designated Bridge      Des Port Type
+----- ---- --------- -----  ---- ---------------------- -------- ----
+  1    0         0    FWD *
+  2    0         0    FWD *
+  3    0         0    DSB *
+  4    0         0    DSB *
+  5    0         0    DSB *
+  6    0         0    DSB *
+  7    0         0    DSB *
+  8    0         0    DSB *
+  9    0         0    FWD *               
+ 10    0         0    FWD *
+ 11    0         0    DSB *
+ 12    0         0    DSB *
+ 13    0         0    DSB *
+ 14    0         0    DSB *
+ 15    0         0    DSB *
+ 16    0         0    DSB *
+ 17  128      9990!   FWD   DESG 9000-08:17:f4:15:ff:00     8019  P2P
+ 18  128      9990!   FWD   DESG 9000-08:17:f4:15:ff:00     8019  P2P
+ 19    0         0    DSB *
+ 20  128     20000!   FWD   DESG 9000-08:17:f4:15:ff:00     8014  P2P, Edge
+ 21  128     20000!   FWD   ROOT 2000-9c:4e:20:99:f2:00     8007  P2P
+ 22  128         0!   DSB  
+ 23  128         0!   DSB  
+ 24  128         0!   DSB  
+* = STP turned off for this port.
+! = Automatic path cost.
+
+------------------------------------------------------------------
+MSTP is not on.
+
+VLAN                Name                Status            Ports
+----  --------------------------------  ------  -------------------------
+1     Default VLAN                      ena     1-18 21-23
+7     oam                               ena     1 2 9 10 17 18 20 21 24
+8     backup                            ena     1 2 9 10 17 18 21
+4095  Mgmt VLAN                         ena     19
+
+PortChannel 1: Enabled
+Protocol - Static
+Port State:
+ 17: STG  1 forwarding
+ 18: STG  1 forwarding
+
+
+Forwarding database information:
+Mac address Aging Time: 300 
+
+     MAC address     VLAN  Port  Trnk  State  Permanent  
+  -----------------  ----  ----  ----  -----  
+  08:17:f4:15:dc:01     7  20          FWD               
+  08:17:f4:16:37:01     7  20          FWD               
+  08:17:f4:16:3e:01     7  20          FWD               
+  08:17:f4:16:53:01     7  20          FWD               
+  08:17:f4:16:b7:00     7  21          FWD               
+  28:93:fe:22:f0:30     7  21          FWD               
+  3c:4a:92:7a:ea:58     7  21          FWD               
+  5c:26:0a:ff:1a:4b     7  21          FWD               
+  68:b5:99:ca:2f:6f     7  20          FWD               
+  98:4b:e1:5d:d6:09     7  20          FWD               
+  98:4b:e1:68:19:b8     7   1          FWD               
+  98:4b:e1:68:29:10     7   9          FWD               
+  98:4b:e1:68:79:d8     7   2          FWD               
+  98:4b:e1:68:ea:f0     7  10          FWD               
+  9c:4e:20:99:f2:43     7  21          FWD               
+  9c:4e:20:d1:8d:87     1  21          FWD               
+
+802.1x Operational Info:
+------------------------------------------------------------------
+System capability : Authenticator
+System status     : disabled
+Protocol version  : 1
+                                  Authenticator    Backend
+Port   Auth Mode    Auth Status     PAE State     Auth State
+----  ------------  ------------  --------------  ----------
+ 1    force-auth    unauthorized  initialize      initialize
+ 2    force-auth    unauthorized  initialize      initialize
+*3    force-auth    unauthorized  initialize      initialize
+*4    force-auth    unauthorized  initialize      initialize
+*5    force-auth    unauthorized  initialize      initialize
+*6    force-auth    unauthorized  initialize      initialize
+*7    force-auth    unauthorized  initialize      initialize
+*8    force-auth    unauthorized  initialize      initialize
+ 9    force-auth    unauthorized  initialize      initialize
+ 10   force-auth    unauthorized  initialize      initialize
+*11   force-auth    unauthorized  initialize      initialize
+*12   force-auth    unauthorized  initialize      initialize
+*13   force-auth    unauthorized  initialize      initialize
+*14   force-auth    unauthorized  initialize      initialize
+*15   force-auth    unauthorized  initialize      initialize
+*16   force-auth    unauthorized  initialize      initialize
+ 17   force-auth    unauthorized  initialize      initialize
+ 18   force-auth    unauthorized  initialize      initialize
+ 20   force-auth    unauthorized  initialize      initialize
+ 21   force-auth    unauthorized  initialize      initialize
+*22   force-auth    unauthorized  initialize      initialize
+*23   force-auth    unauthorized  initialize      initialize
+*24   force-auth    unauthorized  initialize      initialize
+------------------------------------------------------------------
+* - Port down or disabled
+
+
+STP uplink fast mode : disabled
+
+
+IP information:
+Interface information:
+  1: 10.51.7.4       255.255.255.192 10.51.7.63,      vlan 7, up
+
+Default gateway information: metric strict
+  1: 10.51.7.60,      vlan any,  up  active
+
+Current BOOTP relay settings: OFF
+Current primary BOOTP server: 0.0.0.0
+Current secondary BOOTP server: 0.0.0.0
+
+Current IP forwarding settings: OFF, dirbr disabled
+
+
+Current network filter settings:
+  none
+
+Current route map settings:
+
+ARP cache information:
+    IP address    Flags    MAC address    VLAN Port
+  --------------- ----- ----------------- ---- ----
+  10.51.7.1             3c:4a:92:7a:ea:58    7  21
+  10.51.7.4        P    08:17:f4:15:ff:00    7    
+  10.51.7.60            9c:4e:20:99:f2:43    7  21
+  10.51.7.61            28:93:fe:22:f0:30    7  21
+
+ARP address information:
+    IP address        IP mask        MAC address     VLAN Pass-Up
+  --------------- --------------- -----------------  ---- -----
+  10.51.7.4       255.255.255.255 08:17:f4:15:ff:00     7 
+
+Virtual Router Redundancy is globally turned OFF.
+
+Route table information:
+Status code: * - best
+    Destination         Mask          Gateway        Type      Tag    Metr If
+  --------------- --------------- --------------- --------- --------- ---- --
+* 0.0.0.0         0.0.0.0         10.51.7.60      indirect  static          1
+* 10.51.7.0       255.255.255.192 10.51.7.4       direct    fixed           1
+* 10.51.7.4       255.255.255.255 10.51.7.4       local     addr            1
+* 10.51.7.63      255.255.255.255 10.51.7.63      broadcast broadcast       1
+* 127.0.0.0       255.0.0.0       0.0.0.0         martian   martian        
+* 224.0.0.0       224.0.0.0       0.0.0.0         martian   martian        
+* 224.0.0.0       240.0.0.0       0.0.0.0         multicast addr           
+* 255.255.255.255 255.255.255.255 255.255.255.255 broadcast broadcast      
+
+
+------------------------------------------------------------------
+ Port  Phy-Type  Speed    Duplex     Flow Ctrl      Link
+ ----  --------  -----   --------  --TX-----RX--   ------
+  1        GE     1000     full       no     no       up 
+  2        GE     1000     full       no     no       up 
+  3        GE     1000     full      yes    yes    disabled
+  4        GE     1000     full      yes    yes    disabled
+  5        GE     1000     full      yes    yes    disabled
+  6        GE     1000     full      yes    yes    disabled
+  7        GE     1000     full      yes    yes    disabled
+  8        GE     1000     full      yes    yes    disabled
+  9        GE     1000     full       no     no       up 
+ 10        GE     1000     full       no     no       up 
+ 11        GE     1000     full      yes    yes    disabled
+ 12        GE     1000     full      yes    yes    disabled
+ 13        GE     1000     full      yes    yes    disabled
+ 14        GE     1000     full      yes    yes    disabled
+ 15        GE     1000     full      yes    yes    disabled
+ 16        GE     1000     full      yes    yes    disabled
+ 17        GE     1000     full      yes    yes       up 
+ 18        GE     1000     full      yes    yes       up 
+ 19        GE      100     full      yes    yes    disabled
+ 20        GE     1000     full      yes    yes       up 
+ 21        Cu     1000     full       no     no       up 
+ 22        GE      any      any      yes    yes    disabled
+ 23        GE      any      any      yes    yes    disabled
+ 24        GE      any      any      yes    yes      down
+
+Port Tag MediaRMON PVID       NAME                  VLAN(s)
+---- --- ---- ----- -------------- -------------------------------
+1     y  Auto   d      7  oeccc11 port Eth1 at 1:03-Half01 - oam,backup 1 7 8 
+2     y  Auto   d      7  oeccc13 port Eth1 at 1:03-Half02 - oam,backup 1 7 8 
+3     n  Auto   d      1* Downlink3      1 
+4     n  Auto   d      1* Downlink4      1 
+5     n  Auto   d      1* Downlink5      1 
+6     n  Auto   d      1* Downlink6      1 
+7     n  Auto   d      1* Downlink7      1 
+8     n  Auto   d      1* Downlink8      1 
+9     y  Auto   d      7  oeccc12 port Eth1 at 1:03-Half09 - oam,backup 1 7 8 
+10    y  Auto   d      7  jeccc11 port Eth1 at 1:03-Half10 - oam,backup 1 7 8 
+11    n  Auto   d      1* Downlink11     1 
+12    n  Auto   d      1* Downlink12     1 
+13    n  Auto   d      1* Downlink13     1 
+14    n  Auto   d      1* Downlink14     1 
+15    n  Auto   d      1* Downlink15     1 
+16    n  Auto   d      1* Downlink16     1 
+17    y  Auto   d      1* BSECCC12 port EthInt17 at 1:03-IConn2 - Trunk 1 7 8 
+18    y  Auto   d      1* BSECCC12 port EthInt18 at 1:03-IConn2 - Trunk 1 7 8 
+19    n  Auto   d   4095  Mgmt           4095 
+20    n  Auto   d      7  BLECCC1 port OA1-ILO at 1:03 - oam 7 
+21    y  Auto   d      1* SECCC11 port Eth7 at 1:39 - Trunk 1 7 8 
+22    n  Auto   d      1* Uplink3        1 
+23    n  Auto   d      1* Uplink4        1 
+24    n  Auto   d      7  oam network for Laptop access 7 
+                                          
+* = PVID is tagged.
+
+  No ACLs configured.
+  No ACL group configured.
+
+Uplink Failure Detection: Disabled
+
+

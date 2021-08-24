@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<H2>
+  <SourceCode>
+var appScan =  "".lastFormLoaded();
+return appScan;
+Action&lt;Panel&gt; showO2ScriptEditor =
+	(targetPanel)=&gt; {
+						var scriptEditor = targetPanel.add_Script(false) ;
+						scriptEditor.InvocationParameters.add("MainForm", appScan);
+						//scriptEditor.Code = "Inside AppScan Standard - Add AltoroJ Menu.h2".local().h2_SourceCode();
+						scriptEditor.Code = "return MainForm;".line() + 
+											"//O2Ref:appscan.exe";
+											
+					};
+
+var menuStrip =  appScan.controls&lt;MenuStrip&gt;();  
+var o2Menu = menuStrip.add_MenuItem("O2");  
+o2Menu.add_MenuItem("O2 Log Viewer", ()=&gt;  "O2 Log Viewer".popupWindow(450,200).add_LogViewer() );
+o2Menu.add_MenuItem("O2 Script Editor", ()=&gt;  showO2ScriptEditor("O2 Script Editor".popupWindow(650,300)) ); 
+
+Action injectScriptIntoGui = 
+	()=&gt;{
+			var leftTreeView = appScan.controls&lt;TreeView&gt;(true)[0];
+			var _panel  = leftTreeView.parent&lt;Panel&gt;().insert_Below();//.parent();   
+			showO2ScriptEditor(_panel);  
+		};
+
+appScan.set_Text("AppScan Standard - O2 Version");
+injectScriptIntoGui();
+
+return "done";
+//return .insert_Below(200);//.typeName(); 
+//return appScan.controls&lt;TreeView&gt;(true)[0].add_Node("a");;</SourceCode>
+  <ReferencedAssemblies />
+</H2>

@@ -1,0 +1,128 @@
+[/]
+desktop-effects-unmaximize-transition='easeOutBounce'
+panel-zone-text-sizes='[{"panelId": 1, "left": 0, "center": 0, "right": 0}, {"left": 0.0, "center": 11.0, "right": 8.0, "panelId": 2}]'
+desktop-effects-maximize-transition='easeInBack'
+applet-cache-updated=1578163652
+desktop-effects-map-effect='scale'
+hotcorner-layout=['expo:false:0', 'scale:false:0', 'scale:false:0', 'desktop:false:0']
+desktop-effects-close-effect='scale'
+desktop-effects-style='default'
+enabled-desklets=@as []
+desktop-effects-unmaximize-time=400
+desktop-effects-map-time=250
+panel-zone-icon-sizes='[{"panelId": 1, "left": 22, "center": 32, "right": 24}, {"panelId": 2, "left": 22, "center": 0, "right": 0}]'
+desktop-effects-minimize-effect='none'
+alttab-switcher-style='coverflow'
+desklet-snap-interval=25
+panels-height=['1:35', '2:23']
+next-applet-id=156
+panel-launchers=['DEPRECATED']
+desktop-effects-map-transition='easeOutSine'
+desktop-effects-unmaximize-effect='none'
+panels-enabled=['1:0:bottom', '2:0:top']
+desktop-effects-tile-transition='easeInBack'
+panel-zone-symbolic-icon-sizes='[{"panelId": 1, "left": 28, "center": 28, "right": 16}, {"left": 24, "center": 28, "right": 15, "panelId": 2}]'
+desktop-effects-maximize-time=400
+desktop-effects-maximize-effect='none'
+enabled-applets=['panel2:right:16:systray@cinnamon.org:0', 'panel1:left:1:menu@cinnamon.org:1', 'panel2:right:21:power@cinnamon.org:14', 'panel2:right:18:network@cinnamon.org:15', 'panel2:right:17:trash@cinnamon.org:16', 'panel2:right:20:nvidia-prime@cinnamon.org:18', 'panel2:left:13:calendar@cinnamon.org:24', 'panel2:center:0:workspace-switcher@cinnamon.org:26', 'panel1:left:2:separator@cinnamon.org:27', 'panel2:right:19:notifications@cinnamon.org:33', 'panel1:center:1:grouped-window-list@cinnamon.org:81', 'panel2:right:14:blueberry@cinnamon.org:84', 'panel1:right:2:separator@cinnamon.org:85', 'panel2:right:12:spacer@cinnamon.org:87', 'panel2:right:13:spacer@cinnamon.org:88', 'panel2:right:9:spacer@cinnamon.org:89', 'panel2:right:8:spacer@cinnamon.org:90', 'panel2:right:7:spacer@cinnamon.org:93', 'panel2:right:4:spacer@cinnamon.org:94', 'panel2:right:10:sound@cinnamon.org:100', 'panel2:right:6:spacer@cinnamon.org:122', 'panel2:left:1:spacer@cinnamon.org:123', 'panel2:right:5:spacer@cinnamon.org:124', 'panel2:left:7:spacer@cinnamon.org:125', 'panel2:left:6:spacer@cinnamon.org:127', 'panel2:left:5:spacer@cinnamon.org:129', 'panel2:left:4:spacer@cinnamon.org:130', 'panel2:left:3:spacer@cinnamon.org:131', 'panel2:left:2:spacer@cinnamon.org:132', 'panel2:right:2:spacer@cinnamon.org:133', 'panel2:left:12:spacer@cinnamon.org:140', 'panel2:left:9:spacer@cinnamon.org:141', 'panel2:right:15:xapp-status@cinnamon.org:148', 'panel2:right:11:separator@cinnamon.org:149', 'panel2:left:10:spacer@cinnamon.org:151', 'panel2:left:8:spacer@cinnamon.org:152', 'panel2:left:11:spacer@cinnamon.org:153', 'panel2:left:0:hwmonitor@sylfurd:155']
+desktop-effects-minimize-time=150
+alttab-switcher-delay=100
+desktop-effects-tile-effect='none'
+desktop-effects-close-transition='easeInBack'
+desktop-effects-minimize-transition='easeInSine'
+panel-edit-mode=false
+panels-show-delay=['1:50', '2:0']
+desklet-cache-updated=1579920385
+desktop-effects-close-time=250
+next-desklet-id=1
+panels-hide-delay=['1:50', '2:0']
+no-adjacent-panel-barriers=true
+desktop-effects-tile-time=400
+panels-autohide=['1:intel', '2:false']
+
+[settings-daemon/plugins/power]
+sleep-display-battery=1800
+lid-close-battery-action='suspend'
+sleep-display-ac=1800
+lid-close-ac-action='suspend'
+sleep-inactive-ac-timeout=0
+sleep-inactive-battery-timeout=0
+
+[settings-daemon/plugins/xsettings]
+buttons-have-icons=true
+
+[settings-daemon/peripherals/touchpad]
+motion-threshold=1
+touchpad-enabled=true
+
+[settings-daemon/peripherals/keyboard]
+numlock-state='on'
+
+[settings-daemon/peripherals/mouse]
+drag-threshold=8
+custom-acceleration=true
+custom-threshold=true
+double-click=400
+motion-threshold=4
+
+[muffin]
+resize-threshold=24
+tile-hud-threshold=25
+
+[desktop/interface]
+cursor-size=24
+text-scaling-factor=1.0
+icon-theme='Mint-X-Dark'
+gtk-theme='Mint-Y-Dark'
+toolkit-accessibility=false
+
+[desktop/applications/calculator]
+exec='gnome-calculator'
+
+[desktop/applications/terminal]
+exec='gnome-terminal'
+
+[desktop/media-handling]
+autorun-x-content-start-app=['x-content/unix-software']
+autorun-never=false
+autorun-x-content-ignore=@as []
+autorun-x-content-open-folder=@as []
+
+[desktop/screensaver]
+lock-enabled=true
+
+[desktop/wm/preferences]
+min-window-opacity=30
+button-layout=':minimize,maximize,close'
+theme='Mint-Y-Dark'
+
+[desktop/a11y/applications]
+screen-keyboard-enabled=false
+screen-reader-enabled=false
+
+[desktop/a11y/mouse]
+secondary-click-enabled=false
+secondary-click-time=1.2
+dwell-time=1.2
+dwell-threshold=10
+dwell-click-enabled=false
+
+[desktop/sound]
+event-sounds=false
+
+[desktop/background]
+picture-uri='file:///home/sergio/work/info/wallpapers/abstract-city-buildings-digital-art-uhdpaper.com-4K-56.jpg'
+picture-options='stretched'
+
+[desktop/background/slideshow]
+image-source='directory:///home/sergio/work/info/wallpapers'
+delay=10
+slideshow-enabled=false
+
+[theme]
+symbolic-relative-size=0.60999999999999999
+theme-cache-updated=1578171149
+name='Numix-Cinnamon-Transparent'
+
+[cinnamon-session]
+quit-time-delay=60

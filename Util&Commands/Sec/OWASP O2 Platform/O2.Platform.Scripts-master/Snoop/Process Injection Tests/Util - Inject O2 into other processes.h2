@@ -1,0 +1,149 @@
+//var topPanel = panel.clear().add_Panel();  
+var topPanel = "Util - Inject O2 into Other processes v2.0".popupWindow(1200,600); 
+
+topPanel.insert_LogViewer();    
+   
+
+var processesTreeView	 = topPanel.title("Current Processes (with MainWindowHandle != 0)").add_TreeView().sort();
+var tabPanel 			 = topPanel.insert_Right().add_TabControl();
+var selectedProcessTab   = tabPanel.add_Tab("Selected Process details").add_Panel();
+//var modulesTreeView 	 = tabPanel.add_Tab("Selected Process Modules List").add_TreeView_with_PropertyGrid().sort();
+
+var modulesTreeView 	= selectedProcessTab.insert_Below("Selected Process Modules List").add_TreeView_with_PropertyGrid(false).sort();
+var processScreenshot 	= modulesTreeView.insert_Left(100).add_PictureBox();
+var codeEditor			= selectedProcessTab.add_SourceCodeViewer();
+//processesTreeView.splitContainer().splitterDistance(300);
+//modulesTreeView.splitContainer().splitterDistance(300);
+Process selectedProcess 	 = null;
+CheckBox x64_CheckBox		 = null;
+CheckBox runtime40_CheckBox  = null;
+
+Action<Process> selectProcess =
+	(process)=> {
+	"select process: {0}".info(process.Id);
+					foreach(var treeNode in processesTreeView.nodes())
+						if (treeNode.tag<Process>().Id == process.Id)
+						{
+							treeNode.selected();
+							return;
+						}
+							
+				};
+ 
+processesTreeView.afterSelect<Process>( 
+	(process)=> {		     
+					selectedProcess = Processes.getProcess(process.Id);  //to refresh the values					
+					modulesTreeView.clear(); 
+					selectedProcessTab.parent<TabPage>().set_Text("Selected process: {0} (id: {1})".format(process.ProcessName, process.Id));
+					//modulesTreeView.parent<GroupBox>()
+					O2Thread.mtaThread(
+						()=>{								
+								processScreenshot.load(selectedProcess.handle().window_ScreenShot() as Image);
+								
+								//selectedProcessTab.insert_Left(40).add_FlowLayoutPanel_with_DetectedModules(process);
+						    });
+					try
+					{						
+						foreach(ProcessModule module in process.Modules)
+							modulesTreeView.add_Node(module.ModuleName, module);
+						modulesTreeView.selectFirst();
+						
+						x64_CheckBox.@checked(process.is64BitProcess());
+						runtime40_CheckBox.@checked(process.isRuntime_V4());
+						modulesTreeView.white();
+					} 
+					catch(Exception ex)
+					{
+						ex.log();
+						x64_CheckBox.@checked(ex.Message == "A 32 bit processes cannot access modules of a 64 bit process.");
+						runtime40_CheckBox.@checked(false);
+						modulesTreeView.pink()
+									   .add_Node("Can't access Module list").treeView()
+									   .add_Node("Exception: {0}".format(ex.Message.info()));
+					}
+					
+				});
+				
+Action refreshProcessList = 
+	()=>{
+			processesTreeView.clear();
+			foreach(Process process in Processes.getProcesses())
+				if (process.MainWindowHandle != IntPtr.Zero && process.ProcessName !="Dbgview")			//Dbgview doens't like to send Dbg messages to itself
+					processesTreeView.add_Node("{0,-40} id: {1}".format(process.ProcessName, process.Id), process);
+			processesTreeView.selectFirst();			
+		};
+
+Action refreshProcessList_in_1Second = 
+	()=>{
+			this.sleep(1000); 
+			refreshProcessList(); 
+		};
+Action injectO2IntoProcess = 
+	()=>{						
+			"Injecting O2 into process '{0}' with id {1}".info(selectedProcess.ProcessName, selectedProcess.Id); 
+			var o2Injector =  new API_O2_Injector();				
+			o2Injector.injectIntoProcess(selectedProcess, x64_CheckBox.value(), runtime40_CheckBox.value());    
+		};   
+
+Action executeScriptInProcess = 
+	()=>{
+			
+			var code =  "Injected_Dll_WithCodeSnippet.cs".local().fileContents();
+			var tempFile = code.replace("/*CODESNIPPET*/", codeEditor.get_Text()).saveWithExtension(".cs"); 
+			var assembly = tempFile.compile(true); 
+			if (assembly.isNull())
+				"Failed to compileAssemnbly to inject".error();
+			else 
+				 new API_O2_Injector().injectIntoProcess(selectedProcess,assembly.Location,"O2.InjectedClass", "main",  x64_CheckBox.value(), runtime40_CheckBox.value());
+		
+		};
+   
+processesTreeView.insert_Below_ToolStrip()
+				 .add_Button("Refresh", "view_refresh".formImage(), ()=> refreshProcessList()).toolStrip()
+				 .add_Button("Process Properties", "btSettings_Image".formImage(), ()=> processesTreeView.selected().Tag.showInfo()).toolStrip()
+				 .add_Button("Bring to front", "preferences_desktop_locale".formImage(), ()=> selectedProcess.process_MainWindow_BringToFront()).toolStrip()
+				 .add_Button("Stop Process", "process_stop".formImage(), () => { selectedProcess.stop(); refreshProcessList();});
+				 
+				   
+selectedProcessTab.insert_ToolStrip()
+	.add("Execute Script (below) in process", "btExecuteSelectedMethod_Image".formImage(),()=> executeScriptInProcess())
+	.add_Button("Inject O2 REPL into Process","btExecuteSelectedMethod_Image".formImage(), ()=>injectO2IntoProcess()).toolStrip()
+	.add_CheckBox("x64",ref x64_CheckBox)
+	.add_CheckBox(".Net 40 runtime",ref runtime40_CheckBox);
+
+var toolStrip = topPanel.insert_Above(30).add_ToolStrip(); 
+toolStrip.add_DropDown("REPL", "document_save_as".formImage())
+		 	.add_DropDown_Button("REPL this Form   ", ()=> topPanel.parentForm().script_Me("form"))
+		 	.add_DropDown_Button("REPL selected Process and API_O2_Injector   ", 
+		 		()=> new API_O2_Injector().script_Me().add_InvocationParameter("process", selectedProcess).code_Insert("//return process;"))
+		 	//.add_DropDown_Button("REPL selected Process", ()=> selectedProcess.script_Me())
+		 	;
+		 	
+toolStrip.add_DropDown("Open Demo Apps", "face_glasses".formImage())
+		 	.add_DropDown_Button("Open LinqPad (C#)   "	, 	 ()=> { "LinqPad_Installer.cs".executeFirstMethod()	; refreshProcessList_in_1Second(); })
+		 	.add_DropDown_Button("Open Calc (C++)     "	, 	 ()=> { "calc.exe".startProcess() 		 		    ; refreshProcessList_in_1Second(); });
+toolStrip.add_Button("Open DbgViewer.exe (SysInternals)",  "btDebugMethod_Image".formImage(),  ()=> "DebugView.cs".executeFirstMethod());
+
+toolStrip.insert_Right(160).add_ProcessFinder(selectProcess, selectProcess).append_Label("Click to select process").top(10);
+
+codeEditor.set_Text("Debug.Write(\"Testing 123...\");".line() + 
+					"System.Windows.Forms.MessageBox.Show(\"Hello\");");
+//toolStrip.insert_Left(30).add_ProcessFindings((process)=>{});
+//<Ctrl_ProcessFinder>
+//O2File:Ctrl_ProcessFinder.cs
+
+
+//x64_CheckBox =	lastLink.append_CheckBox("x64", (value)=>x64= value);
+//runtime40_ChexkBox = x64_CheckBox.append_CheckBox(".Net 40 runtime", (value)=> runtime40 = value);
+
+refreshProcessList();  
+
+return "done";
+
+//injectO2IntoProcess();  
+
+//using O2.XRules.Database.APIs
+//using System.Diagnostics
+
+//O2File:API_O2_Injector.cs
+//O2File:_Extra_methods_To_Add_to_Main_CodeBase.cs

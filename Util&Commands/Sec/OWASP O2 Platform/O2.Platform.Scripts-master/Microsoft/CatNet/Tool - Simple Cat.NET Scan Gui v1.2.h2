@@ -1,0 +1,58 @@
+try
+{
+
+O2Setup.extractEmbededConfigZips();
+var topPanel = "Tool - Simple Cat.NET Scan Gui v1.1".popupWindow(700,400)
+					.set_Form_Icon("cheshire_cat.ico".local()); 
+//var topPanel = panel.add_Panel(true);
+var logViewer = topPanel.title("Scan Logs").add_LogViewer();
+var codeViewer = topPanel.insert_Below("Scan results").add_SourceCodeViewer();
+
+API_CatNet_Deployment.ensure_CatNet_Instalation();
+
+Action<string> scanFile = 
+	(target)=>{
+				if (target.extension(".cs"))
+					target = target.compileScriptFile(true).location();					
+				if (target.valid() && target.fileExists())
+				{
+					"Scanning with Cat.NET: {0}".debug(target);
+					var catNet = new API_CatNet().loadRules();
+					var savedReport = catNet.scan(target).savedReport(); 
+					codeViewer.open(savedReport);
+				}
+				else
+					"Provided target not valid: {0}".error(target);
+		};
+		
+
+Action askUserForAssemblyToScan = 
+	()=>{
+			scanFile(topPanel.askUserForFileToOpen());						
+		};
+Action scanTestFile = 
+	()=> scanFile("Web_SQL_Injection.cs".local());		
+logViewer.onDrop(scanFile);		
+
+topPanel.mainMenu().clear()
+		.add_Menu("File")
+			.add_MenuItem("Open Assembly to Scan", askUserForAssemblyToScan)
+		.add_Menu("Debug")
+			.add_MenuItem("Scan Test File "		, ()=>scanTestFile())
+			.add_MenuItem("Scan HacmeBank .NET"	, ()=>scanFile("DotNetGoat.dll".local()))
+			.add_MenuItem("Open REPL Script"	, ()=>topPanel.parentForm().script_Me());
+
+scanTestFile();
+}
+catch(Exception ex)
+{
+	ex.log("in script body");
+}
+
+//using O2.XRules.Database.APIs
+
+//O2File:API_CatNet.cs
+//O2Package:Web_SQL_Injection.cs
+//O2Package:DotNetGoat.dll
+//O2Package:cheshire_cat.ico
+//O2Embed:E:\TeamMentor\TM_UnitTests\StandAlone_Exes_Packages\CatNet_Files.zip

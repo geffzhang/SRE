@@ -1,0 +1,29 @@
+ LVM Configuration
+
+
+Resize:
+
+
+vi /opt/ngp/etc/ngp-storage-lvm.conf
+
+lvm01 += {
+  usr:ext3:20000
+}
+
+lvm01 += { 
+  home:ext3:7000+:/home  
+}
+
+
+lvm01 += { 
+  dbs:ext3:10000:/ds/dbs
+  dblog:ext3:10000:/ds/dblog
+  usr:ext3:40000+
+}
+
+lvm01 += { 
+  backup:ext3:50000+:/backup  
+}
+
+
+ngp-storage --mode lvm

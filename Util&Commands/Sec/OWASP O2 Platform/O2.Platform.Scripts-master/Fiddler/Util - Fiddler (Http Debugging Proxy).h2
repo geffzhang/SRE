@@ -1,0 +1,48 @@
+//CompileEngine.resetLocalScriptsFileMappings();
+
+//panel.clear();
+//var topPanel = panel.add_Panel(); 
+var topPanel = O2Gui.open<Panel>("Fiddler - HTTP Debugging Proxy",800,600);
+var fiddler = new API_Fiddler();  
+
+var ribbon = topPanel.add_Ribbon_Above();  
+ribbon.add_Tab("Fiddler") 
+	  .add_Group("Fiddler Process")
+	  .add_Button("Start", "start.png",()=>fiddler.startAndSync(topPanel)) 
+	  .add_Button("Stop","stop.png",   ()=>fiddler.stop()) 
+	  .add_Button("Restart", "restart.png", ()=>fiddler.startAndSync(topPanel));
+ribbon.tab("Fiddler")  
+	  .add_Group("Gui Automation")	   
+	  .add_Button("Capture Traffic",()=>fiddler.Fiddler_Window.menu_Click("File","Capture Traffic")) 
+	  .add_Button("Text Encode/Decode...",()=>fiddler.Fiddler_Window.menu_Click("Tools","Text Encode/Decode...")) 	  
+	  .add_Button("Exit",()=>fiddler.Fiddler_Window.menu_Click("File","Exit"));
+	  
+ribbon.add_Tab("Admin Utils")  
+	  .add_Group("Fiddler Window")  
+	  .add_Button("Disable allways on top", ()=>fiddler.Fiddler_Window.alwaysOnTop(false))
+	  .add_Button("Enable allways on top", ()=>fiddler.Fiddler_Window.alwaysOnTop(true));
+
+ribbon.button_Click("Fiddler", "Fiddler Process","Start");  
+
+//this.sleep(1000);   
+//return fiddler.Fiddler_Window.menu("Tools").click().menu("Text Encode/Decode...").click();//.names(); 
+//return fiddler.Fiddler_Window.menu("Application");   
+ 
+
+
+//using FluentSharp.GuiAutomation
+//using O2.XRules.Database.APIs
+//using O2.XRules.Database.Utils
+
+//O2File:API_GuiAutomation.cs
+//O2Ref:White.Core.dll
+
+//O2File:API_Fiddler.cs
+//O2File:WPF_Ribbon.cs
+//O2Ref:WindowsFormsIntegration.dll
+//O2Ref:RibbonControlsLibrary.dll
+
+//O2Ref:PresentationCore.dll
+//O2Ref:PresentationFramework.dll
+//O2Ref:WindowsBase.dll
+//O2Ref:System.Xaml.dll

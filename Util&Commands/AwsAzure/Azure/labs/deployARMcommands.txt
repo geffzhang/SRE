@@ -1,0 +1,77 @@
+Deploy the template to Azure
+
+NEW VM Linux
+ New-AzResourceGroupDeployment -ResourceGroupName RG1 -TemplateUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vm-simple-linux/azuredeploy.json
+
+SA Account
+
+You learned about the deployment commands in the previous module. Here, we're using the Azure PowerShell New-AzResourceGroupDeployment command.
+
+Deploy the template by using Azure PowerShell commands in the Visual Studio Code terminal. Remember to replace {your-prefix} with a different string. For example, you could use storage.
+
+Azure PowerShell
+$templateFile = "azuredeploy.json"
+$today=Get-Date -Format "MM-dd-yyyy"
+$deploymentName="addfunction-"+"$today"
+New-AzResourceGroupDeployment `
+  -Name $deploymentName `
+  -TemplateFile $templateFile `
+  -storagePrefix {your-prefix}
+
+
+
+In the first section of this code, you set Azure PowerShell variables for the path to the template file that you want to deploy and the name of the deployment. You then use the
+ ```New-AzResourceGroupDeployment``` command to deploy the template to Azure.
+
+
+
+
+
+
+
+
+New-AzResourceGroup -Name <resource-group-name> -Location <resource-group-location> #use this command when you need to create a new resource group for your deployment
+
+	
+
+
+
+
+
+deploy vhd
+$vm = Get-AzVM -ResourceGroupName westus `
+    -Name simgdeployed
+
+$image = New-AzImageConfig -SourceVirtualMachineId `
+    $vm.ID -Location westus
+
+New-AzImage -Image $image `
+    -ImageName vhd1-image-20200829162832 `
+    -ResourceGroupName westus
+
+
+
+
+
+
+
+
+
+
+New-AzVm `
+    -ResourceGroupName WestUS `
+    -Name fromvhdps `
+    -ImageName vhd1-image-20200829162832 `
+    -Location WestUS
+ 
+
+New-AzResourceGroupDeployment -ResourceGroupName RG1 -TemplateUri C:\Users\Jeff\Desktop\azure\labs\simpleLinVM.json
+
+New-AzResourceGroupDeployment -ResourceGroupName RG1 -TemplateUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vm-simple-linux/azuredeploy.json
+
+
+
+
+
+New-AzResourceGroupDeployment -ResourceGroupName RG1 -TemplateUri C:\Users\Jeff\Desktop\azure\labs\simpleLinVM.json
+

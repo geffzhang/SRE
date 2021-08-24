@@ -1,0 +1,10 @@
+[
+  {
+    "Description": "vm1disk001vmdk",
+    "Format": "vmdk",
+    "UserBucket": {
+        "S3Bucket": "s3migratebuck",
+        "S3Key": "VM-Import/vm 1-disk001.vmdk"
+    }
+}]
+

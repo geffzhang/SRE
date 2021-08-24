@@ -1,0 +1,219 @@
+
+BSECCC16#sh run
+Current configuration:
+!
+version "5.1.3"
+switch-type "GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem"
+!
+!
+ssh enable
+!
+
+snmp-server target-address 1 name "v1v2_host1" address 192.168.46.70
+snmp-server target-address 1 taglist "v1v2_tag"
+snmp-server target-address 1 parameters-name "v1v2_pname"
+!
+snmp-server target-parameters 1 name "v1v2_pname"
+snmp-server target-parameters 1 message snmpv2c
+snmp-server target-parameters 1 user-name "v1v2only"
+snmp-server target-parameters 1 security snmpv2
+!
+snmp-server notify 1 name "v1v2_notify1"
+snmp-server notify 1 tag "v1v2_tag"
+!
+snmp-server community 1 index "comm1"
+snmp-server community 1 name "public"
+snmp-server community 1 user-name "v1v2only"
+hostname "BSECCC16"
+!
+system idle 60
+banner "Ecuador - BSECCC16 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn6"
+!
+access user administrator-password "b85098af885088aab5b2f3e64be02b58fb62eda7c4f0b1b4ce3d8db02130f075"
+enable password "b9ba994589108800b4f2f2a64aa02bf20a848f9b63f7e03ffe23a33c71b35d58"
+!
+!
+spanning-tree mode rstp
+!
+interface GigabitEthernet  1
+        name "oeccc11 port Eth4 at 1:03-Half01 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet  2
+        name "oeccc13 port Eth4 at 1:03-Half02 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet  3
+        shutdown
+        exit
+!
+interface GigabitEthernet  4
+        shutdown
+        exit
+!
+interface GigabitEthernet  5
+        shutdown
+        exit
+!
+interface GigabitEthernet  6
+        shutdown
+        exit
+!
+interface GigabitEthernet  7
+        shutdown
+        exit
+!
+interface GigabitEthernet  8
+        shutdown
+        exit
+!
+interface GigabitEthernet  9
+        name "oeccc12 port Eth4 at 1:03-Half09 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet 10
+        name "jeccc11 port Eth4 at 1:03-Half10 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet 11
+        shutdown
+        exit
+!
+interface GigabitEthernet 12
+        shutdown
+        exit
+!
+interface GigabitEthernet 13
+        shutdown
+        exit
+!
+interface GigabitEthernet 14
+        shutdown
+        exit
+!
+interface GigabitEthernet 15
+        shutdown
+        exit
+!
+interface GigabitEthernet 16
+        shutdown
+        exit
+!
+interface GigabitEthernet 17
+        name "BSECCC15 port EthInt17 at 1:03-IConn5 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 18
+        name "BSECCC15 port EthInt18 at 1:03-IConn5 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 20
+        shutdown
+        exit
+!
+interface GigabitEthernet 21
+        name "SW-08 port Eth6 at 1:40 - Trunk"
+        tagging
+        exit
+!
+interface GigabitEthernet 22
+        shutdown
+        exit
+!
+interface GigabitEthernet 23
+        shutdown
+        exit
+!       
+interface GigabitEthernet 24
+        shutdown
+        exit
+!
+vlan 1
+        no member  1
+        no member  2
+        member  3
+        member  4
+        member  5
+        member  6
+        member  7
+        member  8
+        no member  9
+        no member 10
+        member 11
+        member 12
+        member 13
+        member 14
+        member 15
+        member 16
+        member 17
+        member 18
+        member 20
+        member 21
+        member 22
+        member 23
+        member 24
+!
+vlan 3
+        enable
+        name "traffic"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 21
+!
+vlan 4095
+        member 19
+!
+spanning-tree stp 1 bridge priority 36864
+spanning-tree stp 1 vlan 1
+spanning-tree stp 1 vlan 3
+spanning-tree stp 1 vlan 4095
+
+
+!
+snmp-server location "Acision Messaging Solution at Ecuador"
+snmp-server contact "Conecel"
+snmp-server ufd-trap
+!
+!interface ip 256
+!       enable
+!       addr <dhcp>
+!
+!ip gateway 4 addr <dhcp>
+!ip gateway 4 enable
+ip dns domain-name acision.com
+!
+ntp enable
+ntp primary-server 10.51.7.1  
+ntp interval 60
+!       
+end
+
+BSECCC16# 
+BSECCC16#
+BSECCC16#
+BSECCC16#sh vlan
+VLAN                Name                Status            Ports
+----  --------------------------------  ------  -------------------------
+1     Default VLAN                      ena     3-8 11-18 20-24
+3     traffic                           ena     1 2 9 10 17 18 21
+4095  Mgmt VLAN                         ena     19
+BSECCC16#
+BSECCC16#
+BSECCC16#
+BSECCC16#

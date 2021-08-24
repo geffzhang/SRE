@@ -1,0 +1,121 @@
+LOAD BALANCER 2
+
+LBRBT42# sh runn
+!Generated on 04/11/2011 11:55:26
+!Active version: sg0820001
+
+configure
+
+
+!*************************** GLOBAL ***************************
+  username admin des-password paiafc2gybnd2deg superuser
+
+  host obrbt11 10.192.28.97
+  host obrbt12 10.192.28.98
+  host obrbt21 10.192.28.99
+  host obrbt22 10.192.28.100
+  host obrbt31 10.192.28.101
+  host obrbt32 10.192.28.102
+
+  ip route 0.0.0.0 0.0.0.0 10.192.28.126 1
+
+!************************* INTERFACE *************************
+interface e7
+  phy 100Mbits-FD
+  trunk
+
+  vlan 13
+
+interface e8
+  phy 100Mbits-FD
+
+!************************** CIRCUIT **************************
+circuit VLAN13
+  description "traffic"
+
+  ip address 10.192.28.124 255.255.255.224
+    ip virtual-router 30
+    ip redundant-interface 30 10.192.28.123
+    ip redundant-vip 30 10.192.28.103
+    ip redundant-vip 30 10.192.28.104
+    ip redundant-vip 30 10.192.28.105
+
+!************************** SERVICE **************************
+service AAG11
+  ip address 10.192.28.97
+  protocol tcp
+  active
+
+service AAG12
+  ip address 10.192.28.98
+  protocol tcp
+  active
+
+service AAG21
+  ip address 10.192.28.99
+  protocol tcp
+  active
+
+service AAG22
+  ip address 10.192.28.100
+  protocol tcp
+  active
+
+service AAG31
+  ip address 10.192.28.101
+  protocol tcp
+  active
+
+service AAG32
+  ip address 10.192.28.102
+  protocol tcp
+  active
+
+!*************************** OWNER ***************************
+owner SMPP
+
+  content AAG1
+    vip address 10.192.28.103
+    add service AAG11 weight 10
+    add service AAG12 weight 10
+    balance weightedrr
+
+  content AAG2
+    vip address 10.192.28.104
+    add service AAG21 weight 10
+    add service AAG22 weight 10
+    balance weightedrr
+
+  content AAG3
+    vip address 10.192.28.105
+    add service AAG31 weight 10
+    add service AAG32 weight 10
+    balance weightedrr
+
+!*************************** GROUP ***************************
+group AAG1
+  vip address 10.192.28.103
+  add destination service AAG11
+  add destination service AAG12
+
+group AAG2
+  vip address 10.192.28.104
+  add destination service AAG21
+  add destination service AAG22
+
+group AAG3
+  vip address 10.192.28.105
+  add destination service AAG31
+  add destination service AAG32
+
+LBRBT42#
+LBRBT42# sh boot
+
+!************************ BOOT CONFIG ************************
+  ip address 10.192.28.81
+  subnet mask 255.255.255.224
+  gateway address 10.192.28.94
+  primary boot-file sg0820001
+  primary boot-type boot-via-disk
+
+LBRBT42#

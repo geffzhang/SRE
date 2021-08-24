@@ -1,0 +1,414 @@
+	ROUTER DE CONSOLE 2811 #CONFIGURAÇÃO
+
+APOS BOB CONFIGURAR=========================.
+
+
+
+
+
+! NVRAM config last updated at 17:28:04 GMT Tue Mar 22 2011 by admin
+!
+version 12.4
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+!
+hostname RBRBT41
+!
+boot-start-marker
+boot-end-marker
+!
+logging buffered 51200 warnings
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!         
+no aaa new-model
+!
+resource policy
+!
+clock timezone GMT -3
+clock summer-time GMT-2 date Oct 17 2010 0:00 Feb 10 2011 0:00
+ip subnet-zero
+no ip source-route
+no ip routing
+!
+!
+no ip cef
+!
+!
+ip domain name yourdomain.com
+ip host RT-03 2077 192.168.254.1
+ip host RT-02 2076 192.168.254.1
+ip host SW-07 2066 192.168.254.1
+ip host SW-08 2067 192.168.254.1
+ip host SW-01 2068 192.168.254.1
+ip host SW-02 2069 192.168.254.1
+ip host SW-03 2070 192.168.254.1
+ip host SW-04 2071 192.168.254.1
+ip host SW-05 2072 192.168.254.1
+ip host SW-06 2073 192.168.254.1
+ip host BL-01-OA1 2074 192.168.254.1
+ip host BL-01-OA2 2075 192.168.254.1
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+username permit
+username permit autocommand access-enable timeout 240
+username open
+username open autocommand ping 
+username close
+username close autocommand clear interface BRI0/0/0
+!
+!
+!
+interface Loopback0
+ ip address 192.168.254.1 255.255.255.255
+ no ip route-cache
+!
+interface FastEthernet0/0
+ description $ETH-LAN$$ETH-SW-LAUNCH$$INTF-INFO-FE 0/0$
+ ip address 10.192.14.229 255.255.255.248
+ no ip route-cache
+ duplex full
+ speed 100
+!
+interface FastEthernet0/1
+ ip address 10.192.14.221 255.255.255.224
+ no ip route-cache
+ duplex auto
+ speed auto
+!
+ip default-gateway 10.192.14.222
+ip classless
+!
+ip http server
+ip http access-class 23
+ip http authentication local
+ip http timeout-policy idle 60 life 86400 requests 10000
+!
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown internet.6.3.12 excluded
+snmp-server view cutdown internet.6.3.13 excluded
+snmp-server view cutdown internet.6.3.16 excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server queue-length 100
+snmp-server location Brazil
+snmp-server contact TIM
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps envmon fan shutdown supply temperature statuschange
+snmp-server enable traps config
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server host 10.221.21.26 version 2c Acision 
+!
+menu solution title ^C
+********************** Acision ************************
+                  Messaging Solution
+                      TIM Brazil
+                       RBRBT41          
+
+                      MAIN MENU
+*******************************************************
+^C
+menu solution text 1 BLBRBT4 (BL-01-OA1)
+menu solution command 1 resume BL-01-OA1 /connect telnet BL-01-OA1
+menu solution text 2 BLBRBT4 (BL-01-OA2)
+menu solution command 2 resume BL-01-OA2 /connect telnet BL-01-OA2
+menu solution text 3 BSBRBT41 (SW-01)
+menu solution command 3 resume SW-01 /connect telnet SW-01
+menu solution text 4 BSBRBT42 (SW-02)
+menu solution command 4 resume SW-02 /connect telnet SW-02
+menu solution text 5 BSBRBT45 (SW-03)
+menu solution command 5 resume SW-03 /connect telnet SW-03
+menu solution text 6 BSBRBT46 (SW-04)
+menu solution command 6 resume SW-04 /connect telnet SW-04
+menu solution text 7 BSBRBT47 (SW-05)
+menu solution command 7 resume SW-05 /connect telnet SW-05
+menu solution text 8 BSBRBT48 (SW-06)
+menu solution command 8 resume SW-06 /connect telnet SW-06
+menu solution text 9 SBRBT41 (SW-07)
+menu solution command 9 resume SW-07 /connect telnet SW-07
+menu solution text a SBRBT41 (SW-08)
+menu solution command a resume SW-08 /connect telnet SW-08
+menu solution text b LBRBT41 (RT-02)
+menu solution command b resume RT-2 /connect telnet RT-02
+menu solution text c LBRBT42 (RT-03)
+menu solution command c resume RT-03 /connect telnet RT-03
+menu solution text x Exit
+menu solution command x menu-exit
+!
+control-plane
+!
+banner motd ^C
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *               TIM                *
+ *              Brazil              *
+ *             RBRBT41              *
+ *             BB 2811              *
+ *        Cabinet 4, U42            *
+ *                                  *
+ ************************************
+          
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ exec-timeout 0 0
+ login local
+ autocommand  menu solution
+ transport preferred none
+ flowcontrol hardware
+line aux 0
+ exec-timeout 0 0
+ script dialer dialnum
+ script reset reset
+ modem InOut
+ modem autoconfigure discovery
+ transport input all
+ speed 57600
+ flowcontrol hardware
+line 1/0 1/15
+ no flush-at-activation
+ script connection ret
+ no exec
+ transport preferred none
+ transport input telnet
+ transport output none
+ autohangup
+ stopbits 1
+line vty 0 4
+ privilege level 15
+ login local
+ autocommand  menu solution
+ transport input telnet
+line vty 5 15
+ privilege level 15
+ no login
+ transport input none
+!
+scheduler allocate 20000 1000
+ntp clock-period 17179983
+ntp update-calendar
+ntp server 10.223.255.231
+ntp server 10.223.255.230 prefer
+!         
+end
+
+
+
+
+ANTES BOB CONFIGURAR
+
+RBRBT41#
+RBRBT41#
+
+
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+!
+hostname RBRBT41
+!
+boot-start-marker
+boot-end-marker
+!
+logging buffered 51200 warnings
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+no aaa new-model
+!
+resource policy
+!
+clock timezone GMT -3
+clock summer-time GMT-2 date Oct 17 2010 0:00 Feb 10 2011 0:00
+ip subnet-zero
+no ip source-route
+no ip routing
+!
+!
+no ip cef
+!
+!
+ip domain name yourdomain.com
+ip host SW-07 2066 192.168.254.1
+ip host SW-08 2067 192.168.254.1
+ip host SW-01 2068 192.168.254.1
+ip host SW-02 2069 192.168.254.1
+ip host SW-03 2070 192.168.254.1
+ip host SW-04 2071 192.168.254.1
+ip host SW-05 2072 192.168.254.1
+ip host SW-06 2073 192.168.254.1
+ip host BL-01-OA1 2074 192.168.254.1
+ip host BL-01-OA2 2075 192.168.254.1
+ip host RT-02 2076 192.168.254.1
+ip host RT-03 2077 192.168.254.1
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+username permit
+username permit autocommand access-enable timeout 240
+username open
+username open autocommand ping 
+username close
+username close autocommand clear interface BRI0/0/0
+!
+!
+!
+interface Loopback0
+ ip address 192.168.254.1 255.255.255.255
+ no ip route-cache
+!
+interface FastEthernet0/0
+ description $ETH-LAN$$ETH-SW-LAUNCH$$INTF-INFO-FE 0/0$
+ ip address 10.192.14.229 255.255.255.248
+ no ip route-cache
+ duplex full
+ speed 100
+!
+interface FastEthernet0/1
+ ip address 10.192.14.221 255.255.255.224
+ no ip route-cache
+ duplex auto
+ speed auto
+!
+ip default-gateway 10.192.14.222
+ip classless
+!
+ip http server
+ip http access-class 23
+ip http authentication local
+ip http timeout-policy idle 60 life 86400 requests 10000
+!
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown internet.6.3.12 excluded
+snmp-server view cutdown internet.6.3.13 excluded
+snmp-server view cutdown internet.6.3.16 excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server queue-length 100
+snmp-server location Brazil
+snmp-server contact TIM
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps envmon fan shutdown supply temperature statuschange
+snmp-server enable traps config
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server host 10.221.21.26 version 2c Acision 
+!
+control-plane
+!
+banner motd ^C
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *               TIM                *
+ *              Brazil              *
+ *             RBRBT41              *
+ *             BB 2811              *
+ *        Cabinet 4, U42            *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ exec-timeout 0 0
+ login local
+ autocommand  menu solution
+ transport preferred none
+ flowcontrol hardware
+line aux 0
+ exec-timeout 0 0
+ script dialer dialnum
+ script reset reset
+ modem InOut
+ modem autoconfigure discovery
+ transport input all
+ flowcontrol hardware
+line 1/0 1/15
+ no flush-at-activation
+ script connection ret
+ no exec
+ transport preferred none
+ transport input telnet
+ transport output none
+ autohangup
+ stopbits 1
+line vty 0 4
+ privilege level 15
+ login local
+ autocommand  menu solution
+ transport input telnet
+line vty 5 15
+ privilege level 15
+ no login
+ transport input none
+!
+scheduler allocate 20000 1000
+ntp clock-period 17179936
+ntp update-calendar
+ntp server 10.223.255.231
+ntp server 10.223.255.230 prefer
+!
+end
+
+
+
+
+
+
+Cisco IOS Software, 2800 Software (C2800NM-IPBASE-M), Version 12.4(3i), RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2007 by Cisco Systems, Inc.
+Compiled Wed 28-Nov-07 21:09 by stshen
+
+ROM: System Bootstrap, Version 12.4(13r)T, RELEASE SOFTWARE (fc1)
+
+RBRBT41 uptime is 10 minutes
+System returned to ROM by power-on
+System restarted at 16:05:40 GMT Tue Mar 22 2011
+System image file is "flash:c2800nm-ipbase-mz.124-3i.bin"
+
+Cisco 2811 (revision 53.50) with 251904K/10240K bytes of memory.
+Processor board ID FCZ121571JE
+2 FastEthernet interfaces
+16 terminal lines
+DRAM configuration is 64 bits wide with parity enabled.
+239K bytes of non-volatile configuration memory.
+62720K bytes of ATA CompactFlash (Read/Write)
+
+Configuration register is 0x2102
+

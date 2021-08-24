@@ -1,0 +1,14 @@
+
+ xen-create-image \
+            --dhcp --mac 5a:36:0e:48:00:0e \
+            --memory 512M --swap 1000M \
+            --dist squeeze \
+            --mirror http://10.80.16.196/debian \
+            --hostname debian.guest.osstest \
+            --lvm field-cricket --force \
+            --kernel /boot/vmlinuz-2.6.32.57 \
+            --initrd /boot/initrd.img-2.6.32.57 \
+            --arch i386 
+After having done that there are some wrinkles that my automatic test system fixes up. I overwrite the ssh keys and authorization setup for my VM so that my test VMs all have the same keys. And I edit the inittab to spawn a console on the guest’s Xen PV console hvc0:
+
+ xc:2345:respawn:/sbin/getty 38400 hvc0 

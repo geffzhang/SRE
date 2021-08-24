@@ -1,0 +1,74 @@
+SW 1
+
+
+interface GigabitEthernet0/6
+ description "OECCC21  port Eth1 at 1: 03-Half06  (CN-9 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+
+interface GigabitEthernet0/14
+ description "OECCC22  port Eth1 at 1: 03-Half14 (CN-8 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+
+
+SW 2
+interface GigabitEthernet0/6
+ description "OECCC21  port Eth1 at 1: 03-Half06  (CN-9 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+
+interface GigabitEthernet0/14
+ description "OECCC22  port Eth1 at 1: 03-Half14 (CN-8 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+
+
+SW 3 final 14
+
+
+
+!
+interface GigabitEthernet0/6
+ description "OECCC21  port Eth1 at 1: 03-Half06  (CN-9 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+
+!
+interface GigabitEthernet0/14
+ description "OECCC22  port Eth1 at 1: 03-Half14 (CN-8 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+
+
+SW 4 final 15
+
+ speed 1000
+!
+interface GigabitEthernet0/6
+ description "OECCC21  port Eth1 at 1: 03-Half06  (CN-9 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!         
+
+!
+interface GigabitEthernet0/14
+ description "OECCC22  port Eth1 at 1: 03-Half14 (CN-8 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast

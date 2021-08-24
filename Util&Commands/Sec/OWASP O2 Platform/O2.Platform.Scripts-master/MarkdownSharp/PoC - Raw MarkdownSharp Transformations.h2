@@ -1,0 +1,19 @@
+//var topPanel = panel.add_Panel(true);
+var topPanel = "PoC - MarkdownSharp Transformations".popupWindow();
+var textArea_Source = topPanel.add_TextArea();
+var textArea_Transformed = textArea_Source.insert_Right()
+										  .add_TextArea();
+var browser = textArea_Transformed.insert_Above()
+								  .add_WebBrowser();
+Action<string> applyTransform = 
+	(source) => {					
+					var transformed = new Markdown().Transform(source);
+					textArea_Transformed.set_Text(transformed);
+					O2Thread.mtaThread(()=>browser.set_Html(transformed));
+			    };
+
+textArea_Source.onTextChange(applyTransform)
+	           .set_Text("#Hello World");
+
+//using MarkdownSharp
+//O2Ref:MarkdownSharp.dll

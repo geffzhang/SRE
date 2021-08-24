@@ -1,0 +1,11 @@
+var topPanel = "PoC - Process Finder via HawkEye".popupWindow(300,400);
+//var topPanel = panel.clear().add_Panel();
+var propertyGrid = topPanel.add_PropertyGrid();
+
+propertyGrid.insert_Above_ProcessFinder()
+	   .onProcessChange((process) => propertyGrid.show(process))
+	   .append_Label("(move the eye to see the window's process details)").autoSize().top(7);
+
+//using O2.XRules.Database.APIs
+
+//O2File:Ctrl_ProcessFinder.cs

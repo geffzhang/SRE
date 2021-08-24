@@ -1,0 +1,20 @@
+As a reminder, we recommend that you visit https://vceguide.com/VCEPlayer.zip
+You'll need this software to view your downloaded .vce exam files on Windows OS.
+We support VCE Player software on WINDOWS OS. It’s free.
+Software only open .vce premium on vceplus site.
+It can’t open other .vce files.
+
+1. Download "VCE Player" program from https://vceguide.com/VCEPlayer.zip
+2. Extract the "VCEPlayer.zip" file to new folder first, and then run "player.exe" to add .vce format file.
+
+Important Note: 
+!!!!! Please Don't update the "VCE Player" to new version. !!!!
+If you update it to new version then you will be require to purchase software licenses.
+
+---------------------------------------------------------------------------------------
+If you have any questions, please feel free to contact us at contactus@vceplus.com
+
+Website: https://vceplus.com
+Facebook: https://www.facebook.com/VCE.For.All.VN/
+Twitter : https://twitter.com/VCE_Plus
+

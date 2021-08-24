@@ -1,0 +1,3368 @@
+BSECCC31#sh 
+BSECCC31#exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 192.168.238.10, port 23
+CC31:SYSTEM> telnet 192.168.238.125
+%TELNET-I-TRYING, Trying ... 192.168.238.125
+%TELNET-I-SESSION, Session 01, host 192.168.238.125, port 23
+CCCLNET-I-ESCAPE, Escape character is ^]
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             SECCC31              *
+ *       BB2.0 3750G-24-Stack       *
+ *          Cabinet 1, U39          *
+ *                                  *
+ ************************************
+
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+
+
+User Access Verification
+
+Username: admin
+Password: 
+SECCC31>en
+Password: 
+SECCC31#
+SECCC31#
+SECCC31#sh run
+Building configuration...
+
+Current configuration : 13000 bytes
+!
+! Last configuration change at 14:52:56 UTC Wed Nov 2 2011 by admin
+! NVRAM config last updated at 06:09:16 UTC Thu Aug 11 2011 by admin
+!
+version 12.2
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname SECCC31
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+no aaa new-model
+switch 1 provision ws-c3750g-24ts-1u
+switch 2 provision ws-c3750g-24ts-1u
+system mtu routing 1500
+ip subnet-zero
+ip routing
+no ip domain-lookup
+ip domain-name porta.net
+!
+!
+!
+crypto pki trustpoint TP-self-signed-87829376
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-87829376
+ revocation-check none
+ rsakeypair TP-self-signed-87829376
+!
+!
+crypto pki certificate chain TP-self-signed-87829376
+ certificate self-signed 01
+  30820245 308201AE A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  2F312D30 2B060355 04031324 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 38373832 39333736 301E170D 39333033 30313030 30313537 
+  5A170D32 30303130 31303030 3030305A 302F312D 302B0603 55040313 24494F53 
+  2D53656C 662D5369 676E6564 2D436572 74696669 63617465 2D383738 32393337 
+  3630819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 8100BDE7 
+  918A32A5 0F712AC2 61810C1E 638FCCF1 C45B8C21 58244AAC 0CE4B683 8FE5901F 
+  DAF3897D F00D26A6 FA95F8EA 5AD0B47B FAD68318 43EE077C ACF38A51 2DE1A286 
+  888394EE DBB2F4B7 50062965 2B6ECFB7 580DD360 C59C5712 9AF0B003 95AC1AB3 
+  C0376788 C1797504 AE0C43E8 63E4CDD0 76E3DDD1 7BAEBFED 1F8095C3 318F0203 
+  010001A3 71306F30 0F060355 1D130101 FF040530 030101FF 301C0603 551D1104 
+  15301382 11534543 43433331 2E706F72 74612E6E 6574301F 0603551D 23041830 
+  168014D0 3820CA77 D9767620 03FF624F CE462A6C 2BA9A530 1D060355 1D0E0416 
+  0414D038 20CA77D9 76762003 FF624FCE 462A6C2B A9A5300D 06092A86 4886F70D 
+  01010405 00038181 0003A279 6AF39490 4D467549 1946E01E 633C3601 4F61550A 
+  DCEEC2AA 649F319B E53DB270 267DF926 6389D56B E4DDCCF7 683CC422 BD622995 
+  CBAD9782 4771D2E9 1ECB9667 B0A323A5 07DC8855 92B11F35 96063878 DFB57540 
+  0CC5E5B2 126C3CF4 A47A1F66 25E47FFD 71574780 E82CDD9E DD27F827 84A5F7F6 
+  B6BD3F26 B9D9F5E6 60
+  quit
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+spanning-tree backbonefast
+spanning-tree vlan 2-4,7 priority 24576
+!
+vlan internal allocation policy ascending
+!         
+!
+!
+interface GigabitEthernet1/0/1
+ description "RECCC31 port Eth0 at 1:41 (RT-03, Cisco 2811) - Messaging"
+ switchport access vlan 4
+ switchport mode access
+ speed 100
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/2
+ description "STECCC31 port Ethernet at 1:17 (ST-05, HP EVA HSV300) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 100
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/3
+ description "BSECCC31 port Eth17 at 1:03-IConn1 (SW-01, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5,7,1002-1005
+ switchport mode trunk
+ speed 1000
+ duplex full
+!
+interface GigabitEthernet1/0/4
+ description "BSECCC35 port Eth17 at 1:03-IConn5 (SW-03, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2-4,1002-1005
+ switchport mode trunk
+ speed 1000
+ duplex full
+!
+interface GigabitEthernet1/0/5
+ description "BSECCC37 port Eth17 at 1:03-IConn5 (SW-05, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 2
+ switchport trunk allowed vlan 2,7,10,15,1002-1005
+ switchport mode trunk
+ speed 1000
+ duplex full
+!
+interface GigabitEthernet1/0/6
+ shutdown
+!
+interface GigabitEthernet1/0/7
+ description "Port 7"
+ switchport trunk native vlan 7
+ switchport mode access
+ speed 1000
+ duplex full
+!
+interface GigabitEthernet1/0/8
+ shutdown
+!
+interface GigabitEthernet1/0/9
+ shutdown
+!
+interface GigabitEthernet1/0/10
+ shutdown
+!
+interface GigabitEthernet1/0/11
+ shutdown
+!
+interface GigabitEthernet1/0/12
+ shutdown
+!
+interface GigabitEthernet1/0/13
+ shutdown
+!
+interface GigabitEthernet1/0/14
+ description External Port with Conecel messaging Prueba
+ switchport access vlan 553
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/15
+ shutdown
+!
+interface GigabitEthernet1/0/16
+ description External Port with Conecel sigtran Prueba
+ switchport access vlan 554
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/17
+ description External Port Herradura
+ switchport mode access
+ shutdown
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/18
+ description External Port with conecel prueba
+ switchport access vlan 555
+ switchport trunk native vlan 555
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/19
+ description LB1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2-4,1002-1005
+ switchport mode trunk
+ duplex full
+!
+interface GigabitEthernet1/0/20
+ shutdown
+!
+interface GigabitEthernet1/0/21
+ description External Port with Conecel messaging
+ switchport access vlan 553
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/22
+ description "Operations,ILO network for Laptop access"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/23
+ description External Port with Conecel sigtran
+ switchport access vlan 554
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/24
+ description External Port with conecel O&M
+ switchport access vlan 555
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/25
+!
+interface GigabitEthernet1/0/26
+!
+interface GigabitEthernet1/0/27
+!         
+interface GigabitEthernet1/0/28
+!
+interface GigabitEthernet2/0/1
+ description "RECCC31 port Eth1 at 1:41 (RT-03, Cisco 2811) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 100
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/2
+ description "BSECCC32 port Eth17 at 1:03-IConn2 (SW-02, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5,7,1002-1005
+ switchport mode trunk
+ duplex full
+!
+interface GigabitEthernet2/0/3
+ description "BSECCC36 port Eth17 at 1:03-IConn6 (SW-04, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2-4,1002-1005
+ switchport mode trunk
+ duplex full
+!         
+interface GigabitEthernet2/0/4
+ shutdown
+!
+interface GigabitEthernet2/0/5
+ description "BSECCC38 port Eth17 at 1:03-IConn5 (SW-06, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3
+ switchport trunk allowed vlan 3,7
+ switchport mode trunk
+ speed 1000
+ duplex full
+!
+interface GigabitEthernet2/0/6
+ shutdown
+!
+interface GigabitEthernet2/0/7
+ shutdown
+!
+interface GigabitEthernet2/0/8
+ shutdown
+!
+interface GigabitEthernet2/0/9
+ shutdown
+!
+interface GigabitEthernet2/0/10
+ shutdown 
+!
+interface GigabitEthernet2/0/11
+ shutdown
+!
+interface GigabitEthernet2/0/12
+ shutdown
+!
+interface GigabitEthernet2/0/13
+ shutdown
+!
+interface GigabitEthernet2/0/14
+ shutdown
+!
+interface GigabitEthernet2/0/15
+ shutdown
+!
+interface GigabitEthernet2/0/16
+ shutdown
+!
+interface GigabitEthernet2/0/17
+ description External Port Herradura
+ switchport mode access
+ shutdown
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/18
+ shutdown
+!
+interface GigabitEthernet2/0/19
+ description LB2
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2-4,1002-1005
+ switchport mode trunk
+ duplex full
+!
+interface GigabitEthernet2/0/20
+ shutdown
+!
+interface GigabitEthernet2/0/21
+ description External Port with Conecel messaging
+ switchport access vlan 553
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/22
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/23
+ description External Port with Conecel sigtran
+ switchport access vlan 554
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/24
+ description External Port with conecel O&M
+ switchport access vlan 555
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/25
+!
+interface GigabitEthernet2/0/26
+!
+interface GigabitEthernet2/0/27
+!
+interface GigabitEthernet2/0/28
+!         
+interface Vlan1
+ no ip address
+!
+interface Vlan2
+ ip address 192.168.234.158 255.255.255.224
+!
+interface Vlan3
+ ip address 192.168.234.222 255.255.255.224
+!
+interface Vlan4
+ ip address 192.168.234.61 255.255.255.192
+!
+interface Vlan5
+ ip address 192.168.238.246 255.255.255.248
+!
+interface Vlan7
+ ip address 192.168.238.125 255.255.255.128
+!
+interface Vlan10
+ no ip address
+!
+interface Vlan11
+ no ip address
+!
+interface Vlan15
+ no ip address
+!
+interface Vlan553
+ description vlan messaging with conecel
+ ip address 192.168.234.123 255.255.255.248
+!
+interface Vlan554
+ description vlan sigtran with conecel
+ ip address 192.168.234.251 255.255.255.248
+!
+interface Vlan555
+ description Vlan to customer O&M network
+ ip address 192.168.238.251 255.255.255.248
+ no ip mroute-cache
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 192.168.234.126
+ip route 0.0.0.0 0.0.0.0 192.168.238.254 2
+ip route 10.51.7.0 255.255.255.192 Vlan4
+ip route 10.51.7.64 255.255.255.224 Vlan4
+ip route 130.2.0.60 255.255.255.255 192.168.238.254
+ip route 135.50.0.0 255.255.0.0 192.168.238.254
+ip route 135.55.0.0 255.255.0.0 192.168.238.254
+ip route 192.168.45.1 255.255.255.255 192.168.238.254
+ip route 192.168.45.17 255.255.255.255 192.168.238.254
+ip route 192.168.46.64 255.255.255.224 192.168.238.254
+ip route 192.168.127.0 255.255.255.0 192.168.238.254
+ip route 192.168.128.0 255.255.255.0 192.168.234.254
+ip route 192.168.130.0 255.255.255.0 192.168.234.254
+ip route 192.168.176.128 255.255.255.240 192.168.238.254
+ip route 192.168.234.128 255.255.255.192 192.168.234.254
+ip route 192.168.253.7 255.255.255.255 192.168.238.254
+no ip http server
+no ip http secure-server
+!
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown snmpTargetMIB excluded
+snmp-server view cutdown snmpNotificationMIB excluded
+snmp-server view cutdown snmpVacmMIB excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server trap-source Vlan7
+snmp-server queue-length 100
+snmp-server location Quito
+snmp-server contact Conecel
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps hsrp
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps vlan-membership
+snmp-server host 10.10.1.3 version 2c private 
+!
+control-plane
+!
+banner motd ^CCCC
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             SECCC31              *
+ *       BB2.0 3750G-24-Stack       *
+ *          Cabinet 1, U39          *
+ *                                  *
+ ************************************
+
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ password 7 13263A354F3A301A
+ login local
+ transport preferred none
+ flowcontrol hardware
+line vty 0 4
+ exec-timeout 480 0
+ password 7 0625220608783D29
+ login local
+ transport preferred ssh
+ transport input telnet ssh
+line vty 5 15
+ exec-timeout 480 0
+ password 7 0225297C4F303B11
+ login local
+!
+ntp clock-period 36028836
+ntp source Vlan7
+ntp server 192.168.238.126
+end
+
+SECCC31#
+SECCC31#
+SECCC31#sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi1/0/6, Gi1/0/7, Gi1/0/8, Gi1/0/9, Gi1/0/10, Gi1/0/11
+                                                Gi1/0/12, Gi1/0/13, Gi1/0/15, Gi1/0/17, Gi1/0/20
+                                                Gi1/0/25, Gi1/0/26, Gi1/0/27, Gi1/0/28, Gi2/0/4, Gi2/0/6
+                                                Gi2/0/7, Gi2/0/8, Gi2/0/9, Gi2/0/10, Gi2/0/11, Gi2/0/12
+                                                Gi2/0/13, Gi2/0/14, Gi2/0/15, Gi2/0/16, Gi2/0/17
+                                                Gi2/0/18, Gi2/0/20, Gi2/0/25, Gi2/0/26, Gi2/0/27
+                                                Gi2/0/28
+2    VLAN0002                         active    
+3    Signaling 2                      active    
+4    traffic                          active    Gi1/0/1
+5    Backup                           active    
+7    Operation,ILO                    active    Gi1/0/2, Gi1/0/22, Gi2/0/1, Gi2/0/22
+10   DECNET 1                         active    
+11   DECNET 2                         active    
+15   VLAN0015                         active    
+553  VLAN0553                         active    Gi1/0/14, Gi1/0/21, Gi2/0/21
+554  VLAN0554                         active    Gi1/0/16, Gi1/0/23, Gi2/0/23
+555  VLAN0555                         active    Gi1/0/18, Gi1/0/24, Gi2/0/24
+1002 fddi-default                     act/unsup 
+1003 trcrf-default                    act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trbrf-default                    act/unsup 
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0   
+2    enet  100002     1500  -      -      -        -    -        0      0   
+3    enet  100003     1500  -      -      -        -    -        0      0   
+4    enet  100004     1500  -      -      -        -    -        0      0   
+5    enet  100005     1500  -      -      -        -    -        0      0   
+7    enet  100007     1500  -      -      -        -    -        0      0   
+10   enet  100010     1500  -      -      -        -    -        0      0   
+11   enet  100011     1500  -      -      -        -    -        0      0   
+15   enet  100015     1500  -      -      -        -    -        0      0   
+553  enet  100553     1500  -      -      -        -    -        0      0   
+554  enet  100554     1500  -      -      -        -    -        0      0   
+555  enet  100555     1500  -      -      -        -    -        0      0   
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 trcrf 101003     4472  1005   3276   -        -    srb      0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trbrf 101005     4472  -      -      15       ibm  -        0      0   
+
+
+VLAN AREHops STEHops Backup CRF
+---- ------- ------- ----------
+1003 7       7       off
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+          
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
+SECCC31#
+SECCC31#
+SECCC31#
+SECCC31#exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 192.168.238.125, port 23
+CC31:SYSTEM> telnet 192.168.238.125
+%TELNET-I-TRYING, Trying ... 192.168.238.125
+%TELNET-I-SESSION, Session 01, host 192.168.238.125, port 23
+CCCLNET-I-ESCAPE, Escape character is ^]
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             SECCC31              *
+ *       BB2.0 3750G-24-Stack       *
+ *          Cabinet 1, U39          *
+ *                                  *
+ ************************************
+
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+
+
+User Access Verification
+
+Username: 
+Username: 
+Username: admin
+Password: 
+SECCC31>
+SECCC31>
+SECCC31>
+SECCC31>en
+Password: 
+SECCC31#
+SECCC31#
+SECCC31#sh run
+Building configuration...
+
+Current configuration : 13000 bytes
+!
+! Last configuration change at 14:52:56 UTC Wed Nov 2 2011 by admin
+! NVRAM config last updated at 06:09:16 UTC Thu Aug 11 2011 by admin
+!
+version 12.2
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname SECCC31
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+no aaa new-model
+switch 1 provision ws-c3750g-24ts-1u
+switch 2 provision ws-c3750g-24ts-1u
+system mtu routing 1500
+ip subnet-zero
+ip routing
+no ip domain-lookup
+ip domain-name porta.net
+!
+!
+!
+crypto pki trustpoint TP-self-signed-87829376
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-87829376
+ revocation-check none
+ rsakeypair TP-self-signed-87829376
+!
+!
+crypto pki certificate chain TP-self-signed-87829376
+ certificate self-signed 01
+  30820245 308201AE A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  2F312D30 2B060355 04031324 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 38373832 39333736 301E170D 39333033 30313030 30313537 
+  5A170D32 30303130 31303030 3030305A 302F312D 302B0603 55040313 24494F53 
+  2D53656C 662D5369 676E6564 2D436572 74696669 63617465 2D383738 32393337 
+  3630819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 8100BDE7 
+  918A32A5 0F712AC2 61810C1E 638FCCF1 C45B8C21 58244AAC 0CE4B683 8FE5901F 
+  DAF3897D F00D26A6 FA95F8EA 5AD0B47B FAD68318 43EE077C ACF38A51 2DE1A286 
+  888394EE DBB2F4B7 50062965 2B6ECFB7 580DD360 C59C5712 9AF0B003 95AC1AB3 
+  C0376788 C1797504 AE0C43E8 63E4CDD0 76E3DDD1 7BAEBFED 1F8095C3 318F0203 
+  010001A3 71306F30 0F060355 1D130101 FF040530 030101FF 301C0603 551D1104 
+  15301382 11534543 43433331 2E706F72 74612E6E 6574301F 0603551D 23041830 
+  168014D0 3820CA77 D9767620 03FF624F CE462A6C 2BA9A530 1D060355 1D0E0416 
+  0414D038 20CA77D9 76762003 FF624FCE 462A6C2B A9A5300D 06092A86 4886F70D 
+  01010405 00038181 0003A279 6AF39490 4D467549 1946E01E 633C3601 4F61550A 
+  DCEEC2AA 649F319B E53DB270 267DF926 6389D56B E4DDCCF7 683CC422 BD622995 
+  CBAD9782 4771D2E9 1ECB9667 B0A323A5 07DC8855 92B11F35 96063878 DFB57540 
+  0CC5E5B2 126C3CF4 A47A1F66 25E47FFD 71574780 E82CDD9E DD27F827 84A5F7F6 
+  B6BD3F26 B9D9F5E6 60
+  quit
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+spanning-tree backbonefast
+spanning-tree vlan 2-4,7 priority 24576
+!
+vlan internal allocation policy ascending
+!         
+!
+!
+interface GigabitEthernet1/0/1
+ description "RECCC31 port Eth0 at 1:41 (RT-03, Cisco 2811) - Messaging"
+ switchport access vlan 4
+ switchport mode access
+ speed 100
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/2
+ description "STECCC31 port Ethernet at 1:17 (ST-05, HP EVA HSV300) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 100
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/3
+ description "BSECCC31 port Eth17 at 1:03-IConn1 (SW-01, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5,7,1002-1005
+ switchport mode trunk
+ speed 1000
+ duplex full
+!
+interface GigabitEthernet1/0/4
+ description "BSECCC35 port Eth17 at 1:03-IConn5 (SW-03, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2-4,1002-1005
+ switchport mode trunk
+ speed 1000
+ duplex full
+!
+interface GigabitEthernet1/0/5
+ description "BSECCC37 port Eth17 at 1:03-IConn5 (SW-05, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 2
+ switchport trunk allowed vlan 2,7,10,15,1002-1005
+ switchport mode trunk
+ speed 1000
+ duplex full
+!
+interface GigabitEthernet1/0/6
+ shutdown
+!
+interface GigabitEthernet1/0/7
+ description "Port 7"
+ switchport trunk native vlan 7
+ switchport mode access
+ speed 1000
+ duplex full
+!
+interface GigabitEthernet1/0/8
+ shutdown
+!
+interface GigabitEthernet1/0/9
+ shutdown
+!
+interface GigabitEthernet1/0/10
+ shutdown
+!
+interface GigabitEthernet1/0/11
+ shutdown
+!
+interface GigabitEthernet1/0/12
+ shutdown
+!
+interface GigabitEthernet1/0/13
+ shutdown
+!
+interface GigabitEthernet1/0/14
+ description External Port with Conecel messaging Prueba
+ switchport access vlan 553
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/15
+ shutdown
+!
+interface GigabitEthernet1/0/16
+ description External Port with Conecel sigtran Prueba
+ switchport access vlan 554
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/17
+ description External Port Herradura
+ switchport mode access
+ shutdown
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/18
+ description External Port with conecel prueba
+ switchport access vlan 555
+ switchport trunk native vlan 555
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/19
+ description LB1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2-4,1002-1005
+ switchport mode trunk
+ duplex full
+!
+interface GigabitEthernet1/0/20
+ shutdown
+!
+interface GigabitEthernet1/0/21
+ description External Port with Conecel messaging
+ switchport access vlan 553
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/22
+ description "Operations,ILO network for Laptop access"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/23
+ description External Port with Conecel sigtran
+ switchport access vlan 554
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/24
+ description External Port with conecel O&M
+ switchport access vlan 555
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/25
+!
+interface GigabitEthernet1/0/26
+!
+interface GigabitEthernet1/0/27
+!         
+interface GigabitEthernet1/0/28
+!
+interface GigabitEthernet2/0/1
+ description "RECCC31 port Eth1 at 1:41 (RT-03, Cisco 2811) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 100
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/2
+ description "BSECCC32 port Eth17 at 1:03-IConn2 (SW-02, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5,7,1002-1005
+ switchport mode trunk
+ duplex full
+!
+interface GigabitEthernet2/0/3
+ description "BSECCC36 port Eth17 at 1:03-IConn6 (SW-04, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2-4,1002-1005
+ switchport mode trunk
+ duplex full
+!         
+interface GigabitEthernet2/0/4
+ shutdown
+!
+interface GigabitEthernet2/0/5
+ description "BSECCC38 port Eth17 at 1:03-IConn5 (SW-06, Cisco 3020 cBlade) - Trunk"
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3
+ switchport trunk allowed vlan 3,7
+ switchport mode trunk
+ speed 1000
+ duplex full
+!
+interface GigabitEthernet2/0/6
+ shutdown
+!
+interface GigabitEthernet2/0/7
+ shutdown
+!
+interface GigabitEthernet2/0/8
+ shutdown
+!
+interface GigabitEthernet2/0/9
+ shutdown
+!
+interface GigabitEthernet2/0/10
+ shutdown 
+!
+interface GigabitEthernet2/0/11
+ shutdown
+!
+interface GigabitEthernet2/0/12
+ shutdown
+!
+interface GigabitEthernet2/0/13
+ shutdown
+!
+interface GigabitEthernet2/0/14
+ shutdown
+!
+interface GigabitEthernet2/0/15
+ shutdown
+!
+interface GigabitEthernet2/0/16
+ shutdown
+!
+interface GigabitEthernet2/0/17
+ description External Port Herradura
+ switchport mode access
+ shutdown
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/18
+ shutdown
+!
+interface GigabitEthernet2/0/19
+ description LB2
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2-4,1002-1005
+ switchport mode trunk
+ duplex full
+!
+interface GigabitEthernet2/0/20
+ shutdown
+!
+interface GigabitEthernet2/0/21
+ description External Port with Conecel messaging
+ switchport access vlan 553
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/22
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/23
+ description External Port with Conecel sigtran
+ switchport access vlan 554
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/24
+ description External Port with conecel O&M
+ switchport access vlan 555
+ switchport mode access
+ speed 1000
+ duplex full
+ spanning-tree portfast
+!
+interface GigabitEthernet2/0/25
+!
+interface GigabitEthernet2/0/26
+!
+interface GigabitEthernet2/0/27
+!
+interface GigabitEthernet2/0/28
+!         
+interface Vlan1
+ no ip address
+!
+interface Vlan2
+ ip address 192.168.234.158 255.255.255.224
+!
+interface Vlan3
+ ip address 192.168.234.222 255.255.255.224
+!
+interface Vlan4
+ ip address 192.168.234.61 255.255.255.192
+!
+interface Vlan5
+ ip address 192.168.238.246 255.255.255.248
+!
+interface Vlan7
+ ip address 192.168.238.125 255.255.255.128
+!
+interface Vlan10
+ no ip address
+!
+interface Vlan11
+ no ip address
+!
+interface Vlan15
+ no ip address
+!
+interface Vlan553
+ description vlan messaging with conecel
+ ip address 192.168.234.123 255.255.255.248
+!
+interface Vlan554
+ description vlan sigtran with conecel
+ ip address 192.168.234.251 255.255.255.248
+!
+interface Vlan555
+ description Vlan to customer O&M network
+ ip address 192.168.238.251 255.255.255.248
+ no ip mroute-cache
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 192.168.234.126
+ip route 0.0.0.0 0.0.0.0 192.168.238.254 2
+ip route 10.51.7.0 255.255.255.192 Vlan4
+ip route 10.51.7.64 255.255.255.224 Vlan4
+ip route 130.2.0.60 255.255.255.255 192.168.238.254
+ip route 135.50.0.0 255.255.0.0 192.168.238.254
+ip route 135.55.0.0 255.255.0.0 192.168.238.254
+ip route 192.168.45.1 255.255.255.255 192.168.238.254
+ip route 192.168.45.17 255.255.255.255 192.168.238.254
+ip route 192.168.46.64 255.255.255.224 192.168.238.254
+ip route 192.168.127.0 255.255.255.0 192.168.238.254
+ip route 192.168.128.0 255.255.255.0 192.168.234.254
+ip route 192.168.130.0 255.255.255.0 192.168.234.254
+ip route 192.168.176.128 255.255.255.240 192.168.238.254
+ip route 192.168.234.128 255.255.255.192 192.168.234.254
+ip route 192.168.253.7 255.255.255.255 192.168.238.254
+no ip http server
+no ip http secure-server
+!
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown snmpTargetMIB excluded
+snmp-server view cutdown snmpNotificationMIB excluded
+snmp-server view cutdown snmpVacmMIB excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server trap-source Vlan7
+snmp-server queue-length 100
+snmp-server location Quito
+snmp-server contact Conecel
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps hsrp
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps vlan-membership
+snmp-server host 10.10.1.3 version 2c private 
+!
+control-plane
+!
+banner motd ^CCCC
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             SECCC31              *
+ *       BB2.0 3750G-24-Stack       *
+ *          Cabinet 1, U39          *
+ *                                  *
+ ************************************
+
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ password 7 13263A354F3A301A
+ login local
+ transport preferred none
+ flowcontrol hardware
+line vty 0 4
+ exec-timeout 480 0
+ password 7 0625220608783D29
+ login local
+ transport preferred ssh
+ transport input telnet ssh
+line vty 5 15
+ exec-timeout 480 0
+ password 7 0225297C4F303B11
+ login local
+!
+ntp clock-period 36028836
+ntp source Vlan7
+ntp server 192.168.238.126
+end
+
+SECCC31#      
+SECCC31#sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi1/0/6, Gi1/0/7, Gi1/0/8, Gi1/0/9, Gi1/0/10, Gi1/0/11
+                                                Gi1/0/12, Gi1/0/13, Gi1/0/15, Gi1/0/17, Gi1/0/20
+                                                Gi1/0/25, Gi1/0/26, Gi1/0/27, Gi1/0/28, Gi2/0/4, Gi2/0/6
+                                                Gi2/0/7, Gi2/0/8, Gi2/0/9, Gi2/0/10, Gi2/0/11, Gi2/0/12
+                                                Gi2/0/13, Gi2/0/14, Gi2/0/15, Gi2/0/16, Gi2/0/17
+                                                Gi2/0/18, Gi2/0/20, Gi2/0/25, Gi2/0/26, Gi2/0/27
+                                                Gi2/0/28
+2    VLAN0002                         active    
+3    Signaling 2                      active    
+4    traffic                          active    Gi1/0/1
+5    Backup                           active    
+7    Operation,ILO                    active    Gi1/0/2, Gi1/0/22, Gi2/0/1, Gi2/0/22
+10   DECNET 1                         active    
+11   DECNET 2                         active    
+15   VLAN0015                         active    
+553  VLAN0553                         active    Gi1/0/14, Gi1/0/21, Gi2/0/21
+554  VLAN0554                         active    Gi1/0/16, Gi1/0/23, Gi2/0/23
+555  VLAN0555                         active    Gi1/0/18, Gi1/0/24, Gi2/0/24
+1002 fddi-default                     act/unsup 
+1003 trcrf-default                    act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trbrf-default                    act/unsup 
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0   
+2    enet  100002     1500  -      -      -        -    -        0      0   
+3    enet  100003     1500  -      -      -        -    -        0      0   
+4    enet  100004     1500  -      -      -        -    -        0      0   
+5    enet  100005     1500  -      -      -        -    -        0      0   
+7    enet  100007     1500  -      -      -        -    -        0      0   
+10   enet  100010     1500  -      -      -        -    -        0      0   
+11   enet  100011     1500  -      -      -        -    -        0      0   
+15   enet  100015     1500  -      -      -        -    -        0      0   
+553  enet  100553     1500  -      -      -        -    -        0      0   
+554  enet  100554     1500  -      -      -        -    -        0      0   
+555  enet  100555     1500  -      -      -        -    -        0      0   
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 trcrf 101003     4472  1005   3276   -        -    srb      0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trbrf 101005     4472  -      -      15       ibm  -        0      0   
+
+
+VLAN AREHops STEHops Backup CRF
+---- ------- ------- ----------
+1003 7       7       off
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+          
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
+SECCC31#
+SECCC31#exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 192.168.238.125, port 23
+CC31:SYSTEM> telnet 192.168.238.10 
+%TELNET-I-TRYING, Trying ... 192.168.238.10
+%TELNET-I-SESSION, Session 01, host 192.168.238.10, port 23
+CCELNET-I-ESCAPE, Escape character is ^]
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC31             *
+ *            BB2.0 300             *
+ *       Cabinet 1, U03-IConn1      *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+
+
+User Access Verification
+
+Username: admin
+Password: 
+BSECCC31>en
+Password: 
+BSECCC31#sh run
+Building configuration...
+
+Current configuration : 8359 bytes
+!
+version 12.2
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname BSECCC31
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+no aaa new-model
+system mtu routing 1500
+ip subnet-zero
+no ip domain-lookup
+ip domain-name porta.net
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2444107136
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2444107136
+ revocation-check none
+ rsakeypair TP-self-signed-2444107136
+!
+!
+crypto pki certificate chain TP-self-signed-2444107136
+ certificate self-signed 01
+  3082024A 308201B3 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32343434 31303731 3336301E 170D3933 30333031 30303031 
+  31365A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 34343431 
+  30373133 3630819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100D246 C4492B3B E2FF0B6F 76046AD8 B3249C0E 965EB57C B356D9C7 0D84D96D 
+  4EE10C70 92713F78 8E73E274 D74A0A78 683E4F39 61C56D99 B5430AD4 713F90AA 
+  E58A961B 1416D8E4 96742335 27708CD1 09D17688 1D21AF28 4EC7CD4E 7B98BA59 
+  3E0496C1 671858EC 5063B171 748C20A0 25113718 36264EED 9D62B92F F4190F61 
+  C57F0203 010001A3 72307030 0F060355 1D130101 FF040530 030101FF 301D0603 
+  551D1104 16301482 12425345 43434333 312E706F 7274612E 6E657430 1F060355 
+  1D230418 30168014 B4C86B73 0C4A73BF D4C795C4 9BDF931B 75F569EF 301D0603 
+  551D0E04 160414B4 C86B730C 4A73BFD4 C795C49B DF931B75 F569EF30 0D06092A 
+  864886F7 0D010104 05000381 81007429 2474C152 F4F49BE6 86387404 73B31A1B 
+  AAFE2A28 3E84EAD4 839FA4A2 9D1E76BA 76AC9ADD 88E24269 23DBCD0C 2E933A41 
+  680D8E20 DD9A2651 B4E0177B A7E00CBF 3FAC80FA 4D1C7D4C 041FB854 28EAC3BB 
+  221A97EE B912AD32 5B536759 65917635 0FBB88A0 E906DBCB C7C3086B 8CA2BC79 
+  85B2CAA4 BB9729C1 7C2B3511 1BD5
+  quit
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+spanning-tree backbonefast
+!
+vlan internal allocation policy ascending
+!
+!
+!
+interface FastEthernet0
+ ip address dhcp
+ no ip route-cache
+ no ip mroute-cache
+ shutdown 
+!
+interface GigabitEthernet0/1
+ description "SMCC31 port Eth3 at 1:03-Full1 (CN-01, HP BL860c) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/2
+ description "SMCC32 port Eth3 at 1:03-Full2 (CN-02, HP BL860c) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/3
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/4
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/5
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/6
+ description "OECCC21  port Eth1 at 1: 03-Half06  (CN-9 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/7
+ description "MCECCC21  port Eth1 at 1: 03-Half07  (CN-9 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/8
+ description "JECCC21  port Eth1 at 1: 03-Half08  (CN-9 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/9
+ description "SMCC31 port Eth1 at 1:03-Full1 (CN-01, HP BL860c) - Backup"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/10
+ description "SMCC32 port Eth1 at 1:03-Full2 (CN-02, HP BL860c) - Backup"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/11
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/12
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/13
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/14
+ description "OECCC22  port Eth1 at 1: 03-Half14 (CN-8 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/15
+ description "MCECCC22  port Eth1 at 1: 03-Half015  (CN-9 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/16
+ description "eeccc31 port Eth1 at 1:03-Half16 (CN-03, HP BL460c) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/17
+ description "SECCC31 port Eth3 at 1:39 (SW-07, Cisco 3750-24) - Trunk"
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5,7,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet0/18
+ shutdown
+!
+interface GigabitEthernet0/19
+ shutdown
+!
+interface GigabitEthernet0/20
+ shutdown
+!
+interface GigabitEthernet0/21
+ shutdown
+!
+interface GigabitEthernet0/22
+ description "Operations,ILO network for Laptop access"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/23
+ description "BLECC3 port OA1-ILO at 1:03 (BL-01, HP cBlade C7000 Enclosure) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/24
+ description "BSECCC32 port EthInt24 at 1:03-IConn2 (SW-02, Cisco 3020 cBlade) - Trunk"
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5,7,1002-1005
+ switchport mode trunk
+ media-type internal
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan5
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan7
+ ip address 192.168.238.10 255.255.255.128
+ no ip route-cache
+ no ip mroute-cache
+!
+ip default-gateway 192.168.238.125
+ip classless
+ip http server
+ip http secure-server
+!
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown snmpTargetMIB excluded
+snmp-server view cutdown snmpNotificationMIB excluded
+snmp-server view cutdown snmpVacmMIB excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server trap-source Vlan7
+snmp-server queue-length 100
+snmp-server location Quito
+snmp-server contact Conecel
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps vlan-membership
+snmp-server host 10.10.1.3 version 2c private 
+!
+control-plane
+!
+banner motd ^CCC
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC31             *
+ *            BB2.0 300             *
+ *       Cabinet 1, U03-IConn1      *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ password 7 13263A354F3A301A
+ login local
+ transport preferred none
+ flowcontrol hardware
+line vty 0 4
+ exec-timeout 480 0
+ password 7 0625220608783D29
+ login local
+ length 0
+ transport preferred ssh
+ transport input telnet ssh
+line vty 5 15
+ exec-timeout 480 0
+ password 7 0225297C4F303B11
+ login local
+!
+ntp source Vlan7
+ntp server 192.168.253.78
+end
+
+BSECCC31#       
+BSECCC31#sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi0/3, Gi0/4, Gi0/5, Gi0/11, Gi0/12, Gi0/13, Gi0/18
+                                                Gi0/19, Gi0/20, Gi0/21
+2    VLAN0002                         active    
+3    Signaling 2                      active    
+4    traffic                          active    
+5    Backup                           active    
+7    Operation,ILO                    active    Gi0/1, Gi0/2, Gi0/6, Gi0/7, Gi0/8, Gi0/9, Gi0/10, Gi0/14
+                                                Gi0/15, Gi0/16, Gi0/22, Gi0/23
+10   DECNET 1                         active    
+11   DECNET 2                         active    
+15   VLAN0015                         active    
+553  VLAN0553                         active    
+554  VLAN0554                         active    
+555  VLAN0555                         active    
+1002 fddi-default                     act/unsup 
+1003 trcrf-default                    act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trbrf-default                    act/unsup 
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0   
+2    enet  100002     1500  -      -      -        -    -        0      0   
+          
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+3    enet  100003     1500  -      -      -        -    -        0      0   
+4    enet  100004     1500  -      -      -        -    -        0      0   
+5    enet  100005     1500  -      -      -        -    -        0      0   
+7    enet  100007     1500  -      -      -        -    -        0      0   
+10   enet  100010     1500  -      -      -        -    -        0      0   
+11   enet  100011     1500  -      -      -        -    -        0      0   
+15   enet  100015     1500  -      -      -        -    -        0      0   
+553  enet  100553     1500  -      -      -        -    -        0      0   
+554  enet  100554     1500  -      -      -        -    -        0      0   
+555  enet  100555     1500  -      -      -        -    -        0      0   
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 trcrf 101003     4472  1005   3276   -        -    srb      0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trbrf 101005     4472  -      -      15       ibm  -        0      0   
+
+
+VLAN AREHops STEHops Backup CRF
+---- ------- ------- ----------
+1003 7       7       off
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
+BSECCC31#
+BSECCC31#exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 192.168.238.10, port 23
+CC31:SYSTEM> telnet 192.168.238.11
+%TELNET-I-TRYING, Trying ... 192.168.238.11
+%TELNET-I-SESSION, Session 01, host 192.168.238.11, port 23
+CCELNET-I-ESCAPE, Escape character is ^]
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC32             *
+ *            BB2.0 3020            *
+ *       Cabinet 1, U03-IConn2      *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+
+
+User Access Verification
+
+Username: admin
+Password: 
+% Login invalid
+
+Username: admin
+Password: 
+BSECCC32>en
+Password: 
+BSECCC32#sh run
+Building configuration...
+
+Current configuration : 8388 bytes
+!
+version 12.2
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname BSECCC32
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+no aaa new-model
+system mtu routing 1500
+ip subnet-zero
+no ip domain-lookup
+ip domain-name porta.net
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2444104832
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2444104832
+ revocation-check none
+ rsakeypair TP-self-signed-2444104832
+!
+!
+crypto pki certificate chain TP-self-signed-2444104832
+ certificate self-signed 01
+  3082024A 308201B3 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32343434 31303438 3332301E 170D3933 30333031 30303031 
+  32315A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 34343431 
+  30343833 3230819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100B37A 0AB5E798 866162E2 4E04A3E5 01C25225 3D62F420 56AAB696 A706DFFE 
+  C408AABD FC64A2BF 7A452565 20CBA5A3 5BC5CD5E 0D07BD2B 492229E8 DC44A88F 
+  F1E0661E 1ADA7627 06161368 2F881DC5 F529B9E7 8C3AF84E A100B7E5 C28E2BDC 
+  AA27C5E0 C604E4BD AE73047A AB36E7C2 FED3DD91 6ED9339E 853301DC 536BC523 
+  6D390203 010001A3 72307030 0F060355 1D130101 FF040530 030101FF 301D0603 
+  551D1104 16301482 12425345 43434333 322E706F 7274612E 6E657430 1F060355 
+  1D230418 30168014 E6B1ED58 495E56C6 73789A16 3587E279 C33AE808 301D0603 
+  551D0E04 160414E6 B1ED5849 5E56C673 789A1635 87E279C3 3AE80830 0D06092A 
+  864886F7 0D010104 05000381 8100AD3A 6A8D9EDD ABE78449 9C1F4951 DA8DC303 
+  D7FB71E0 6A7ED603 28886FA0 50C3DB37 569A48E4 82F889B9 45677106 6D4D7360 
+  C891298C 507AB73A 05A5FE12 B7A595E2 3F3619C9 B407725C 933E3BB8 73C44CD7 
+  94346BE5 1E111924 2DBD85D8 CA03DB41 41F388DC 43379244 DE499262 D32FBFEB 
+  A0D9857F 148952E8 E4831794 267A
+  quit
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+spanning-tree backbonefast
+!
+vlan internal allocation policy ascending
+!
+!
+!
+interface FastEthernet0
+ ip address dhcp
+ no ip route-cache
+ no ip mroute-cache
+ shutdown 
+!
+interface GigabitEthernet0/1
+ description "SMCC31 port Eth4 at 1:03-Full1 (CN-01, HP BL860c) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/2
+ description "SMCC32 port Eth4 at 1:03-Full2 (CN-02, HP BL860c) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/3
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/4
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/5
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/6
+ description "OECCC21  port Eth1 at 1: 03-Half06  (CN-9 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/7
+ description "MCECCC21  port Eth2 at 1: 03-Half07  (CN-9 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/8
+ description "JECCC21  port Eth1 at 1: 03-Half08  (CN-9 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/9
+ description "SMCC31 port Eth2 at 1:03-Full1 (CN-01, HP BL860c) - Backup"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/10
+ description "SMCC32 port Eth2 at 1:03-Full2 (CN-02, HP BL860c) - Backup"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/11
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/12
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/13
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/14
+ description "OECCC22  port Eth1 at 1: 03-Half14 (CN-8 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/15
+ description "MCECCC22  port Eth2 at 1: 03-Half015  (CN-9 , HP BL460c) - OAM"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/16
+ description "eeccc31 port Eth2 at 1:03-Half16 (CN-03, HP BL460c) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/17
+ description "SECCC31 port Eth2 at 1:40 (SW-08, Cisco 3750-24) - Trunk"
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5,7,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet0/18
+ shutdown
+!         
+interface GigabitEthernet0/19
+ shutdown
+!
+interface GigabitEthernet0/20
+ shutdown
+!
+interface GigabitEthernet0/21
+ shutdown
+!
+interface GigabitEthernet0/22
+ description "Operations,ILO network for Laptop access"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/23
+ description "BLECCC3 port OA2-ILO at 1:03 (BL-01, HP cBlade C7000 Enclosure) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/24
+ description "BSECCC31 port EthInt24 at 1:03-IConn1 (SW-01, Cisco 3020 cBlade) - Trunk"
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 5,7,1002-1005
+ switchport mode trunk
+ media-type internal
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan5
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan7
+ ip address 192.168.238.11 255.255.255.128
+ no ip route-cache
+ no ip mroute-cache
+!
+ip default-gateway 192.168.238.125
+ip classless
+ip http server
+ip http secure-server
+!
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown snmpTargetMIB excluded
+snmp-server view cutdown snmpNotificationMIB excluded
+snmp-server view cutdown snmpVacmMIB excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server trap-source Vlan7
+snmp-server queue-length 100
+snmp-server location Quito
+snmp-server contact Conecel
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps vlan-membership
+snmp-server host 10.10.1.3 version 2c private 
+!         
+control-plane
+!
+banner motd ^CCC
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC32             *
+ *            BB2.0 3020            *
+ *       Cabinet 1, U03-IConn2      *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ password 7 13263A354F3A301A
+ login local
+ transport preferred none
+ flowcontrol hardware
+line vty 0 4
+ exec-timeout 480 0
+ password 7 0625220608783D29
+ login local
+ transport preferred ssh
+ transport input telnet ssh
+line vty 5 15
+ exec-timeout 480 0
+ password 7 0225297C4F303B11
+ login local
+!
+ntp clock-period 36028795
+ntp source Vlan7
+ntp server 192.168.253.78
+end
+
+BSECCC32#      
+BSECCC32#sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi0/3, Gi0/4, Gi0/5, Gi0/11, Gi0/12, Gi0/13, Gi0/18
+                                                Gi0/19, Gi0/20, Gi0/21
+2    VLAN0002                         active    
+3    Signaling 2                      active    
+4    traffic                          active    
+5    Backup                           active    
+7    Operation,ILO                    active    Gi0/1, Gi0/2, Gi0/6, Gi0/7, Gi0/8, Gi0/9, Gi0/10, Gi0/14
+                                                Gi0/15, Gi0/16, Gi0/22, Gi0/23
+10   DECNET 1                         active    
+11   DECNET 2                         active    
+15   VLAN0015                         active    
+553  VLAN0553                         active    
+554  VLAN0554                         active    
+555  VLAN0555                         active    
+1002 fddi-default                     act/unsup 
+1003 trcrf-default                    act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trbrf-default                    act/unsup 
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0   
+2    enet  100002     1500  -      -      -        -    -        0      0   
+          
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+3    enet  100003     1500  -      -      -        -    -        0      0   
+4    enet  100004     1500  -      -      -        -    -        0      0   
+5    enet  100005     1500  -      -      -        -    -        0      0   
+7    enet  100007     1500  -      -      -        -    -        0      0   
+10   enet  100010     1500  -      -      -        -    -        0      0   
+11   enet  100011     1500  -      -      -        -    -        0      0   
+15   enet  100015     1500  -      -      -        -    -        0      0   
+553  enet  100553     1500  -      -      -        -    -        0      0   
+554  enet  100554     1500  -      -      -        -    -        0      0   
+555  enet  100555     1500  -      -      -        -    -        0      0   
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 trcrf 101003     4472  1005   3276   -        -    srb      0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trbrf 101005     4472  -      -      15       ibm  -        0      0   
+
+
+VLAN AREHops STEHops Backup CRF
+---- ------- ------- ----------
+1003 7       7       off
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
+BSECCC32#  
+BSECCC32#
+BSECCC32#
+BSECCC32#exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 192.168.238.11, 
+port 23
+CC31:SYSTEM> telnet 192.168.238.14
+%TELNET-I-TRYING, Trying ... 192.168.238.14
+%TELNET-I-SESSION, Session 01, host 192.168.238.14, port 23
+CCELNET-I-ESCAPE, Escape character is ^]
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC35             *
+ *            BB2.0 3020            *
+ *       Cabinet 1, U03-IConn5      *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+
+
+User Access Verification
+
+Username: admin
+Password: 
+BSECCC35>en
+Password: 
+BSECCC35#
+BSECCC35#
+BSECCC35#sh run
+Building configuration...
+
+Current configuration : 6262 bytes
+!
+! Last configuration change at 13:28:24 UTC Wed Nov 2 2011 by admin
+! NVRAM config last updated at 04:05:21 UTC Wed Nov 2 2011 by admin
+!
+version 12.2
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname BSECCC35
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+no aaa new-model
+system mtu routing 1500
+ip subnet-zero
+no ip domain-lookup
+ip domain-name porta.net
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+spanning-tree backbonefast
+!
+vlan internal allocation policy ascending
+!
+!
+!
+interface FastEthernet0
+ ip address dhcp
+ no ip route-cache
+ no ip mroute-cache
+!
+interface GigabitEthernet0/1
+ description "SMCC31 port Eth5 at 1:03-Full1 (CN-01, HP BL860c) - Messaging"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/2
+ description "SMCC32 port Eth5 at 1:03-Full2 (CN-02, HP BL860c) - Messaging"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/3
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/4
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/5
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/6
+ description "OECCC21  port Eth1 at 1: 03-Half06  (CN-9 , HP BL460c) - Traffic"
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/7
+ description "MCECCC21  port Eth3 at 1: 03-Half07  (CN-9 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/8
+ description "JECCC21  port Eth1 at 1: 03-Half08  (CN-9 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/9
+ description "SMCC31 port Eth11 at 1:03-Full1 (CN-01, HP BL860c) - Signaling 1"
+ switchport access vlan 2
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/10
+ description "SMCC32 port Eth11 at 1:03-Full2 (CN-02, HP BL860c) - Signaling 1"
+ switchport access vlan 2
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/11
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/12
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/13
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/14
+ description "OECCC22  port Eth1 at 1: 03-Half14 (CN-8 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ spanning-tree portfast
+!         
+interface GigabitEthernet0/15
+ description "MCECCC22  port Eth3 at 1: 03-Half015  (CN-9 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/16
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/17
+ description "SECCC31 port Eth4 at 1:39 (SW-07, Cisco 3750-24) - Trunk"
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2,4,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet0/18
+ shutdown
+!
+interface GigabitEthernet0/19
+ shutdown
+!
+interface GigabitEthernet0/20
+ shutdown
+!         
+interface GigabitEthernet0/21
+ shutdown
+!
+interface GigabitEthernet0/22
+ shutdown
+!
+interface GigabitEthernet0/23
+ shutdown
+!
+interface GigabitEthernet0/24
+ description "BSECCC36 port EthInt24 at 1:03-IConn6 (SW-04, Cisco 3020 cBlade) - Trunk"
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 2,4,1002-1005
+ switchport mode trunk
+ media-type internal
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan2
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan4
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+!
+ip classless
+ip http server
+ip http secure-server
+!
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown snmpTargetMIB excluded
+snmp-server view cutdown snmpNotificationMIB excluded
+snmp-server view cutdown snmpVacmMIB excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server trap-source FastEthernet0
+snmp-server queue-length 100
+snmp-server location Quito
+snmp-server contact Conecel
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps vlan-membership
+snmp-server host 10.10.1.3 version 2c private 
+!
+control-plane
+!
+banner motd ^CCC
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC35             *
+ *            BB2.0 3020            *
+ *       Cabinet 1, U03-IConn5      *
+ *                                  *
+ ************************************
+          
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ password 7 13263A354F3A301A
+ login local
+ transport preferred none
+ flowcontrol hardware
+line vty 0 4
+ exec-timeout 480 0
+ password 7 0625220608783D29
+ login local
+ length 0
+ transport preferred ssh
+ transport input telnet ssh
+line vty 5 15
+ exec-timeout 480 0
+ password 7 0225297C4F303B11
+ login local
+!
+ntp clock-period 36028811
+ntp source FastEthernet0
+ntp server 192.168.253.78
+end
+
+BSECCC35#      
+BSECCC35#sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi0/3, Gi0/4, Gi0/5, Gi0/6, Gi0/11, Gi0/12, Gi0/13
+                                                Gi0/16, Gi0/18, Gi0/19, Gi0/20, Gi0/21, Gi0/22, Gi0/23
+2    VLAN0002                         active    Gi0/9, Gi0/10
+3    Signaling 2                      active    
+4    traffic                          active    Gi0/1, Gi0/2, Gi0/7, Gi0/8, Gi0/14, Gi0/15
+5    Backup                           active    
+7    Operation,ILO                    active    
+10   DECNET 1                         active    
+11   DECNET 2                         active    
+15   VLAN0015                         active    
+553  VLAN0553                         active    
+554  VLAN0554                         active    
+555  VLAN0555                         active    
+1002 fddi-default                     act/unsup 
+1003 trcrf-default                    act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trbrf-default                    act/unsup 
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0   
+2    enet  100002     1500  -      -      -        -    -        0      0   
+3    enet  100003     1500  -      -      -        -    -        0      0   
+          
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+4    enet  100004     1500  -      -      -        -    -        0      0   
+5    enet  100005     1500  -      -      -        -    -        0      0   
+7    enet  100007     1500  -      -      -        -    -        0      0   
+10   enet  100010     1500  -      -      -        -    -        0      0   
+11   enet  100011     1500  -      -      -        -    -        0      0   
+15   enet  100015     1500  -      -      -        -    -        0      0   
+553  enet  100553     1500  -      -      -        -    -        0      0   
+554  enet  100554     1500  -      -      -        -    -        0      0   
+555  enet  100555     1500  -      -      -        -    -        0      0   
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 trcrf 101003     4472  1005   3276   -        -    srb      0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trbrf 101005     4472  -      -      15       ibm  -        0      0   
+
+
+VLAN AREHops STEHops Backup CRF
+---- ------- ------- ----------
+1003 7       7       off
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
+BSECCC35# exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 192.168.238.14, port 23
+CC31:SYSTEM> telnet 192.168.238.15
+%TELNET-I-TRYING, Trying ... 192.168.238.15
+%TELNET-I-SESSION, Session 01, host 192.168.238.15, port 23
+CCCLNET-I-ESCAPE, Escape character is ^]
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC36             *
+ *            BB2.0 3020            *
+ *       Cabinet 1, U03-IConn6      *
+ *                                  *
+ ************************************
+
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+
+
+User Access Verification
+
+Username: admin
+Password: 
+BSECCC36>en
+Password: 
+BSECCC36#sh run
+Building configuration...
+
+Current configuration : 6253 bytes
+!
+! Last configuration change at 04:13:05 UTC Wed Nov 2 2011 by admin
+! NVRAM config last updated at 04:04:30 UTC Wed Nov 2 2011 by admin
+!
+version 12.2
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname BSECCC36
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+no aaa new-model
+system mtu routing 1500
+ip subnet-zero
+no ip domain-lookup
+ip domain-name porta.net
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+spanning-tree backbonefast
+!
+vlan internal allocation policy ascending
+!
+!
+!
+interface FastEthernet0
+ ip address dhcp
+ no ip route-cache
+ no ip mroute-cache
+!
+interface GigabitEthernet0/1
+ description "SMCC31 port Eth6 at 1:03-Full1 (CN-01, HP BL860c) - Messaging"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/2
+ description "SMCC32 port Eth6 at 1:03-Full2 (CN-02, HP BL860c) - Messaging"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/3
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/4
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/5
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/6
+ description "OECCC21  port Eth1 at 1: 03-Half06  (CN-9 , HP BL460c) - Traffic"
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/7
+ description "MCECCC21  port Eth3 at 1: 03-Half07  (CN-9 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/8
+ description "JECCC21  port Eth1 at 1: 03-Half08  (CN-9 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/9
+ description "SMCC31 port Eth12 at 1:03-Full1 (CN-01, HP BL860c) - Signaling 1"
+ switchport access vlan 3
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/10
+ description "SMCC32 port Eth12 at 1:03-Full2 (CN-02, HP BL860c) - Signaling 1"
+ switchport access vlan 3
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/11
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/12
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/13
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/14
+ description "OECCC22  port Eth1 at 1: 03-Half14 (CN-8 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ spanning-tree portfast
+!         
+interface GigabitEthernet0/15
+ description "MCECCC22  port Eth4 at 1: 03-Half07  (CN-9 , HP BL460c) - Traffic"
+ switchport access vlan 4
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/16
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/17
+ description "SECCC31 port Eth3 at 1:40 (SW-08, Cisco 3750-24) - Trunk"
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 3,4
+ switchport mode trunk
+!
+interface GigabitEthernet0/18
+ shutdown
+!
+interface GigabitEthernet0/19
+ shutdown
+!
+interface GigabitEthernet0/20
+ shutdown
+!         
+interface GigabitEthernet0/21
+ shutdown
+!
+interface GigabitEthernet0/22
+ shutdown
+!
+interface GigabitEthernet0/23
+ shutdown
+!
+interface GigabitEthernet0/24
+ description "BSECCC35 port EthInt24 at 1:03-IConn5 (SW-03, Cisco 3020 cBlade) - Trunk"
+ switchport trunk native vlan 4
+ switchport trunk allowed vlan 3,4,1002-1005
+ switchport mode trunk
+ media-type internal
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan3
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan4
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+!
+ip classless
+ip http server
+ip http secure-server
+!
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown snmpTargetMIB excluded
+snmp-server view cutdown snmpNotificationMIB excluded
+snmp-server view cutdown snmpVacmMIB excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server trap-source FastEthernet0
+snmp-server queue-length 100
+snmp-server location Quito
+snmp-server contact Conecel
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps vlan-membership
+snmp-server host 10.10.1.3 version 2c private 
+!
+control-plane
+!
+banner motd ^CCCC
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC36             *
+ *            BB2.0 3020            *
+ *       Cabinet 1, U03-IConn6      *
+ *                                  *
+ ************************************
+          
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ password 7 13263A354F3A301A
+ login local
+ transport preferred none
+ flowcontrol hardware
+line vty 0 4
+ exec-timeout 480 0
+ password 7 0625220608783D29
+ login local
+ length 0
+ transport preferred ssh
+ transport input telnet ssh
+line vty 5 15
+ exec-timeout 480 0
+ password 7 0225297C4F303B11
+ login local
+!
+ntp clock-period 36028867
+ntp source FastEthernet0
+ntp server 192.168.253.78
+end
+
+BSECCC36#  sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi0/3, Gi0/4, Gi0/5, Gi0/6, Gi0/11, Gi0/12, Gi0/13
+                                                Gi0/16, Gi0/18, Gi0/19, Gi0/20, Gi0/21, Gi0/22, Gi0/23
+2    VLAN0002                         active    
+3    Signaling 2                      active    Gi0/9, Gi0/10
+4    traffic                          active    Gi0/1, Gi0/2, Gi0/7, Gi0/8, Gi0/14, Gi0/15
+5    Backup                           active    
+7    Operation,ILO                    active    
+10   DECNET 1                         active    
+11   DECNET 2                         active    
+15   VLAN0015                         active    
+553  VLAN0553                         active    
+554  VLAN0554                         active    
+555  VLAN0555                         active    
+1002 fddi-default                     act/unsup 
+1003 trcrf-default                    act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trbrf-default                    act/unsup 
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0   
+2    enet  100002     1500  -      -      -        -    -        0      0   
+3    enet  100003     1500  -      -      -        -    -        0      0   
+          
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+4    enet  100004     1500  -      -      -        -    -        0      0   
+5    enet  100005     1500  -      -      -        -    -        0      0   
+7    enet  100007     1500  -      -      -        -    -        0      0   
+10   enet  100010     1500  -      -      -        -    -        0      0   
+11   enet  100011     1500  -      -      -        -    -        0      0   
+15   enet  100015     1500  -      -      -        -    -        0      0   
+553  enet  100553     1500  -      -      -        -    -        0      0   
+554  enet  100554     1500  -      -      -        -    -        0      0   
+555  enet  100555     1500  -      -      -        -    -        0      0   
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 trcrf 101003     4472  1005   3276   -        -    srb      0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trbrf 101005     4472  -      -      15       ibm  -        0      0   
+
+
+VLAN AREHops STEHops Backup CRF
+---- ------- ------- ----------
+1003 7       7       off
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
+BSECCC36# exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 192.168.238.15, port 23
+CC31:SYSTEM> telnet 192.168.238.16
+%TELNET-I-TRYING, Trying ... 192.168.238.16
+%TELNET-I-SESSION, Session 01, host 192.168.238.16, port 23
+CCELNET-I-ESCAPE, Escape character is ^]
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC37             *
+ *       BB2.0 3020-Internal        *
+ *       Cabinet 1, U03-IConn7      *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+
+
+User Access Verification
+
+Username: admin
+Password: 
+BSECCC37>en
+Password: 
+BSECCC37#sh run
+Building configuration...
+
+Current configuration : 7962 bytes
+!
+version 12.2
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname BSECCC37
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+no aaa new-model
+system mtu routing 1500
+vtp domain NGP-INTERNAL-DOMAIN
+vtp mode transparent
+ip subnet-zero
+no ip domain-lookup
+ip domain-name porta.net
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2444113792
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2444113792
+ revocation-check none
+ rsakeypair TP-self-signed-2444113792
+!
+!
+crypto pki certificate chain TP-self-signed-2444113792
+ certificate self-signed 01
+  3082024A 308201B3 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32343434 31313337 3932301E 170D3933 30333031 30303031 
+  31395A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 34343431 
+  31333739 3230819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100BF4E 01923D86 0F5F30A1 4BBCFBCA 38251051 7983573C E5D8701A 01318402 
+  F2DFACF5 43BCBBF1 6958C518 7FF5CDD4 92ACDB94 10075988 BD2EF31D D177F7AC 
+  82FF1047 9E2AB05B 0B7D6C3E 80414E8A 2FFC31D4 EFFD2D31 1988817E C24A164E 
+  4353F55F 32E1BDDC CDB61346 B49C2E1A 88BC515C 04B851DD BC8A0CBA 8E96BD12 
+  14030203 010001A3 72307030 0F060355 1D130101 FF040530 030101FF 301D0603 
+  551D1104 16301482 12425345 43434333 372E706F 7274612E 6E657430 1F060355 
+  1D230418 30168014 F1A549C7 773F2379 F06D66B4 90BD92B3 4BD43190 301D0603 
+  551D0E04 160414F1 A549C777 3F2379F0 6D66B490 BD92B34B D4319030 0D06092A 
+  864886F7 0D010104 05000381 810054E7 D760F446 D68EA7F4 FE15CCD0 7F4CDFFC 
+  F24DF66A E24A4035 32B7501B FD2D109B 3C8CC3D4 E0F2B916 40D89AFC 971273CF 
+  29E4B440 1D0173F3 2C5A7FAA 67DB9749 2526ED15 EAB5AD86 2E459F75 F1C4A49E 
+  2919B172 201D8402 E239F9DC 07E21164 D3562D06 F9FDCC69 20FB5A3D 4B32892D 
+  82BB7974 6799BB80 613AEC5F BD3B
+  quit
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+spanning-tree backbonefast
+!
+vlan internal allocation policy ascending
+!
+vlan 2
+ name sig1
+!
+vlan 7
+ name Operations,ILO
+!
+vlan 10
+ name DECNET 1
+!
+!
+!
+interface FastEthernet0
+ ip address dhcp
+ no ip route-cache
+ no ip mroute-cache
+ shutdown
+!
+interface GigabitEthernet0/1
+ description "SMCC31 port Eth7 at 1:03-Full1 (CN-01, HP BL860c) - DECNET 1"
+ switchport access vlan 10
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/2
+ description "SMCC32 port Eth7 at 1:03-Full2 (CN-02, HP BL860c) - DECNET 1"
+ switchport access vlan 10
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!         
+interface GigabitEthernet0/3
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/4
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/5
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/6
+ description "OECCC21 06-Half1 - Cluster"
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/7
+ description "MCECCC21 port Eth5 at 1:03-Full1 (CN-01, HP BL860c) - Sig1"
+ switchport access vlan 2
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/8
+ description "JECCC21 08-Half1 - Cluster"
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/9
+ description "SMCC31 port Eth9 at 1:03-Full1 (CN-01, HP BL860c) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/10
+ description "SMCC32 port Eth9 at 1:03-Full2 (CN-02, HP BL860c) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/11
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/12
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/13
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/14
+ description "OECCC22 14-Half2 Cluster"
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/15
+ description "MCECCC22 port Eth5 at 1:03-Full1 (CN-01, HP BL860c) - Sig1"
+ switchport access vlan 2
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/16
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/17
+ description "SECCC31 port Eth5 at 1:39 (SW-07, Cisco 3750-24) - Trunk"
+ switchport trunk native vlan 2
+ switchport trunk allowed vlan 2,7,10,15,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet0/18
+ shutdown
+!
+interface GigabitEthernet0/19
+ shutdown
+!
+interface GigabitEthernet0/20
+ shutdown
+!
+interface GigabitEthernet0/21
+ shutdown
+!
+interface GigabitEthernet0/22
+ description "Operations,ILO network for Laptop access"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/23
+ shutdown
+!
+interface GigabitEthernet0/24
+ description "BSECCC38 port EthInt24 at 1:03-IConn8 (SW-06, Cisco 3020 cBlade) - Trunk"
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 7,1002-1005
+ switchport mode trunk
+ media-type internal
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan2
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan7
+ ip address 192.168.238.16 255.255.255.128
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan10
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+!
+ip default-gateway 192.168.238.125
+ip classless
+ip http server
+ip http secure-server
+!
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown snmpTargetMIB excluded
+snmp-server view cutdown snmpNotificationMIB excluded
+snmp-server view cutdown snmpVacmMIB excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server user public public v1 
+snmp-server user public public v2c 
+snmp-server trap-source Vlan7
+snmp-server queue-length 100
+snmp-server location Quito
+snmp-server contact Conecel
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps vlan-membership
+snmp-server host 10.10.1.3 version 2c private 
+!
+control-plane
+!
+banner motd ^CCC
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC37             *
+ *       BB2.0 3020-Internal        *
+ *       Cabinet 1, U03-IConn7      *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ password 7 13263A354F3A301A
+ login local
+ transport preferred none
+ flowcontrol hardware
+line vty 0 4
+ exec-timeout 480 0
+ password 7 0625220608783D29
+ login local
+ transport preferred ssh
+ transport input telnet ssh
+line vty 5 15
+ exec-timeout 480 0
+ password 7 0225297C4F303B11
+ login local
+!
+ntp source Vlan7
+ntp server 192.168.253.78
+end
+
+BSECCC37# sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi0/3, Gi0/4, Gi0/5, Gi0/6, Gi0/8, Gi0/11, Gi0/12
+                                                Gi0/13, Gi0/14, Gi0/16, Gi0/18, Gi0/19, Gi0/20, Gi0/21
+                                                Gi0/23
+2    sig1                             active    Gi0/7, Gi0/15
+7    Operations,ILO                   active    Gi0/9, Gi0/10, Gi0/22
+10   DECNET 1                         active    Gi0/1, Gi0/2
+1002 fddi-default                     act/unsup 
+1003 trcrf-default                    act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trbrf-default                    act/unsup 
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0   
+2    enet  100002     1500  -      -      -        -    -        0      0   
+7    enet  100007     1500  -      -      -        -    -        0      0   
+10   enet  100010     1500  -      -      -        -    -        0      0   
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 trcrf 101003     4472  1005   3276   -        -    srb      0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trbrf 101005     4472  -      -      15       ibm  -        0      0   
+
+
+VLAN AREHops STEHops Backup CRF
+---- ------- ------- ----------
+1003 7       7       off
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
+BSECCC37#     exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 192.168.238.16, port 23
+CC31:SYSTEM> telnet 192.168.238.17
+%TELNET-I-TRYING, Trying ... 192.168.238.17
+%TELNET-I-SESSION, Session 01, host 192.168.238.17, port 23
+CCELNET-I-ESCAPE, Escape character is ^]
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *            Guayaquil             *
+ *             BSECCC38             *
+ *       BB2.0 3020-Internal        *
+ *       Cabinet 1, U03-IConn8      *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+
+
+User Access Verification
+
+Username: admin
+Password: 
+BSECCC38>en
+Password: 
+BSECCC38#sh run
+Building configuration...
+
+Current configuration : 7893 bytes
+!
+version 12.2
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname BSECCC38
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+no aaa new-model
+system mtu routing 1500
+vtp domain NGP-INTERNAL-DOMAIN
+vtp mode transparent
+ip subnet-zero
+no ip domain-lookup
+ip domain-name porta.net
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2444098688
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2444098688
+ revocation-check none
+ rsakeypair TP-self-signed-2444098688
+!
+!
+crypto pki certificate chain TP-self-signed-2444098688
+ certificate self-signed 01
+  3082024A 308201B3 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32343434 30393836 3838301E 170D3933 30333031 30303031 
+  31365A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 34343430 
+  39383638 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  810092A8 8C2C7F30 393CCCD8 179560F1 CC009E02 1C9E373E 08CAB2A1 0A1CF931 
+  86AD52D1 9245A87B 983A8780 F95478AF C4B5F70F 0AC9800A 4934879D E6EE34D6 
+  ACE79223 5B361C68 DF8B78C5 73E5D1AB 8FF772BA F41ECE69 D2C38604 56104EC5 
+  B89C6066 74736A08 61C68243 4172A9C8 FCC0B27C 8DDC25D4 BE887EBE A753BB64 
+  FC770203 010001A3 72307030 0F060355 1D130101 FF040530 030101FF 301D0603 
+  551D1104 16301482 12425345 43434333 382E706F 7274612E 6E657430 1F060355 
+  1D230418 30168014 A8CDA3E4 B9DF4A85 D8432AFE 2B439D37 20A74B5C 301D0603 
+  551D0E04 160414A8 CDA3E4B9 DF4A85D8 432AFE2B 439D3720 A74B5C30 0D06092A 
+  864886F7 0D010104 05000381 81002C57 40C29564 5AE0ABEA 3E4F6220 363608A5 
+  3523F22E 7DA84D1A 332E6420 961F3CF2 D0E764AE 02950C34 9A085079 36FDDD0C 
+  E6698810 CBE1AE0D 852B86BE F1BC0DD7 F1924934 5095BAF1 5D50AA62 9A119021 
+  CD5FB21D B3391192 A7BD13A5 B1511E6F B0B28F4E AAA08ED7 42F8FB74 F6EE988C 
+  E293FE49 073BED66 4F67033E EDD1
+  quit
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+spanning-tree backbonefast
+!
+vlan internal allocation policy ascending
+!
+vlan 3
+ name sig2
+!
+vlan 7
+ name Operations,ILO
+!
+vlan 11
+ name DECNET 2
+!
+!
+!
+interface FastEthernet0
+ ip address dhcp
+ no ip route-cache
+ no ip mroute-cache
+ shutdown
+!
+interface GigabitEthernet0/1
+ description "SMCC31 port Eth8 at 1:03-Full1 (CN-01, HP BL860c) - DECNET 2"
+ switchport access vlan 11
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/2
+ description "SMCC32 port Eth8 at 1:03-Full2 (CN-02, HP BL860c) - DECNET 2"
+ switchport access vlan 11
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!         
+interface GigabitEthernet0/3
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/4
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/5
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/6
+ description "OECCC21 Half-1 Cluster"
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/7
+ description "MCECCC21 07-Half1 - SIG_2"
+ switchport access vlan 3
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/8
+ description "JECCC21 08-Half1 - Cluster"
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/9
+ description "SMCC3 port Eth10 at 1:03-Full1 (CN-01, HP BL860c) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/10
+ description "SMCC32 port Eth10 at 1:03-Full2 (CN-02, HP BL860c) - Operations,ILO"
+ switchport access vlan 7
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/11
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/12
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/13
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/14
+ description "OECCC22 Half-2 Cluster"
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/15
+ description "MCECCC22 07-Half1 - SIG_2"
+ switchport access vlan 3
+ switchport mode access
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/16
+ shutdown
+ speed 1000
+!
+interface GigabitEthernet0/17
+ description "SECCC31 port Eth5 at 1:39 (SW-07, Cisco 3750-24) - Trunk"
+ switchport trunk native vlan 3
+ switchport trunk allowed vlan 3,7
+ switchport mode trunk
+!
+interface GigabitEthernet0/18
+ shutdown
+!
+interface GigabitEthernet0/19
+ shutdown
+!
+interface GigabitEthernet0/20
+ shutdown
+!
+interface GigabitEthernet0/21
+ shutdown
+!
+interface GigabitEthernet0/22
+ description "Operations,ILO network for Laptop access"
+ switchport access vlan 7
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/23
+ shutdown
+!
+interface GigabitEthernet0/24
+ description "BSECCC37 port EthInt24 at 1:03-IConn7 (SW-05, Cisco 3020 cBlade) - Trunk"
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 7,1002-1005
+ switchport mode trunk
+          
+BSECCC38# v v v v v v  
+BSECCC38#sh vlan 
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi0/3, Gi0/4, Gi0/5, Gi0/6, Gi0/8, Gi0/11, Gi0/12
+                                                Gi0/13, Gi0/14, Gi0/16, Gi0/18, Gi0/19, Gi0/20, Gi0/21
+                                                Gi0/23
+3    sig2                             active    Gi0/7, Gi0/15
+7    Operations,ILO                   active    Gi0/9, Gi0/10, Gi0/22
+11   DECNET 2                         active    Gi0/1, Gi0/2
+1002 fddi-default                     act/unsup 
+1003 trcrf-default                    act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trbrf-default                    act/unsup 
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0   
+3    enet  100003     1500  -      -      -        -    -        0      0   
+7    enet  100007     1500  -      -      -        -    -        0      0   
+11   enet  100011     1500  -      -      -        -    -        0      0   
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 trcrf 101003     4472  1005   3276   -        -    srb      0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trbrf 101005     4472  -      -      15       ibm  -        0      0   
+
+
+VLAN AREHops STEHops Backup CRF
+---- ------- ------- ----------
+1003 7       7       off
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
+BSECCC38#   exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 192.168.238.17, port 23

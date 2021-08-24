@@ -1,0 +1,119 @@
+
+Current configuration : 2864 bytes
+!
+version 12.4
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+!
+hostname RECCC11
+!
+boot-start-marker
+boot system flash:c2800nm-ipbasek9-mz.124-25d.bin
+boot-end-marker
+!
+logging buffered 51200 warnings
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+no aaa new-model
+clock timezone GMT-5 -5
+!
+!
+ip cef
+!
+!
+no ip domain lookup
+ip domain name acision.com
+!
+!
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+archive
+ log config
+  hidekeys
+!
+!
+!
+!
+interface FastEthernet0/0
+ description $ETH-LAN$$ETH-SW-LAUNCH$$INTF-INFO-FE 0/0$
+ ip address 10.51.7.61 255.255.255.192
+ duplex full
+ speed 100
+!
+interface FastEthernet0/1
+ ip address 10.51.7.93 255.255.255.224
+ duplex full
+ speed 100
+!
+ip default-gateway 10.51.7.60
+ip forward-protocol nd
+ip route 0.0.0.0 0.0.0.0 10.51.7.60
+!
+ip http server
+ip http authentication local
+no ip http secure-server
+ip http timeout-policy idle 60 life 86400 requests 10000
+!
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown internet.6.3.12 excluded
+snmp-server view cutdown internet.6.3.13 excluded
+snmp-server view cutdown internet.6.3.16 excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdown RO
+snmp-server queue-length 100
+snmp-server location Acision Messaging Solution at Ecuador
+snmp-server contact Conecel
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config
+snmp-server enable traps entity
+snmp-server host 192.168.46.70 version 2c private 
+!
+control-plane
+!
+banner motd ^C
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *             Conecel              *
+ *             Ecuador              *
+ *             RECCC11              *
+ *          BB2.1 2811 router       *
+ *          Cabinet 1, U41          *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ login local
+line aux 0
+line vty 0 4
+ privilege level 15
+ no login
+ transport input telnet
+line vty 5 15
+ privilege level 15
+ no login 
+ transport input telnet
+!
+scheduler allocate 20000 1000
+!
+end
+	

@@ -1,0 +1,68 @@
+global:
+  imagePullSecrets:
+    - name: "regcred"
+    - name: "regcred-gitlab"
+tombombadil:
+  enabled: true
+  replicaCount: 2
+  service:
+    type: ClusterIP
+    port: 5555
+  image:
+    tag: 1.1.0-development.20
+  stage:
+    image:
+      tag: 1.1.5-development.1
+  app:
+    port: 5555
+    elasticsearch:
+      prefix: "tom_bombadil"
+      host: "http://machina-elastic-cloud-es-http.machina-es.svc.cluster.local:9200"
+      username: "machina"
+  istio:
+    enabled: true
+    gateways:
+      - "istio-system/machina-expose-tombombadil-gw"
+      - "istio-system/machina-expose-consumerz-gw"
+gandalf:
+  enabled: true
+  replicaCount: 2
+  service:
+    type: ClusterIP
+    port: 4444
+  image:
+    tag: 1.1.2-development.1
+  stage:
+    image:
+      tag: 1.2.0-development.2
+  app:
+    port: 4444
+    paymentLite:
+      address: "http://payment-process-lite.aws.dev.k8s.machina-devel.com.br"
+    discoveryLite:
+      address: "http://tom-bombadil:5555"
+    postgres:
+      host: machina-postgres-postgresql.machina-pg.svc.cluster.local
+      port: 5432
+      database: gandalf
+      username: gandalf
+    kafka:
+      client: "gandalf"
+      brokers: "kafka.machina.qa.inlabs.app:32092,kafka.machina.qa.inlabs.app:32192,kafka.machina.qa.inlabs.app:32292"
+      topics:
+        order: order
+  istio:
+    enabled: true
+    gateways:
+      - "istio-system/machina-expose-gandalf-gw"
+      - "istio-system/machina-expose-consumery-gw"
+gollum:
+  enabled: true
+  replicaCount: 2
+  service:
+    type: ClusterIP
+    port: 3333
+  image:
+    tag: latest
+  server:
+    port: 3333

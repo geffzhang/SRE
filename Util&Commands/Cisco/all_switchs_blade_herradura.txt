@@ -1,0 +1,1464 @@
+BSECCC11#exit
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 10.51.7.4, port 23
+CC31:SYSTEM> telnet 10.51.7.4
+%TELNET-I-TRYING, Trying ... 10.51.7.4
+%TELNET-I-SESSION, Session 01, host 10.51.7.4, port 23
+-TELNET-I-ESCAPE, Escape character is ^]
+GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem.
+
+Copyright(C)2003 Hewlett-Packard Development Company, L.P.
+
+
+Enter password: 
+
+Ecuador - BSECCC11 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn1
+
+BSECCC11>
+Oct 28 18:19:47 BSECCC11 NOTICE  mgmt: admin(admin) login from host 192.168.234.1
+en
+Enable Password: 
+
+Enable privilege granted.
+BSECCC11#
+BSECCC11#sh run
+Current configuration:
+!
+version "5.1.3"
+switch-type "GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem"
+!
+!
+ssh enable
+!
+
+snmp-server target-address 1 name "v1v2_host1" address 192.168.46.70
+snmp-server target-address 1 taglist "v1v2_tag"
+snmp-server target-address 1 parameters-name "v1v2_pname"
+!
+snmp-server target-parameters 1 name "v1v2_pname"
+snmp-server target-parameters 1 message snmpv2c
+snmp-server target-parameters 1 user-name "v1v2only"
+snmp-server target-parameters 1 security snmpv2
+!
+snmp-server notify 1 name "v1v2_notify1"
+snmp-server notify 1 tag "v1v2_tag"
+!
+snmp-server community 1 index "comm1"
+snmp-server community 1 name "public"
+snmp-server community 1 user-name "v1v2only"
+!       
+hostname "BSECCC11"
+no system dhcp
+system idle 60
+banner "Ecuador - BSECCC11 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn1"
+!
+access user administrator-password "f10376a4200022a0babab7e7e3b081526a66d0767b120cb4c1b98ce3fd054364"
+enable password "f0a3770420002200babab6e7e3b081f2c8a38b4140b73d7b55c54d458bbec313"
+!
+!
+spanning-tree mode rstp
+!
+interface GigabitEthernet  1
+        name "oeccc11 port Eth1 at 1:03-Half01 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet  2
+        name "oeccc13 port Eth1 at 1:03-Half02 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!       
+interface GigabitEthernet  3
+        shutdown
+        exit
+!       
+interface GigabitEthernet  4
+        shutdown
+        exit
+!
+interface GigabitEthernet  5
+        shutdown
+        exit
+!
+interface GigabitEthernet  6
+        shutdown
+        exit
+!
+interface GigabitEthernet  7
+        shutdown
+        exit
+!
+interface GigabitEthernet  8
+        shutdown
+        exit
+!
+interface GigabitEthernet  9
+        name "oeccc12 port Eth1 at 1:03-Half09 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 10
+        name "jeccc11 port Eth1 at 1:03-Half10 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 11
+        shutdown
+        exit
+!
+interface GigabitEthernet 12
+        shutdown
+        exit
+!
+interface GigabitEthernet 13
+        shutdown
+        exit
+!       
+interface GigabitEthernet 14
+        shutdown
+        exit
+!
+interface GigabitEthernet 15
+        shutdown
+        exit
+!
+interface GigabitEthernet 16
+        shutdown
+        exit
+!
+interface GigabitEthernet 17
+        name "BSECCC12 port EthInt17 at 1:03-IConn2 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 18
+        name "BSECCC12 port EthInt18 at 1:03-IConn2 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 19
+        shutdown
+        exit
+!
+interface GigabitEthernet 20
+        name "BLECCC1 port OA1-ILO at 1:03 - oam"
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 21
+        name "SECCC11 port Eth7 at 1:39 - Trunk"
+        tagging
+        exit
+!
+interface GigabitEthernet 22
+        shutdown
+        exit
+!
+interface GigabitEthernet 23
+        shutdown
+        exit
+!       
+interface GigabitEthernet 24
+        name "oam network for Laptop access"
+        no tag-pvid
+        pvid 7
+        exit
+!
+vlan 1
+        member  1
+        member  2
+        member  3
+        member  4
+        member  5
+        member  6
+        member  7
+        member  8
+        member  9
+        member 10
+        member 11
+        member 12
+        member 13
+        member 14
+        member 15
+        member 16
+        member 17
+        member 18
+        no member 20
+        member 21
+        member 22
+        member 23
+        no member 24
+!
+vlan 7
+        enable
+        name "oam"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 20
+        member 21
+        member 24
+!
+vlan 8  
+        enable
+        name "backup"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 21
+!
+vlan 4095
+        member 19
+!
+spanning-tree stp 1 bridge priority 36864
+spanning-tree stp 1 vlan 1
+spanning-tree stp 1 vlan 7
+spanning-tree stp 1 vlan 8
+spanning-tree stp 1 vlan 4095
+
+interface GigabitEthernet 20
+        spanning-tree stp 1 edge
+        exit
+!
+interface GigabitEthernet 24
+        spanning-tree stp 1 edge
+        exit
+!
+
+!
+snmp-server location "Acision Messaging Solution at Ecuador"
+snmp-server contact "Conecel"
+snmp-server ufd-trap
+!
+interface ip 1
+        ip address 10.51.7.4  255.255.255.192
+        enable
+        vlan 7
+        exit
+!
+ip gateway 1 address 10.51.7.60
+ip gateway 1 enable
+!
+ip dns domain-name acision.com
+!       
+ntp enable
+ntp primary-server 10.51.7.1  
+ntp interval 60
+!       
+end     
+        
+BSECCC11#
+BSECCC11#exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 10.51.7.4, port 23
+CC31:SYSTEM> 5telnet 10.51.7.4
+%DCL-W-IVVERB, unrecognized command verb - check validity and spelling
+ \5TELNET\
+CC31:SYSTEM> telnet 10.51.7.5
+%TELNET-I-TRYING, Trying ... 10.51.7.5
+%TELNET-I-SESSION, Session 01, host 10.51.7.5, port 23
+-TELNET-I-ESCAPE, Escape character is ^]
+GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem.
+
+Copyright(C)2003 Hewlett-Packard Development Company, L.P.
+
+
+Enter password: 
+
+Ecuador - BSECCC12 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn2
+
+BSECCC12>
+Oct 28 18:24:03 BSECCC12 NOTICE  mgmt: admin(admin) login from host 192.168.234.1
+en
+Enable Password: 
+
+Enable privilege granted.
+BSECCC12#
+BSECCC12#sh run
+Current configuration:
+!
+version "5.1.3"
+switch-type "GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem"
+!
+!
+ssh enable
+!
+
+snmp-server target-address 1 name "v1v2_host1" address 192.168.46.70
+snmp-server target-address 1 taglist "v1v2_tag"
+snmp-server target-address 1 parameters-name "v1v2_pname"
+!
+snmp-server target-parameters 1 name "v1v2_pname"
+snmp-server target-parameters 1 message snmpv2c
+snmp-server target-parameters 1 user-name "v1v2only"
+snmp-server target-parameters 1 security snmpv2
+!
+snmp-server notify 1 name "v1v2_notify1"
+snmp-server notify 1 tag "v1v2_tag"
+!
+snmp-server community 1 index "comm1"
+snmp-server community 1 name "public"
+snmp-server community 1 user-name "v1v2only"
+!       
+hostname "BSECCC12"
+no system dhcp
+system idle 60
+banner "Ecuador - BSECCC12 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn2"
+!
+access user administrator-password "ba0b2d0238022802b216e6e3fbb28bf020b32581dc4e665115f2aca68037abf3"
+enable password "bc522b5b3c022a0ab616e2b2ffb289f84fc5758098abc3694c5b0ccc2e48fadf"
+!
+!
+spanning-tree mode rstp
+!
+interface GigabitEthernet  1
+        name "oeccc11 port Eth2 at 1:03-Half01 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet  2
+        name "oeccc13 port Eth2 at 1:03-Half02 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet  3
+        shutdown
+        exit
+!
+interface GigabitEthernet  4
+        shutdown
+        exit
+!
+interface GigabitEthernet  5
+        shutdown
+        exit
+!
+interface GigabitEthernet  6
+        shutdown
+        exit
+!
+interface GigabitEthernet  7
+        shutdown
+        exit
+!       
+interface GigabitEthernet  8
+        shutdown
+        exit
+!
+interface GigabitEthernet  9
+        name "oeccc12 port Eth2 at 1:03-Half09 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 10
+        name "jeccc11 port Eth2 at 1:03-Half10 - oam,backup"
+        tagging
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 11
+        shutdown
+        exit
+!       
+interface GigabitEthernet 12
+        shutdown
+        exit
+!
+interface GigabitEthernet 13
+        shutdown
+        exit
+!
+interface GigabitEthernet 14
+        shutdown
+        exit
+!
+interface GigabitEthernet 15
+        shutdown
+        exit
+!
+interface GigabitEthernet 16
+        shutdown
+        exit
+!
+interface GigabitEthernet 17
+        name "BSECCC11 port EthInt17 at 1:03-IConn1 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 18
+        name "BSECCC11 port EthInt18 at 1:03-IConn1 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 19
+        shutdown
+        exit
+!
+interface GigabitEthernet 20
+        name "BLECCC1 port OA2-ILO at 1:03 - oam"
+        no tag-pvid
+        pvid 7
+        exit
+!
+interface GigabitEthernet 21
+        name "SW-08 port Eth5 at 1:40 - Trunk"
+        tagging
+        exit
+!       
+interface GigabitEthernet 22
+        shutdown
+        exit
+!       
+interface GigabitEthernet 23
+        shutdown
+        exit
+!       
+interface GigabitEthernet 24
+        name "oam network for Laptop access"
+        no tag-pvid
+        pvid 7
+        exit
+!       
+vlan 1  
+        member  1
+        member  2
+        member  3
+        member  4
+        member  5
+        member  6
+        member  7
+        member  8
+        member  9
+        member 10
+        member 11
+        member 12
+        member 13
+        member 14
+        member 15
+        member 16
+        member 17
+        member 18
+        no member 20
+        member 21
+        member 22
+        member 23
+        no member 24
+!       
+vlan 7  
+        enable
+        name "oam"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 20
+        member 21
+        member 24
+!       
+vlan 8  
+        enable
+        name "backup"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 21
+!       
+vlan 4095
+        member 19
+!       
+spanning-tree stp 1 bridge priority 36864
+spanning-tree stp 1 vlan 1
+spanning-tree stp 1 vlan 7
+spanning-tree stp 1 vlan 8
+spanning-tree stp 1 vlan 4095
+        
+interface GigabitEthernet 20
+        spanning-tree stp 1 edge
+        exit
+!       
+interface GigabitEthernet 24
+        spanning-tree stp 1 edge
+        exit
+!       
+
+!
+snmp-server location "Acision Messaging Solution at Ecuador"
+snmp-server contact "Conecel"
+snmp-server ufd-trap
+!
+interface ip 1
+        ip address 10.51.7.5  255.255.255.192
+        enable
+        vlan 7
+        exit
+!
+ip gateway 1 address 10.51.7.60
+ip gateway 1 enable
+!
+ip dns domain-name acision.com
+!
+ntp enable
+ntp primary-server 10.51.7.1  
+ntp interval 60
+!
+end     
+
+BSECCC12#
+BSECCC12#
+BSECCC12#exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 10.51.7.5, port 23
+CC31:SYSTEM> telnet 10.51.7.8
+%TELNET-I-TRYING, Trying ... 10.51.7.8
+%TELNET-I-SESSION, Session 01, host 10.51.7.8, port 23
+-TELNET-I-ESCAPE, Escape character is ^]
+GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem.
+
+Copyright(C)2003 Hewlett-Packard Development Company, L.P.
+
+
+Enter password: 
+
+Ecuador - BSECCC15 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn5
+
+BSECCC15>
+Oct 28 18:28:16 BSECCC15 NOTICE  mgmt: admin(admin) login from host 192.168.234.1
+en
+Enable Password: 
+
+Enable privilege granted.
+BSECCC15#sh run
+Current configuration:
+!
+version "5.1.3"
+switch-type "GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem"
+!
+!
+ssh enable
+!
+
+snmp-server target-address 1 name "v1v2_host1" address 192.168.46.70
+snmp-server target-address 1 taglist "v1v2_tag"
+snmp-server target-address 1 parameters-name "v1v2_pname"
+!
+snmp-server target-parameters 1 name "v1v2_pname"
+snmp-server target-parameters 1 message snmpv2c
+snmp-server target-parameters 1 user-name "v1v2only"
+snmp-server target-parameters 1 security snmpv2
+!
+snmp-server notify 1 name "v1v2_notify1"
+snmp-server notify 1 tag "v1v2_tag"
+!
+snmp-server community 1 index "comm1"
+snmp-server community 1 name "public"
+snmp-server community 1 user-name "v1v2only"
+hostname "BSECCC15"
+!
+system idle 60
+banner "Ecuador - BSECCC15 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn5"
+!
+access user administrator-password "f4f451b204e400a2bcbfb2f3c754a3507d84a94d93cf0f84c83eeffbebd4757a"
+enable password "eb054e430a050a02b25ea7a2c9b5a9f0680793b37302b492834e403abd353b5a"
+!
+!
+spanning-tree mode rstp
+!
+interface GigabitEthernet  1
+        name "oeccc11 port Eth3 at 1:03-Half01 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet  2
+        name "oeccc13 port Eth3 at 1:03-Half02 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet  3
+        shutdown
+        exit
+!
+interface GigabitEthernet  4
+        shutdown
+        exit
+!
+interface GigabitEthernet  5
+        shutdown
+        exit
+!
+interface GigabitEthernet  6
+        shutdown
+        exit
+!
+interface GigabitEthernet  7
+        shutdown
+        exit
+!
+interface GigabitEthernet  8
+        shutdown
+        exit
+!
+interface GigabitEthernet  9
+        name "oeccc12 port Eth3 at 1:03-Half09 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet 10
+        name "jeccc11 port Eth3 at 1:03-Half10 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet 11
+        shutdown
+        exit
+!
+interface GigabitEthernet 12
+        shutdown
+        exit
+!
+interface GigabitEthernet 13
+        shutdown
+        exit
+!
+interface GigabitEthernet 14
+        shutdown
+        exit
+!
+interface GigabitEthernet 15
+        shutdown
+        exit
+!
+interface GigabitEthernet 16
+        shutdown
+        exit
+!
+interface GigabitEthernet 17
+        name "BSECCC16 port EthInt17 at 1:03-IConn6 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 18
+        name "BSECCC16 port EthInt18 at 1:03-IConn6 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 20
+        shutdown
+        exit
+!
+interface GigabitEthernet 21
+        name "SECCC11 port Eth8 at 1:39 - Trunk"
+        tagging
+        exit
+!
+interface GigabitEthernet 22
+        shutdown
+        exit
+!
+interface GigabitEthernet 23
+        shutdown
+        exit
+!       
+interface GigabitEthernet 24
+        shutdown
+        exit
+!
+vlan 1
+        no member  1
+        no member  2
+        member  3
+        member  4
+        member  5
+        member  6
+        member  7
+        member  8
+        no member  9
+        no member 10
+        member 11
+        member 12
+        member 13
+        member 14
+        member 15
+        member 16
+        member 17
+        member 18
+        member 20
+        member 21
+        member 22
+        member 23
+        member 24
+!
+vlan 3
+        enable
+        name "traffic"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 21
+!
+vlan 4095
+        member 19
+!
+spanning-tree stp 1 bridge priority 36864
+spanning-tree stp 1 vlan 1
+spanning-tree stp 1 vlan 3
+spanning-tree stp 1 vlan 4095
+
+
+!
+snmp-server location "Acision Messaging Solution at Ecuador"
+snmp-server contact "Conecel"
+snmp-server ufd-trap
+!
+!interface ip 256
+!       enable
+!       addr <dhcp>
+!
+!ip gateway 4 addr <dhcp>
+!ip gateway 4 enable
+ip dns domain-name acision.com
+!
+ntp enable
+ntp primary-server 10.51.7.1  
+ntp interval 60
+!       
+end
+
+BSECCC15#exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 10.51.7.8, port 23
+CC31:SYSTEM> telnet 10.51.7.9
+%TELNET-I-TRYING, Trying ... 10.51.7.9
+%TELNET-I-SESSION, Session 01, host 10.51.7.9, port 23
+-TELNET-I-ESCAPE, Escape character is ^]
+GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem.
+
+Copyright(C)2003 Hewlett-Packard Development Company, L.P.
+
+
+Enter password: 
+
+Ecuador - BSECCC16 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn6
+
+BSECCC16>
+Oct 28 18:29:31 BSECCC16 NOTICE  mgmt: admin(admin) login from host 192.168.234.1
+en
+Enable Password: 
+
+Enable privilege granted.
+BSECCC16#sh run
+Current configuration:
+!
+version "5.1.3"
+switch-type "GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem"
+!
+!
+ssh enable
+!
+
+snmp-server target-address 1 name "v1v2_host1" address 192.168.46.70
+snmp-server target-address 1 taglist "v1v2_tag"
+snmp-server target-address 1 parameters-name "v1v2_pname"
+!
+snmp-server target-parameters 1 name "v1v2_pname"
+snmp-server target-parameters 1 message snmpv2c
+snmp-server target-parameters 1 user-name "v1v2only"
+snmp-server target-parameters 1 security snmpv2
+!
+snmp-server notify 1 name "v1v2_notify1"
+snmp-server notify 1 tag "v1v2_tag"
+!
+snmp-server community 1 index "comm1"
+snmp-server community 1 name "public"
+snmp-server community 1 user-name "v1v2only"
+hostname "BSECCC16"
+!
+system idle 60
+banner "Ecuador - BSECCC16 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn6"
+!
+access user administrator-password "d6617f6602202a22b63ab6a7c19089d034456aba29ce7b3792a0f1c4dda95f77"
+enable password "d4f17df600a028a2b4bab6b7c3108b50944d4871d1d302b1a3b76b93e87d87b2"
+!
+!
+spanning-tree mode rstp
+!
+interface GigabitEthernet  1
+        name "oeccc11 port Eth4 at 1:03-Half01 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet  2
+        name "oeccc13 port Eth4 at 1:03-Half02 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet  3
+        shutdown
+        exit
+!
+interface GigabitEthernet  4
+        shutdown
+        exit
+!
+interface GigabitEthernet  5
+        shutdown
+        exit
+!
+interface GigabitEthernet  6
+        shutdown
+        exit
+!
+interface GigabitEthernet  7
+        shutdown
+        exit
+!
+interface GigabitEthernet  8
+        shutdown
+        exit
+!
+interface GigabitEthernet  9
+        name "oeccc12 port Eth4 at 1:03-Half09 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet 10
+        name "jeccc11 port Eth4 at 1:03-Half10 - traffic"
+        no tag-pvid
+        pvid 3
+        exit
+!
+interface GigabitEthernet 11
+        shutdown
+        exit
+!
+interface GigabitEthernet 12
+        shutdown
+        exit
+!
+interface GigabitEthernet 13
+        shutdown
+        exit
+!
+interface GigabitEthernet 14
+        shutdown
+        exit
+!
+interface GigabitEthernet 15
+        shutdown
+        exit
+!
+interface GigabitEthernet 16
+        shutdown
+        exit
+!
+interface GigabitEthernet 17
+        name "BSECCC15 port EthInt17 at 1:03-IConn5 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 18
+        name "BSECCC15 port EthInt18 at 1:03-IConn5 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 20
+        shutdown
+        exit
+!
+interface GigabitEthernet 21
+        name "SW-08 port Eth6 at 1:40 - Trunk"
+        tagging
+        exit
+!
+interface GigabitEthernet 22
+        shutdown
+        exit
+!
+interface GigabitEthernet 23
+        shutdown
+        exit
+!       
+interface GigabitEthernet 24
+        shutdown
+        exit
+!
+vlan 1
+        no member  1
+        no member  2
+        member  3
+        member  4
+        member  5
+        member  6
+        member  7
+        member  8
+        no member  9
+        no member 10
+        member 11
+        member 12
+        member 13
+        member 14
+        member 15
+        member 16
+        member 17
+        member 18
+        member 20
+        member 21
+        member 22
+        member 23
+        member 24
+!
+vlan 3
+        enable
+        name "traffic"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 21
+!
+vlan 4095
+        member 19
+!
+spanning-tree stp 1 bridge priority 36864
+spanning-tree stp 1 vlan 1
+spanning-tree stp 1 vlan 3
+spanning-tree stp 1 vlan 4095
+
+
+!
+snmp-server location "Acision Messaging Solution at Ecuador"
+snmp-server contact "Conecel"
+snmp-server ufd-trap
+!
+!interface ip 256
+!       enable
+!       addr <dhcp>
+!
+!ip gateway 4 addr <dhcp>
+!ip gateway 4 enable
+ip dns domain-name acision.com
+!
+ntp enable
+ntp primary-server 10.51.7.1  
+ntp interval 60
+!       
+end
+
+BSECCC16#
+BSECCC16#
+BSECCC16#exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 10.51.7.9, port 23
+CC31:SYSTEM> telnet 10.51.7.10
+%TELNET-I-TRYING, Trying ... 10.51.7.10
+%TELNET-I-SESSION, Session 01, host 10.51.7.10, port 23
+-TELNET-I-ESCAPE, Escape character is ^]
+GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem.
+
+Copyright(C)2003 Hewlett-Packard Development Company, L.P.
+
+
+Enter password: 
+
+Ecuador - BSECCC17 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn7
+
+BSECCC17>
+Oct 28 18:31:08 BSECCC17 NOTICE  mgmt: admin(admin) login from host 192.168.234.1
+en
+Enable Password: 
+
+Enable privilege granted.
+BSECCC17#sh urn
+             ^
+% Invalid input detected at '^' marker.
+BSECCC17#sh run
+Current configuration:
+!
+version "5.1.3"
+switch-type "GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem"
+!
+!
+ssh enable
+!
+
+snmp-server target-address 1 name "v1v2_host1" address 192.168.46.70
+snmp-server target-address 1 taglist "v1v2_tag"
+snmp-server target-address 1 parameters-name "v1v2_pname"
+!
+snmp-server target-parameters 1 name "v1v2_pname"
+snmp-server target-parameters 1 message snmpv2c
+snmp-server target-parameters 1 user-name "v1v2only"
+snmp-server target-parameters 1 security snmpv2
+!
+snmp-server notify 1 name "v1v2_notify1"
+snmp-server notify 1 tag "v1v2_tag"
+!
+snmp-server community 1 index "comm1"
+snmp-server community 1 name "public"
+snmp-server community 1 user-name "v1v2only"
+hostname "BSECCC17"
+!
+system idle 60
+banner "Ecuador - BSECCC17 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn7"
+!
+access user administrator-password "ef5f430e075a020ab616a2e7c4eaa1f8c9c85e08d5c2fd68c6c8f42c0d09600f"
+enable password "ed33416205320022b47ea2a3c682a3d0ef2b67994ce66af481c7e262c6919886"
+!
+!
+spanning-tree mode rstp
+!
+interface GigabitEthernet  1
+        name "oeccc11 port Eth5 at 1:03-Half01 - cluster"
+        no tag-pvid
+        pvid 5
+        exit
+!
+interface GigabitEthernet  2
+        name "oeccc13 port Eth5 at 1:03-Half02 - cluster"
+        no tag-pvid
+        pvid 5
+        exit
+!
+interface GigabitEthernet  3
+        shutdown
+        exit
+!
+interface GigabitEthernet  4
+        shutdown
+        exit
+!
+interface GigabitEthernet  5
+        shutdown
+        exit
+!
+interface GigabitEthernet  6
+        shutdown
+        exit
+!
+interface GigabitEthernet  7
+        shutdown
+        exit
+!
+interface GigabitEthernet  8
+        shutdown
+        exit
+!
+interface GigabitEthernet  9
+        name "oeccc12 port Eth5 at 1:03-Half09 - cluster"
+        no tag-pvid
+        pvid 5
+        exit
+!
+interface GigabitEthernet 10
+        name "jeccc11 port Eth5 at 1:03-Half10 - cluster"
+        no tag-pvid
+        pvid 5
+        exit
+!
+interface GigabitEthernet 11
+        shutdown
+        exit
+!
+interface GigabitEthernet 12
+        shutdown
+        exit
+!
+interface GigabitEthernet 13
+        shutdown
+        exit
+!
+interface GigabitEthernet 14
+        shutdown
+        exit
+!
+interface GigabitEthernet 15
+        shutdown
+        exit
+!
+interface GigabitEthernet 16
+        shutdown
+        exit
+!
+interface GigabitEthernet 17
+        name "BSECCC18 port EthInt17 at 1:03-IConn8 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 18
+        name "BSECCC18 port EthInt18 at 1:03-IConn8 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 20
+        shutdown
+        exit
+!
+interface GigabitEthernet 21
+        name "SECCC11 port Eth9 at 1:39 - Trunk"
+        tagging
+        exit
+!
+interface GigabitEthernet 22
+        shutdown
+        exit
+!
+interface GigabitEthernet 23
+        shutdown
+        exit
+!       
+interface GigabitEthernet 24
+        shutdown
+        exit
+!
+vlan 1
+        no member  1
+        no member  2
+        member  3
+        member  4
+        member  5
+        member  6
+        member  7
+        member  8
+        no member  9
+        no member 10
+        member 11
+        member 12
+        member 13
+        member 14
+        member 15
+        member 16
+        member 17
+        member 18
+        member 20
+        member 21
+        member 22
+        member 23
+        member 24
+!
+vlan 5
+        enable
+        name "cluster"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 21
+!
+vlan 4095
+        member 19
+!
+spanning-tree stp 1 bridge priority 36864
+spanning-tree stp 1 vlan 1
+spanning-tree stp 1 vlan 5
+spanning-tree stp 1 vlan 4095
+
+
+!
+snmp-server location "Acision Messaging Solution at Ecuador"
+snmp-server contact "Conecel"
+snmp-server ufd-trap
+!
+!interface ip 256
+!       enable
+!       addr <dhcp>
+!
+!ip gateway 4 addr <dhcp>
+!ip gateway 4 enable
+ip dns domain-name acision.com
+!
+ntp enable
+ntp primary-server 10.51.7.1  
+ntp interval 60
+!       
+end
+
+BSECCC17# exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 10.51.7.10, port 23
+CC31:SYSTEM> telnet 10.51.7.11
+%TELNET-I-TRYING, Trying ... 10.51.7.11
+%TELNET-I-SESSION, Session 01, host 10.51.7.11, port 23
+-TELNET-I-ESCAPE, Escape character is ^]
+GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem.
+
+Copyright(C)2003 Hewlett-Packard Development Company, L.P.
+
+
+Enter password: 
+
+Ecuador - BSECCC18 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn8
+
+BSECCC18>
+Oct 28 18:32:40 BSECCC18 NOTICE  mgmt: admin(admin) login from host 192.168.234.1
+en
+Enable Password: 
+
+Enable privilege granted.
+BSECCC18#
+BSECCC18#sh run
+Current configuration:
+!
+version "5.1.3"
+switch-type "GbE2c L2/L3 Ethernet Blade Switch for HP c-Class BladeSystem"
+!
+!
+ssh enable
+!
+
+snmp-server target-address 1 name "v1v2_host1" address 192.168.46.70
+snmp-server target-address 1 taglist "v1v2_tag"
+snmp-server target-address 1 parameters-name "v1v2_pname"
+!
+snmp-server target-parameters 1 name "v1v2_pname"
+snmp-server target-parameters 1 message snmpv2c
+snmp-server target-parameters 1 user-name "v1v2only"
+snmp-server target-parameters 1 security snmpv2
+!
+snmp-server notify 1 name "v1v2_notify1"
+snmp-server notify 1 tag "v1v2_tag"
+!
+snmp-server community 1 index "comm1"
+snmp-server community 1 name "public"
+snmp-server community 1 user-name "v1v2only"
+hostname "BSECCC18"
+!
+system idle 60
+banner "Ecuador - BSECCC18 (BB2.1 gbe2c-L2) at Cabinet 1, U03-IConn8"
+!
+access user administrator-password "fcad442510210020b5b4a7e6d391a3d29b18a21358f8bfbaf96ace326a3da6db"
+enable password "fa3d42b5122102a0b7b4a3f6d191a1524d0e9dfe421acb4d3274aa086d1fbd2e"
+!
+!
+spanning-tree mode rstp
+!
+interface GigabitEthernet  1
+        name "oeccc11 port Eth6 at 1:03-Half01 - cluster"
+        no tag-pvid
+        pvid 5
+        exit
+!
+interface GigabitEthernet  2
+        name "oeccc13 port Eth6 at 1:03-Half02 - cluster"
+        no tag-pvid
+        pvid 5
+        exit
+!
+interface GigabitEthernet  3
+        shutdown
+        exit
+!
+interface GigabitEthernet  4
+        shutdown
+        exit
+!
+interface GigabitEthernet  5
+        shutdown
+        exit
+!
+interface GigabitEthernet  6
+        shutdown
+        exit
+!
+interface GigabitEthernet  7
+        shutdown
+        exit
+!
+interface GigabitEthernet  8
+        shutdown
+        exit
+!
+interface GigabitEthernet  9
+        name "oeccc12 port Eth6 at 1:03-Half09 - cluster"
+        no tag-pvid
+        pvid 5
+        exit
+!
+interface GigabitEthernet 10
+        name "jeccc11 port Eth6 at 1:03-Half10 - cluster"
+        no tag-pvid
+        pvid 5
+        exit
+!
+interface GigabitEthernet 11
+        shutdown
+        exit
+!
+interface GigabitEthernet 12
+        shutdown
+        exit
+!
+interface GigabitEthernet 13
+        shutdown
+        exit
+!
+interface GigabitEthernet 14
+        shutdown
+        exit
+!
+interface GigabitEthernet 15
+        shutdown
+        exit
+!
+interface GigabitEthernet 16
+        shutdown
+        exit
+!
+interface GigabitEthernet 17
+        name "BSECCC17 port EthInt17 at 1:03-IConn7 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 18
+        name "BSECCC17 port EthInt18 at 1:03-IConn7 - Trunk"
+        no shutdown
+        tagging
+        exit
+!
+interface GigabitEthernet 20
+        shutdown
+        exit
+!
+interface GigabitEthernet 21
+        name "SW-08 port Eth7 at 1:40 - Trunk"
+        tagging
+        exit
+!
+interface GigabitEthernet 22
+        shutdown
+        exit
+!
+interface GigabitEthernet 23
+        shutdown
+        exit
+!       
+interface GigabitEthernet 24
+        shutdown
+        exit
+!
+vlan 1
+        no member  1
+        no member  2
+        member  3
+        member  4
+        member  5
+        member  6
+        member  7
+        member  8
+        no member  9
+        no member 10
+        member 11
+        member 12
+        member 13
+        member 14
+        member 15
+        member 16
+        member 17
+        member 18
+        member 20
+        member 21
+        member 22
+        member 23
+        member 24
+!
+vlan 5
+        enable
+        name "cluster"
+        member  1
+        member  2
+        member  9
+        member 10
+        member 17
+        member 18
+        member 21
+!
+vlan 4095
+        member 19
+!
+spanning-tree stp 1 bridge priority 36864
+spanning-tree stp 1 vlan 1
+spanning-tree stp 1 vlan 5
+spanning-tree stp 1 vlan 4095
+
+
+!
+snmp-server location "Acision Messaging Solution at Ecuador"
+snmp-server contact "Conecel"
+snmp-server ufd-trap
+!
+!interface ip 256
+!       enable
+!       addr <dhcp>
+!
+!ip gateway 4 addr <dhcp>
+!ip gateway 4 enable
+ip dns domain-name acision.com
+!
+ntp enable
+ntp primary-server 10.51.7.1  
+ntp interval 60
+!       
+end
+
+BSECCC18#exit
+
+%TELNET-S-REMCLOSED, Remote connection closed
+-TELNET-I-SESSION, Session 01, host 10.51.7.11, port 23
+CC31:SYSTEM> 
+CC31:SYSTEM> 
+CC31:SYSTEM> 

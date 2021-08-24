@@ -1,0 +1,33 @@
+Configuring a Keepalive Port Number
+By default, the port number for keepalives is based on the keepalive type. If the 
+keepalive type is:
+• HTTP or TCP - The default port number is 80
+• FTP - The port number is 21 and is not configurable
+• SSL - The port number is 443
+• ICMP - The port number is the number for the service 
+You can configure a port number from 0 to 65535.
+• To specify the keepalive port number for a service, use the service mode 
+keepalive port command. For example, to specify port 8080, enter:
+(config-service[serv1])# keepalive port 80801-43
+Cisco Content Services Switch Content Load-Balancing Configuration Guide
+OL-4499-01
+Chapter 1      Configuring Services
+Configuring Keepalives
+To reset the keepalive port to its default value, enter:
+(config-service[serv1])# no keepalive port
+• To specify a port for a global keepalive, use the keepalive mode port 
+command. For example, to specify port 8080,enter:
+(config-keepalive[keepimages])# port 8080
+To reset the keepalive port to its default value, enter:
+(config-keepalive[keepimages])# no port
+
+
+service AAG1
+  protocol tcp
+keepalive port 10000
+  keepalive frequency 3
+  keepalive retryperiod 3
+  keepalive maxfailure 5
+  redundant-index 1
+  ip address 10.129.137.135
+  active

@@ -1,0 +1,14 @@
+lvm01 += {
+        omg_cdr.vol:ext3:20000
+        omg_log.vol:ext3:10000
+        omg_trace.vol:ext3:4000
+        omg_archive.vol:ext3:10000
+        omg_opt.vol:ext3:5000
+        omg_app.vol:ext3:10000
+        omg_james.vol:ext3:100
+        omg_amq.vol:ext3:1000
+        omg_h2.vol:ext3:5000
+}
+
+
+chown -R omg:omg /home/omg

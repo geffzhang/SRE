@@ -1,0 +1,15 @@
+//var topPanel = panel.clear().add_Panel();
+var topPanel = "IE TeamProfessor Scripting".popupWindow();
+var ie = topPanel.add_IE();
+var ieteamProfessor = new IE_TeamProfessor(ie); 
+ieteamProfessor.homePage();
+return ie.links();
+
+
+//using O2.XRules.Database.APIs
+
+//O2File:IE_TeamProfessor.cs
+
+//using FluentSharp.Watin
+//O2Ref:FluentSharp.Watin.dll
+//O2Ref:Watin.Core.dll

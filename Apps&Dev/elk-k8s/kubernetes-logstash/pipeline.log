@@ -1,0 +1,797 @@
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.headius.backport9.modules.Modules (file:/usr/share/logstash/logstash-core/lib/jars/jruby-complete-9.2.7.0.jar) to field java.io.FileDescriptor.fd
+WARNING: Please consider reporting this to the maintainers of com.headius.backport9.modules.Modules
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Thread.exclusive is deprecated, use Thread::Mutex
+Could not find log4j2 configuration at path /usr/share/logstash/config/log4j2.properties. Using default config which logs errors to the console
+[INFO ] 2019-11-07 19:58:03.308 [main] writabledirectory - Creating directory {:setting=>"path.queue", :path=>"/usr/share/logstash/data/queue"}
+[INFO ] 2019-11-07 19:58:03.333 [main] writabledirectory - Creating directory {:setting=>"path.dead_letter_queue", :path=>"/usr/share/logstash/data/dead_letter_queue"}
+[WARN ] 2019-11-07 19:58:04.013 [LogStash::Runner] multilocal - Ignoring the 'pipelines.yml' file because modules or command line options are specified
+[INFO ] 2019-11-07 19:58:04.023 [LogStash::Runner] runner - Starting Logstash {"logstash.version"=>"7.3.2"}
+[INFO ] 2019-11-07 19:58:04.064 [LogStash::Runner] agent - No persistent UUID file found. Generating new UUID {:uuid=>"774a34b6-c85f-425f-9d53-c37953893ff5", :path=>"/usr/share/logstash/data/uuid"}
+[INFO ] 2019-11-07 19:58:06.387 [Converge PipelineAction::Create<main>] Reflections - Reflections took 87 ms to scan 1 urls, producing 19 keys and 39 values 
+[WARN ] 2019-11-07 19:58:07.196 [Converge PipelineAction::Create<main>] elasticsearch - You are using a deprecated config setting "document_type" set in elasticsearch. Deprecated settings will continue to work, but are scheduled for removal from logstash in the future. Document types are being deprecated in Elasticsearch 6.0, and removed entirely in 7.0. You should avoid this feature If you have any questions about this, please visit the #logstash channel on freenode irc. {:name=>"document_type", :plugin=><LogStash::Outputs::ElasticSearch index=>"%{[type]}-%{+YYYY.MM.dd}", sniffing=>false, manage_template=>false, id=>"8d7ebc4e8b9a7e96b194241877d92a5c3865d538cb414a8334cd96673d8e9648", hosts=>[//elasticsearch:9200], document_type=>"%{[@metadata][type]}", enable_metric=>true, codec=><LogStash::Codecs::Plain id=>"plain_7512f0fd-02b7-4b40-9b1c-e42a699de670", enable_metric=>true, charset=>"UTF-8">, workers=>1, template_name=>"logstash", template_overwrite=>false, doc_as_upsert=>false, script_type=>"inline", script_lang=>"painless", script_var_name=>"event", scripted_upsert=>false, retry_initial_interval=>2, retry_max_interval=>64, retry_on_conflict=>1, ilm_enabled=>"auto", ilm_rollover_alias=>"logstash", ilm_pattern=>"{now/d}-000001", ilm_policy=>"logstash-policy", action=>"index", ssl_certificate_verification=>true, sniffing_delay=>5, timeout=>60, pool_max=>1000, pool_max_per_route=>100, resurrect_delay=>5, validate_after_inactivity=>10000, http_compression=>false>}
+[WARN ] 2019-11-07 19:58:07.284 [Converge PipelineAction::Create<main>] elasticsearch - You are using a deprecated config setting "document_type" set in elasticsearch. Deprecated settings will continue to work, but are scheduled for removal from logstash in the future. Document types are being deprecated in Elasticsearch 6.0, and removed entirely in 7.0. You should avoid this feature If you have any questions about this, please visit the #logstash channel on freenode irc. {:name=>"document_type", :plugin=><LogStash::Outputs::ElasticSearch index=>"%{[type]}-%{+YYYY.MM.dd}", sniffing=>false, manage_template=>false, id=>"16df1add2a132ed18b5a631ef830cae789448dc994225ac7ab305eae69e8d327", hosts=>[//elasticsearch:9200], document_type=>"%{[@metadata][type]}", enable_metric=>true, codec=><LogStash::Codecs::Plain id=>"plain_b7d64545-07ac-4e43-8b31-f5820e5e4b44", enable_metric=>true, charset=>"UTF-8">, workers=>1, template_name=>"logstash", template_overwrite=>false, doc_as_upsert=>false, script_type=>"inline", script_lang=>"painless", script_var_name=>"event", scripted_upsert=>false, retry_initial_interval=>2, retry_max_interval=>64, retry_on_conflict=>1, ilm_enabled=>"auto", ilm_rollover_alias=>"logstash", ilm_pattern=>"{now/d}-000001", ilm_policy=>"logstash-policy", action=>"index", ssl_certificate_verification=>true, sniffing_delay=>5, timeout=>60, pool_max=>1000, pool_max_per_route=>100, resurrect_delay=>5, validate_after_inactivity=>10000, http_compression=>false>}
+[WARN ] 2019-11-07 19:58:07.328 [Converge PipelineAction::Create<main>] elasticsearch - You are using a deprecated config setting "document_type" set in elasticsearch. Deprecated settings will continue to work, but are scheduled for removal from logstash in the future. Document types are being deprecated in Elasticsearch 6.0, and removed entirely in 7.0. You should avoid this feature If you have any questions about this, please visit the #logstash channel on freenode irc. {:name=>"document_type", :plugin=><LogStash::Outputs::ElasticSearch index=>"%{[type]}-%{+YYYY.MM.dd}", sniffing=>false, manage_template=>false, id=>"fc2c4798a7f22d8f2eae603125f9256f6e75457d82391a07accec15bd8bfdf42", hosts=>[//elasticsearch:9200], document_type=>"%{[@metadata][type]}", enable_metric=>true, codec=><LogStash::Codecs::Plain id=>"plain_042072e3-d89b-41ee-a408-fd2d641a8b00", enable_metric=>true, charset=>"UTF-8">, workers=>1, template_name=>"logstash", template_overwrite=>false, doc_as_upsert=>false, script_type=>"inline", script_lang=>"painless", script_var_name=>"event", scripted_upsert=>false, retry_initial_interval=>2, retry_max_interval=>64, retry_on_conflict=>1, ilm_enabled=>"auto", ilm_rollover_alias=>"logstash", ilm_pattern=>"{now/d}-000001", ilm_policy=>"logstash-policy", action=>"index", ssl_certificate_verification=>true, sniffing_delay=>5, timeout=>60, pool_max=>1000, pool_max_per_route=>100, resurrect_delay=>5, validate_after_inactivity=>10000, http_compression=>false>}
+[WARN ] 2019-11-07 19:58:07.374 [Converge PipelineAction::Create<main>] elasticsearch - You are using a deprecated config setting "document_type" set in elasticsearch. Deprecated settings will continue to work, but are scheduled for removal from logstash in the future. Document types are being deprecated in Elasticsearch 6.0, and removed entirely in 7.0. You should avoid this feature If you have any questions about this, please visit the #logstash channel on freenode irc. {:name=>"document_type", :plugin=><LogStash::Outputs::ElasticSearch index=>"%{[type]}-%{+YYYY.MM.dd}", sniffing=>false, manage_template=>false, id=>"05a54ebaee9a8d3d8f7d2d102131f517c2fd019cc14e42899b3b9db7bdf3de98", hosts=>[//elasticsearch:9200], document_type=>"%{[@metadata][type]}", enable_metric=>true, codec=><LogStash::Codecs::Plain id=>"plain_80ceba32-2466-4790-a47f-236974cf084d", enable_metric=>true, charset=>"UTF-8">, workers=>1, template_name=>"logstash", template_overwrite=>false, doc_as_upsert=>false, script_type=>"inline", script_lang=>"painless", script_var_name=>"event", scripted_upsert=>false, retry_initial_interval=>2, retry_max_interval=>64, retry_on_conflict=>1, ilm_enabled=>"auto", ilm_rollover_alias=>"logstash", ilm_pattern=>"{now/d}-000001", ilm_policy=>"logstash-policy", action=>"index", ssl_certificate_verification=>true, sniffing_delay=>5, timeout=>60, pool_max=>1000, pool_max_per_route=>100, resurrect_delay=>5, validate_after_inactivity=>10000, http_compression=>false>}
+[WARN ] 2019-11-07 19:58:07.413 [Converge PipelineAction::Create<main>] elasticsearch - You are using a deprecated config setting "document_type" set in elasticsearch. Deprecated settings will continue to work, but are scheduled for removal from logstash in the future. Document types are being deprecated in Elasticsearch 6.0, and removed entirely in 7.0. You should avoid this feature If you have any questions about this, please visit the #logstash channel on freenode irc. {:name=>"document_type", :plugin=><LogStash::Outputs::ElasticSearch index=>"%{[type]}-%{+YYYY.MM.dd}", sniffing=>false, manage_template=>false, id=>"3a7ae4799a888d582e96cab1e05fd1f49be4a7f2b8d4be554828eee58cfe24f5", hosts=>[//elasticsearch:9200], document_type=>"%{[@metadata][type]}", enable_metric=>true, codec=><LogStash::Codecs::Plain id=>"plain_aae71e58-6dc7-4680-b50a-b5977d4cd02f", enable_metric=>true, charset=>"UTF-8">, workers=>1, template_name=>"logstash", template_overwrite=>false, doc_as_upsert=>false, script_type=>"inline", script_lang=>"painless", script_var_name=>"event", scripted_upsert=>false, retry_initial_interval=>2, retry_max_interval=>64, retry_on_conflict=>1, ilm_enabled=>"auto", ilm_rollover_alias=>"logstash", ilm_pattern=>"{now/d}-000001", ilm_policy=>"logstash-policy", action=>"index", ssl_certificate_verification=>true, sniffing_delay=>5, timeout=>60, pool_max=>1000, pool_max_per_route=>100, resurrect_delay=>5, validate_after_inactivity=>10000, http_compression=>false>}
+[INFO ] 2019-11-07 19:58:08.183 [[main]-pipeline-manager] elasticsearch - Elasticsearch pool URLs updated {:changes=>{:removed=>[], :added=>[http://elasticsearch:9200/]}}
+[WARN ] 2019-11-07 19:58:08.419 [[main]-pipeline-manager] elasticsearch - Restored connection to ES instance {:url=>"http://elasticsearch:9200/"}
+[INFO ] 2019-11-07 19:58:08.745 [[main]-pipeline-manager] elasticsearch - ES Output version determined {:es_version=>7}
+[WARN ] 2019-11-07 19:58:08.747 [[main]-pipeline-manager] elasticsearch - Detected a 6.x and above cluster: the `type` event field won't be used to determine the document _type {:es_version=>7}
+[INFO ] 2019-11-07 19:58:08.754 [[main]-pipeline-manager] elasticsearch - New Elasticsearch output {:class=>"LogStash::Outputs::ElasticSearch", :hosts=>["//elasticsearch:9200"]}
+[INFO ] 2019-11-07 19:58:08.772 [[main]-pipeline-manager] elasticsearch - Elasticsearch pool URLs updated {:changes=>{:removed=>[], :added=>[http://elasticsearch:9200/]}}
+[WARN ] 2019-11-07 19:58:08.794 [[main]-pipeline-manager] elasticsearch - Restored connection to ES instance {:url=>"http://elasticsearch:9200/"}
+[INFO ] 2019-11-07 19:58:08.806 [[main]-pipeline-manager] elasticsearch - ES Output version determined {:es_version=>7}
+[WARN ] 2019-11-07 19:58:08.807 [[main]-pipeline-manager] elasticsearch - Detected a 6.x and above cluster: the `type` event field won't be used to determine the document _type {:es_version=>7}
+[INFO ] 2019-11-07 19:58:08.812 [[main]-pipeline-manager] elasticsearch - New Elasticsearch output {:class=>"LogStash::Outputs::ElasticSearch", :hosts=>["//elasticsearch:9200"]}
+[INFO ] 2019-11-07 19:58:08.832 [[main]-pipeline-manager] elasticsearch - Elasticsearch pool URLs updated {:changes=>{:removed=>[], :added=>[http://elasticsearch:9200/]}}
+[WARN ] 2019-11-07 19:58:09.028 [[main]-pipeline-manager] elasticsearch - Restored connection to ES instance {:url=>"http://elasticsearch:9200/"}
+[INFO ] 2019-11-07 19:58:09.075 [[main]-pipeline-manager] elasticsearch - ES Output version determined {:es_version=>7}
+[WARN ] 2019-11-07 19:58:09.076 [[main]-pipeline-manager] elasticsearch - Detected a 6.x and above cluster: the `type` event field won't be used to determine the document _type {:es_version=>7}
+[INFO ] 2019-11-07 19:58:09.089 [[main]-pipeline-manager] elasticsearch - New Elasticsearch output {:class=>"LogStash::Outputs::ElasticSearch", :hosts=>["//elasticsearch:9200"]}
+[INFO ] 2019-11-07 19:58:09.135 [[main]-pipeline-manager] elasticsearch - Elasticsearch pool URLs updated {:changes=>{:removed=>[], :added=>[http://elasticsearch:9200/]}}
+[WARN ] 2019-11-07 19:58:09.224 [[main]-pipeline-manager] elasticsearch - Restored connection to ES instance {:url=>"http://elasticsearch:9200/"}
+[INFO ] 2019-11-07 19:58:09.270 [[main]-pipeline-manager] elasticsearch - ES Output version determined {:es_version=>7}
+[WARN ] 2019-11-07 19:58:09.271 [[main]-pipeline-manager] elasticsearch - Detected a 6.x and above cluster: the `type` event field won't be used to determine the document _type {:es_version=>7}
+[INFO ] 2019-11-07 19:58:09.287 [[main]-pipeline-manager] elasticsearch - New Elasticsearch output {:class=>"LogStash::Outputs::ElasticSearch", :hosts=>["//elasticsearch:9200"]}
+[INFO ] 2019-11-07 19:58:09.311 [[main]-pipeline-manager] elasticsearch - Elasticsearch pool URLs updated {:changes=>{:removed=>[], :added=>[http://elasticsearch:9200/]}}
+[WARN ] 2019-11-07 19:58:09.416 [[main]-pipeline-manager] elasticsearch - Restored connection to ES instance {:url=>"http://elasticsearch:9200/"}
+[INFO ] 2019-11-07 19:58:09.464 [[main]-pipeline-manager] elasticsearch - ES Output version determined {:es_version=>7}
+[WARN ] 2019-11-07 19:58:09.465 [[main]-pipeline-manager] elasticsearch - Detected a 6.x and above cluster: the `type` event field won't be used to determine the document _type {:es_version=>7}
+[INFO ] 2019-11-07 19:58:09.526 [[main]-pipeline-manager] elasticsearch - New Elasticsearch output {:class=>"LogStash::Outputs::ElasticSearch", :hosts=>["//elasticsearch:9200"]}
+[WARN ] 2019-11-07 19:58:10.120 [[main]-pipeline-manager] LazyDelegatingGauge - A gauge metric of an unknown type (org.jruby.specialized.RubyArrayOneObject) has been create for key: cluster_uuids. This may result in invalid serialization.  It is recommended to log an issue to the responsible developer/development team.
+[INFO ] 2019-11-07 19:58:10.123 [[main]-pipeline-manager] javapipeline - Starting pipeline {:pipeline_id=>"main", "pipeline.workers"=>1, "pipeline.batch.size"=>125, "pipeline.batch.delay"=>50, "pipeline.max_inflight"=>125, :thread=>"#<Thread:0x4550284a@/usr/share/logstash/logstash-core/lib/logstash/java_pipeline.rb:102 run>"}
+[INFO ] 2019-11-07 19:58:10.192 [[main]-pipeline-manager] javapipeline - Pipeline started {"pipeline.id"=>"main"}
+[INFO ] 2019-11-07 19:58:10.272 [Ruby-0-Thread-1: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/stud-0.0.23/lib/stud/task.rb:22] agent - Pipelines running {:count=>1, :running_pipelines=>[:main], :non_running_pipelines=>[]}
+[INFO ] 2019-11-07 19:58:10.399 [[main]<kafka] ConsumerConfig - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = latest
+	bootstrap.servers = [bootstrap.kafka:9092]
+	check.crcs = true
+	client.dns.lookup = default
+	client.id = logstash-0
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = logstash
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+[INFO ] 2019-11-07 19:58:10.415 [[main]<kafka] ConsumerConfig - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = latest
+	bootstrap.servers = [bootstrap.kafka:9092]
+	check.crcs = true
+	client.dns.lookup = default
+	client.id = logstash-0
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = logstash
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+[INFO ] 2019-11-07 19:58:10.422 [[main]<kafka] ConsumerConfig - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = latest
+	bootstrap.servers = [bootstrap.kafka:9092]
+	check.crcs = true
+	client.dns.lookup = default
+	client.id = logstash-0
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = logstash
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+[INFO ] 2019-11-07 19:58:10.425 [[main]<kafka] ConsumerConfig - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = latest
+	bootstrap.servers = [bootstrap.kafka:9092]
+	check.crcs = true
+	client.dns.lookup = default
+	client.id = logstash-0
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = logstash
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+[INFO ] 2019-11-07 19:58:10.417 [[main]<kafka] ConsumerConfig - ConsumerConfig values: 
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = latest
+	bootstrap.servers = [bootstrap.kafka:9092]
+	check.crcs = true
+	client.dns.lookup = default
+	client.id = logstash-0
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = logstash
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.leave.group.on.close = true
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.mechanism = GSSAPI
+	security.protocol = PLAINTEXT
+	send.buffer.bytes = 131072
+	session.timeout.ms = 10000
+	ssl.cipher.suites = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = https
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+
+[INFO ] 2019-11-07 19:58:10.753 [Api Webserver] agent - Successfully started Logstash API endpoint {:port=>9600}
+[INFO ] 2019-11-07 19:58:11.057 [[main]<kafka] AppInfoParser - Kafka version : 2.1.0
+[INFO ] 2019-11-07 19:58:11.058 [[main]<kafka] AppInfoParser - Kafka commitId : eec43959745f444f
+[INFO ] 2019-11-07 19:58:11.069 [[main]<kafka] AppInfoParser - Kafka version : 2.1.0
+[INFO ] 2019-11-07 19:58:11.070 [[main]<kafka] AppInfoParser - Kafka commitId : eec43959745f444f
+[WARN ] 2019-11-07 19:58:11.075 [[main]<kafka] AppInfoParser - Error registering AppInfo mbean
+javax.management.InstanceAlreadyExistsException: kafka.consumer:type=app-info,id=logstash-0
+	at com.sun.jmx.mbeanserver.Repository.addMBean(Repository.java:436) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerWithRepository(DefaultMBeanServerInterceptor.java:1855) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerDynamicMBean(DefaultMBeanServerInterceptor.java:955) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerObject(DefaultMBeanServerInterceptor.java:890) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerMBean(DefaultMBeanServerInterceptor.java:320) ~[?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.registerMBean(JmxMBeanServer.java:522) ~[?:?]
+	at org.apache.kafka.common.utils.AppInfoParser.registerAppInfo(AppInfoParser.java:62) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:797) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:652) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:632) [kafka-clients-2.1.0.jar:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:?]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[?:?]
+	at org.jruby.javasupport.JavaConstructor.newInstanceDirect(JavaConstructor.java:279) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.invokers.ConstructorInvoker.call(ConstructorInvoker.java:87) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.invokers.ConstructorInvoker.call(ConstructorInvoker.java:176) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:178) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.proxies.ConcreteJavaProxy$InitializeMethod.call(ConcreteJavaProxy.java:56) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:178) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.newInstance(RubyClass.java:894) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass$INVOKER$i$newInstance.call(RubyClass$INVOKER$i$newInstance.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroOrOneOrNBlock.call(JavaMethod.java:349) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.proxies.ConcreteJavaProxy$NewMethod.call(ConcreteJavaProxy.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:168) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:339) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:170) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.Interpreter.INTERPRET_BLOCK(Interpreter.java:128) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.MixedModeIRBlockBody.commonYieldPath(MixedModeIRBlockBody.java:151) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.IRBlockBody.doYield(IRBlockBody.java:187) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.BlockBody.yield(BlockBody.java:116) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.yield(Block.java:165) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable$23.call(RubyEnumerable.java:849) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.CallBlock19.doYield(CallBlock19.java:98) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.BlockBody.yield(BlockBody.java:116) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.yield(Block.java:165) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyFixnum.times(RubyFixnum.java:284) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyInteger$INVOKER$i$0$0$times.call(RubyInteger$INVOKER$i$0$0$times.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroBlock.call(JavaMethod.java:555) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.finvoke(RubyClass.java:505) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Helpers.invoke(Helpers.java:433) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyBasicObject.callMethod(RubyBasicObject.java:393) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerator.each(RubyEnumerator.java:327) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerator$INVOKER$i$each.call(RubyEnumerator$INVOKER$i$each.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.finvoke(RubyClass.java:493) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Helpers.invoke(Helpers.java:421) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.callEach19(RubyEnumerable.java:118) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.collectCommon(RubyEnumerable.java:841) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.map(RubyEnumerable.java:833) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable$INVOKER$s$0$0$map.call(RubyEnumerable$INVOKER$s$0$0$map.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroBlock.call(JavaMethod.java:555) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:80) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.callIter(CachingCallSite.java:89) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.instructions.CallBase.interpret(CallBase.java:537) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:362) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:339) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:170) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:168) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.Interpreter.INTERPRET_BLOCK(Interpreter.java:128) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.MixedModeIRBlockBody.commonYieldPath(MixedModeIRBlockBody.java:151) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.IRBlockBody.call(IRBlockBody.java:79) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.call(Block.java:124) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:295) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:274) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:270) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.RubyRunnable.run(RubyRunnable.java:105) [jruby-complete-9.2.7.0.jar:?]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+[INFO ] 2019-11-07 19:58:11.089 [[main]<kafka] AppInfoParser - Kafka version : 2.1.0
+[INFO ] 2019-11-07 19:58:11.090 [[main]<kafka] AppInfoParser - Kafka commitId : eec43959745f444f
+[WARN ] 2019-11-07 19:58:11.108 [[main]<kafka] AppInfoParser - Error registering AppInfo mbean
+javax.management.InstanceAlreadyExistsException: kafka.consumer:type=app-info,id=logstash-0
+	at com.sun.jmx.mbeanserver.Repository.addMBean(Repository.java:436) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerWithRepository(DefaultMBeanServerInterceptor.java:1855) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerDynamicMBean(DefaultMBeanServerInterceptor.java:955) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerObject(DefaultMBeanServerInterceptor.java:890) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerMBean(DefaultMBeanServerInterceptor.java:320) ~[?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.registerMBean(JmxMBeanServer.java:522) ~[?:?]
+	at org.apache.kafka.common.utils.AppInfoParser.registerAppInfo(AppInfoParser.java:62) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:797) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:652) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:632) [kafka-clients-2.1.0.jar:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:?]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[?:?]
+	at org.jruby.javasupport.JavaConstructor.newInstanceDirect(JavaConstructor.java:279) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.invokers.ConstructorInvoker.call(ConstructorInvoker.java:87) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.invokers.ConstructorInvoker.call(ConstructorInvoker.java:176) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:350) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:180) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.proxies.ConcreteJavaProxy$InitializeMethod.call(ConcreteJavaProxy.java:56) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:350) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:180) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.newInstance(RubyClass.java:894) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass$INVOKER$i$newInstance.call(RubyClass$INVOKER$i$newInstance.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroOrOneOrNBlock.call(JavaMethod.java:349) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.proxies.ConcreteJavaProxy$NewMethod.call(ConcreteJavaProxy.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:339) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:170) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:339) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:170) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.Interpreter.INTERPRET_BLOCK(Interpreter.java:128) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.MixedModeIRBlockBody.commonYieldPath(MixedModeIRBlockBody.java:151) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.IRBlockBody.doYield(IRBlockBody.java:187) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.BlockBody.yield(BlockBody.java:116) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.yield(Block.java:165) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable$23.call(RubyEnumerable.java:849) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.CallBlock19.doYield(CallBlock19.java:98) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.BlockBody.yield(BlockBody.java:116) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.yield(Block.java:165) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyFixnum.times(RubyFixnum.java:284) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyInteger$INVOKER$i$0$0$times.call(RubyInteger$INVOKER$i$0$0$times.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroBlock.call(JavaMethod.java:555) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.finvoke(RubyClass.java:505) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Helpers.invoke(Helpers.java:433) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyBasicObject.callMethod(RubyBasicObject.java:393) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerator.each(RubyEnumerator.java:327) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerator$INVOKER$i$each.call(RubyEnumerator$INVOKER$i$each.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.finvoke(RubyClass.java:493) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Helpers.invoke(Helpers.java:421) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.callEach19(RubyEnumerable.java:118) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.collectCommon(RubyEnumerable.java:841) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.map(RubyEnumerable.java:833) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable$INVOKER$s$0$0$map.call(RubyEnumerable$INVOKER$s$0$0$map.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroBlock.call(JavaMethod.java:555) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:296) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:82) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.callIter(CachingCallSite.java:89) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.instructions.CallBase.interpret(CallBase.java:537) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:362) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:339) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:170) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:339) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:170) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.Interpreter.INTERPRET_BLOCK(Interpreter.java:128) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.MixedModeIRBlockBody.commonYieldPath(MixedModeIRBlockBody.java:151) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.IRBlockBody.call(IRBlockBody.java:79) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.call(Block.java:124) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:295) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:274) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:270) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.RubyRunnable.run(RubyRunnable.java:105) [jruby-complete-9.2.7.0.jar:?]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+[INFO ] 2019-11-07 19:58:11.135 [[main]<kafka] AppInfoParser - Kafka version : 2.1.0
+[INFO ] 2019-11-07 19:58:11.136 [[main]<kafka] AppInfoParser - Kafka commitId : eec43959745f444f
+[WARN ] 2019-11-07 19:58:11.142 [[main]<kafka] AppInfoParser - Error registering AppInfo mbean
+javax.management.InstanceAlreadyExistsException: kafka.consumer:type=app-info,id=logstash-0
+	at com.sun.jmx.mbeanserver.Repository.addMBean(Repository.java:436) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerWithRepository(DefaultMBeanServerInterceptor.java:1855) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerDynamicMBean(DefaultMBeanServerInterceptor.java:955) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerObject(DefaultMBeanServerInterceptor.java:890) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerMBean(DefaultMBeanServerInterceptor.java:320) ~[?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.registerMBean(JmxMBeanServer.java:522) ~[?:?]
+	at org.apache.kafka.common.utils.AppInfoParser.registerAppInfo(AppInfoParser.java:62) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:797) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:652) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:632) [kafka-clients-2.1.0.jar:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:?]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[?:?]
+	at org.jruby.javasupport.JavaConstructor.newInstanceDirect(JavaConstructor.java:279) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.invokers.ConstructorInvoker.call(ConstructorInvoker.java:87) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.invokers.ConstructorInvoker.call(ConstructorInvoker.java:176) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:178) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.proxies.ConcreteJavaProxy$InitializeMethod.call(ConcreteJavaProxy.java:56) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:178) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.newInstance(RubyClass.java:894) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass$INVOKER$i$newInstance.call(RubyClass$INVOKER$i$newInstance.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroOrOneOrNBlock.call(JavaMethod.java:349) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.proxies.ConcreteJavaProxy$NewMethod.call(ConcreteJavaProxy.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:168) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:339) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:170) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.Interpreter.INTERPRET_BLOCK(Interpreter.java:128) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.MixedModeIRBlockBody.commonYieldPath(MixedModeIRBlockBody.java:151) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.IRBlockBody.doYield(IRBlockBody.java:187) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.BlockBody.yield(BlockBody.java:116) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.yield(Block.java:165) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable$23.call(RubyEnumerable.java:849) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.CallBlock19.doYield(CallBlock19.java:98) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.BlockBody.yield(BlockBody.java:116) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.yield(Block.java:165) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyFixnum.times(RubyFixnum.java:284) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyInteger$INVOKER$i$0$0$times.call(RubyInteger$INVOKER$i$0$0$times.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroBlock.call(JavaMethod.java:555) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.finvoke(RubyClass.java:505) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Helpers.invoke(Helpers.java:433) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyBasicObject.callMethod(RubyBasicObject.java:393) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerator.each(RubyEnumerator.java:327) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerator$INVOKER$i$each.call(RubyEnumerator$INVOKER$i$each.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.finvoke(RubyClass.java:493) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Helpers.invoke(Helpers.java:421) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.callEach19(RubyEnumerable.java:118) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.collectCommon(RubyEnumerable.java:841) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.map(RubyEnumerable.java:833) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable$INVOKER$s$0$0$map.call(RubyEnumerable$INVOKER$s$0$0$map.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroBlock.call(JavaMethod.java:555) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:80) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.callIter(CachingCallSite.java:89) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.instructions.CallBase.interpret(CallBase.java:537) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:362) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:339) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:170) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:168) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.Interpreter.INTERPRET_BLOCK(Interpreter.java:128) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.MixedModeIRBlockBody.commonYieldPath(MixedModeIRBlockBody.java:151) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.IRBlockBody.call(IRBlockBody.java:79) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.call(Block.java:124) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:295) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:274) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:270) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.RubyRunnable.run(RubyRunnable.java:105) [jruby-complete-9.2.7.0.jar:?]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+[INFO ] 2019-11-07 19:58:11.180 [[main]<kafka] AppInfoParser - Kafka version : 2.1.0
+[INFO ] 2019-11-07 19:58:11.180 [[main]<kafka] AppInfoParser - Kafka commitId : eec43959745f444f
+[WARN ] 2019-11-07 19:58:11.182 [[main]<kafka] AppInfoParser - Error registering AppInfo mbean
+javax.management.InstanceAlreadyExistsException: kafka.consumer:type=app-info,id=logstash-0
+	at com.sun.jmx.mbeanserver.Repository.addMBean(Repository.java:436) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerWithRepository(DefaultMBeanServerInterceptor.java:1855) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerDynamicMBean(DefaultMBeanServerInterceptor.java:955) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerObject(DefaultMBeanServerInterceptor.java:890) ~[?:?]
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.registerMBean(DefaultMBeanServerInterceptor.java:320) ~[?:?]
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.registerMBean(JmxMBeanServer.java:522) ~[?:?]
+	at org.apache.kafka.common.utils.AppInfoParser.registerAppInfo(AppInfoParser.java:62) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:797) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:652) [kafka-clients-2.1.0.jar:?]
+	at org.apache.kafka.clients.consumer.KafkaConsumer.<init>(KafkaConsumer.java:632) [kafka-clients-2.1.0.jar:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[?:?]
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:?]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:490) ~[?:?]
+	at org.jruby.javasupport.JavaConstructor.newInstanceDirect(JavaConstructor.java:279) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.invokers.ConstructorInvoker.call(ConstructorInvoker.java:87) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.invokers.ConstructorInvoker.call(ConstructorInvoker.java:176) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:178) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.proxies.ConcreteJavaProxy$InitializeMethod.call(ConcreteJavaProxy.java:56) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:178) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.newInstance(RubyClass.java:894) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass$INVOKER$i$newInstance.call(RubyClass$INVOKER$i$newInstance.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroOrOneOrNBlock.call(JavaMethod.java:349) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.java.proxies.ConcreteJavaProxy$NewMethod.call(ConcreteJavaProxy.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:168) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:339) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:170) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.Interpreter.INTERPRET_BLOCK(Interpreter.java:128) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.MixedModeIRBlockBody.commonYieldPath(MixedModeIRBlockBody.java:151) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.IRBlockBody.doYield(IRBlockBody.java:187) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.BlockBody.yield(BlockBody.java:116) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.yield(Block.java:165) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable$23.call(RubyEnumerable.java:849) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.CallBlock19.doYield(CallBlock19.java:98) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.BlockBody.yield(BlockBody.java:116) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.yield(Block.java:165) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyFixnum.times(RubyFixnum.java:284) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyInteger$INVOKER$i$0$0$times.call(RubyInteger$INVOKER$i$0$0$times.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroBlock.call(JavaMethod.java:555) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.finvoke(RubyClass.java:505) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Helpers.invoke(Helpers.java:433) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyBasicObject.callMethod(RubyBasicObject.java:393) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerator.each(RubyEnumerator.java:327) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerator$INVOKER$i$each.call(RubyEnumerator$INVOKER$i$each.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyClass.finvoke(RubyClass.java:493) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Helpers.invoke(Helpers.java:421) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.callEach19(RubyEnumerable.java:118) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.collectCommon(RubyEnumerable.java:841) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable.map(RubyEnumerable.java:833) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyEnumerable$INVOKER$s$0$0$map.call(RubyEnumerable$INVOKER$s$0$0$map.gen) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroBlock.call(JavaMethod.java:555) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:80) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.callIter(CachingCallSite.java:89) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.instructions.CallBase.interpret(CallBase.java:537) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:362) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:339) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:170) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.interpret(InterpreterEngine.java:86) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.INTERPRET_METHOD(MixedModeIRMethod.java:171) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.MixedModeIRMethod.call(MixedModeIRMethod.java:158) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:200) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:168) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.InterpreterEngine.processCall(InterpreterEngine.java:317) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.StartupInterpreterEngine.interpret(StartupInterpreterEngine.java:72) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.ir.interpreter.Interpreter.INTERPRET_BLOCK(Interpreter.java:128) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.MixedModeIRBlockBody.commonYieldPath(MixedModeIRBlockBody.java:151) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.IRBlockBody.call(IRBlockBody.java:79) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.runtime.Block.call(Block.java:124) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:295) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:274) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.RubyProc.call(RubyProc.java:270) [jruby-complete-9.2.7.0.jar:?]
+	at org.jruby.internal.runtime.RubyRunnable.run(RubyRunnable.java:105) [jruby-complete-9.2.7.0.jar:?]
+	at java.lang.Thread.run(Thread.java:834) [?:?]
+[INFO ] 2019-11-07 19:58:12.000 [Ruby-0-Thread-28: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] Metadata - Cluster ID: _3CuMMFeT4uSkL8oiwlV8g
+[INFO ] 2019-11-07 19:58:12.000 [Ruby-0-Thread-27: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] Metadata - Cluster ID: _3CuMMFeT4uSkL8oiwlV8g
+[INFO ] 2019-11-07 19:58:12.000 [Ruby-0-Thread-26: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] Metadata - Cluster ID: _3CuMMFeT4uSkL8oiwlV8g
+[INFO ] 2019-11-07 19:58:12.002 [Ruby-0-Thread-29: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] Metadata - Cluster ID: _3CuMMFeT4uSkL8oiwlV8g
+[INFO ] 2019-11-07 19:58:12.003 [Ruby-0-Thread-25: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] Metadata - Cluster ID: _3CuMMFeT4uSkL8oiwlV8g
+[INFO ] 2019-11-07 19:58:12.073 [Ruby-0-Thread-25: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Discovered group coordinator kafka-1.broker.kafka.svc.cluster.local:9092 (id: 2147483646 rack: null)
+[INFO ] 2019-11-07 19:58:12.086 [Ruby-0-Thread-29: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Discovered group coordinator kafka-1.broker.kafka.svc.cluster.local:9092 (id: 2147483646 rack: null)
+[INFO ] 2019-11-07 19:58:12.094 [Ruby-0-Thread-27: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Discovered group coordinator kafka-1.broker.kafka.svc.cluster.local:9092 (id: 2147483646 rack: null)
+[INFO ] 2019-11-07 19:58:12.078 [Ruby-0-Thread-28: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Discovered group coordinator kafka-1.broker.kafka.svc.cluster.local:9092 (id: 2147483646 rack: null)
+[INFO ] 2019-11-07 19:58:12.143 [Ruby-0-Thread-26: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Discovered group coordinator kafka-1.broker.kafka.svc.cluster.local:9092 (id: 2147483646 rack: null)
+[INFO ] 2019-11-07 19:58:12.263 [Ruby-0-Thread-28: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] ConsumerCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Revoking previously assigned partitions []
+[INFO ] 2019-11-07 19:58:12.263 [Ruby-0-Thread-28: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] (Re-)joining group
+[INFO ] 2019-11-07 19:58:12.297 [Ruby-0-Thread-26: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] ConsumerCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Revoking previously assigned partitions []
+[INFO ] 2019-11-07 19:58:12.298 [Ruby-0-Thread-26: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] (Re-)joining group
+[INFO ] 2019-11-07 19:58:12.309 [Ruby-0-Thread-29: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] ConsumerCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Revoking previously assigned partitions []
+[INFO ] 2019-11-07 19:58:12.309 [Ruby-0-Thread-29: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] (Re-)joining group
+[INFO ] 2019-11-07 19:58:12.321 [Ruby-0-Thread-27: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] ConsumerCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Revoking previously assigned partitions []
+[INFO ] 2019-11-07 19:58:12.322 [Ruby-0-Thread-27: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] (Re-)joining group
+[INFO ] 2019-11-07 19:58:12.340 [Ruby-0-Thread-25: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] ConsumerCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Revoking previously assigned partitions []
+[INFO ] 2019-11-07 19:58:12.341 [Ruby-0-Thread-25: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] (Re-)joining group
+[INFO ] 2019-11-07 19:58:15.343 [Ruby-0-Thread-26: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Successfully joined group with generation 810
+[INFO ] 2019-11-07 19:58:15.343 [Ruby-0-Thread-28: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Successfully joined group with generation 810
+[INFO ] 2019-11-07 19:58:15.344 [Ruby-0-Thread-25: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Successfully joined group with generation 810
+[INFO ] 2019-11-07 19:58:15.354 [Ruby-0-Thread-27: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Successfully joined group with generation 810
+[INFO ] 2019-11-07 19:58:15.362 [Ruby-0-Thread-26: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] ConsumerCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Setting newly assigned partitions [TPC-RAW-ZABBIX-HOSTS-0]
+[INFO ] 2019-11-07 19:58:15.363 [Ruby-0-Thread-27: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] ConsumerCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Setting newly assigned partitions [RAW-METRICBEAT-K8S-0]
+[INFO ] 2019-11-07 19:58:15.363 [Ruby-0-Thread-29: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] AbstractCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Successfully joined group with generation 810
+[INFO ] 2019-11-07 19:58:15.366 [Ruby-0-Thread-29: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] ConsumerCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Setting newly assigned partitions [TPC-RAW-ZABBIX-ALERT-0]
+[INFO ] 2019-11-07 19:58:15.367 [Ruby-0-Thread-25: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] ConsumerCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Setting newly assigned partitions [RAW-FILEBEAT-K8S-0]
+[INFO ] 2019-11-07 19:58:15.372 [Ruby-0-Thread-28: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] ConsumerCoordinator - [Consumer clientId=logstash-0, groupId=logstash] Setting newly assigned partitions [TPC-RAW-ZABBIX-TRIGGERS-0]
+[INFO ] 2019-11-07 19:58:15.408 [Ruby-0-Thread-26: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] Fetcher - [Consumer clientId=logstash-0, groupId=logstash] Resetting offset for partition TPC-RAW-ZABBIX-HOSTS-0 to offset 269.
+[INFO ] 2019-11-07 19:58:15.434 [Ruby-0-Thread-27: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] Fetcher - [Consumer clientId=logstash-0, groupId=logstash] Resetting offset for partition RAW-METRICBEAT-K8S-0 to offset 1578.
+[INFO ] 2019-11-07 19:58:15.510 [Ruby-0-Thread-28: /usr/share/logstash/vendor/bundle/jruby/2.5.0/gems/logstash-input-kafka-9.0.1/lib/logstash/inputs/kafka.rb:244] Fetcher - [Consumer clientId=logstash-0, groupId=logstash] Resetting offset for partition TPC-RAW-ZABBIX-TRIGGERS-0 to offset 0.
+

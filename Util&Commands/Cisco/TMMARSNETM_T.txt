@@ -1,0 +1,587 @@
+
+SCP
+SERVICE CENTRE PRFILE
+-----------------------------------------------------
+(61)ESME / LA CONFIGURATION 52
+-----------------------------------------------------
+ESME / LA Name : TMMARSNETM_T
+Large Account ID : 1025
+System ID: TMMARSNE
+System Type: TM
+Binding Type: Transmitter
+Enabled : YES
+Kill ESME / LA on Change : YES
+Make CDE Entry : NO
+Auto-Provision : YES
+ESME / LA Interface Password : '%{Cni"g
+SMSC Interface Password : '%{Cni"g
+MSISDN : 1.1.trusted
+SA Validation Expression: ..
+SA Validation enabled on: MAR
+SmProtocol : SMPP v3.4
+LA IP address : 
+MAR Seq ID Stack Size : 4096
+Seq ID Timeout : 30
+Transmission Control Protocol : TCP
+Non Gateway Esme
+Basic Billing : Not Enabled
+MTThrottling Period : 0
+MOThrottling Period : 0
+MTThrottling Limit : 0
+MOThrottling Limit : 0
+Bind Throttling Attempts : 0
+Bind Throttling Time Period:0
+Bind Throttling Back Off Time Period:0
+Throttling Type : dynamic
+Optional SMPP3.4 Parameters : NO
+Routing Type : DEFAULT
+Global Message ID's : NO
+Notifications enabled : NO
+Alarms enabled : YES
+MAR ID String : MAR_MDM
+Buffer Pool Size : 
+Deliver Timeout : 30
+Query Timeout : 30
+MAR Idle Timeout : 30
+SMSC Idle Timeout : 30
+Max Sessions : 10
+Min Sessions : 0
+Class of Service : 
+Max Multi Recipients : 
+Address Translation File : 
+Environment File : 
+Max Submit : 
+Max Query : 
+Max Replace : 
+Max Cancel : 
+Max Transaction : 
+Default Validity Period : 
+Max Validity Period : 
+Max Schedule Period : 
+Retry Profile : 
+Reset Priority Messages : 
+Force Msg Priority : 
+Max Message Length : 
+Message Billing Mode : 
+Disable Distribution Lists : 
+Message Truncation : 
+Ignore Source Addr : YES
+Customer Validation : 
+Submit Replace : 
+Closed User Group : 
+Protocol ID (PID) : 
+Statistics Class : 
+Interface Stats Logging : 
+Data Coding Scheme : 
+User Group Restriction : 
+Round Robin : 
+Transaction Counters : 
+Messages Per Ingres Page : 
+Socket Size : 
+Min Call Duration : 
+SMPP Mux Force ID Switch : 
+Aim Group name : 
+Post Translation Filtering File : 
+Skip IP check: No	
+Prepaid Check Switch :
+Prepaid Charge Indicator :
+Prepaid Triggers Enabled :
+Prepaid Credit Warning :
+Prepaid Unavailable Warning :
+Esme Switch : 
+Esme Alert : 
+Address Validation Length : 
+Message Mode : 
+Out Bind Enabled : 0
+Esme Outbind Address : 
+Outbind Port : 0
+Outbind Password : 
+Outbind bypass : 0
+V5.x_AddressType : SMPP_TCPIP
+V5.x_AlphaLA : 
+V5.x_BufferedNotif : 
+V5.x_CheckConnectAddress : 
+V5.x_ConnPort : 
+V5.x_Consolidation : 
+V5.x_DeliverNotif : 
+V5.x_HeartbeatTime : 
+V5.x_HideMoCli : 
+V5.x_IgnoreReplyPath : 
+V5.x_IdUsergroup : 
+V5.x_IntervalThroughput : 
+V5.x_LAInfo : 
+V5.x_LANotifSet : 
+V5.x_LevelThroughput : 
+V5.x_MaintOriginatorLA : 
+V5.x_MaintRecipientLA : 
+V5.x_MaxAddressOriginator : 
+V5.x_MaxAddressRecipient : 
+V5.x_MNPOtherOperAllowed : 
+V5.x_MOPPCharging : 
+V5.x_MTPPCharging : 
+V5.x_NondeliverNotif : 
+V5.x_NotifInclMsg : 
+V5.x_NumberHeartbeats : 
+V5.x_OriginatorList : 
+V5.x_PriorityType : 
+V5.x_ProvPassword : 
+V5.x_RecipientList : 
+V5.x_ReturnAckData : 
+V5.x_ResponseTimeout : 
+V5.x_RetryProf : 
+V5.x_SetPassword : 
+V5.x_SingleShot : 
+V5.x_SMSGateway : 
+V5.x_UMFAllowed : 
+V5.x_UMFDomainName : 
+V5.x_INPUT_WINDOW : 
+V5.x_OUTPUT_WINDOW: 
+V5.x_MULTIPLE_ADDRESSES: 
+V5.x_MAXSESSIONS: 
+V5.x_SCALE_DOWN_ACTIVATION_TIME: 
+V5.x_RARR_ALLOWED: 
+V5.x_SMPP_TRIGGER_PROFILE: 
+V5.x_MESSAGE_LIMIT_IN: 
+V5.x_MESSAGE_LIMIT_IN_ACTION: 
+V5.x_PROVIDE_MSC_ADDRESS: 
+V5.x_ADDRESS_TRANSLATION_PROFILE: 
+V5.x_DMR_TRASHBIN: 
+Mar Address : 
+SMSC ALLOCATION : Distributed Messaging
+Distributed Throttling : 
+Designated Throttling : 
+Backwards Compatible : 
+EsmeRecLoopSwt : 
+
+SMSC Count : 8
+--------------------------------------
+SMSC 1 : TMRCE1(46) (Port 7100 Weight 100)
+SMSC 1 Aim Type [2700 Only] : SIMPLEX
+SMSC 1 Mux ID [2700 Only] : 0
+Source Validation Expression: 1.1.trusted
+SMSC not using MUX
+DefRoute Count : 0
+--------------------------------------
+SMSC 2 : TMRCE2(47) (Port 7100 Weight 100)
+SMSC 2 Aim Type [2700 Only] : SIMPLEX
+SMSC 2 Mux ID [2700 Only] : 0
+Source Validation Expression: 1.1.trusted
+SMSC not using MUX
+DefRoute Count : 0
+--------------------------------------
+SMSC 3 : TMRJO1(48) (Port 7100 Weight 100)
+SMSC 3 Aim Type [2700 Only] : SIMPLEX
+SMSC 3 Mux ID [2700 Only] : 0
+Source Validation Expression: 1.1.trusted
+SMSC not using MUX
+DefRoute Count : 0
+--------------------------------------
+SMSC 4 : TMRJO2(49) (Port 7100 Weight 100)
+SMSC 4 Aim Type [2700 Only] : SIMPLEX
+SMSC 4 Mux ID [2700 Only] : 0
+Source Validation Expression: 1.1.trusted
+SMSC not using MUX
+DefRoute Count : 0
+--------------------------------------
+SMSC 5 : TMCTA2(51) (Port 7100 Weight 100)
+SMSC 5 Aim Type [2700 Only] : SIMPLEX
+SMSC 5 Mux ID [2700 Only] : 0
+Source Validation Expression: 1.1.trusted
+SMSC not using MUX
+DefRoute Count : 0
+--------------------------------------
+SMSC 6 : TMCTA1(50) (Port 7100 Weight 100)
+SMSC 6 Aim Type [2700 Only] : SIMPLEX
+SMSC 6 Mux ID [2700 Only] : 0
+Source Validation Expression: 1.1.trusted
+SMSC not using MUX
+DefRoute Count : 0
+--------------------------------------
+SMSC 7 : TMSP21(52) (Port 7100 Weight 100)
+SMSC 7 Aim Type [2700 Only] : SIMPLEX
+SMSC 7 Mux ID [2700 Only] : 0
+Source Validation Expression: 1.1.trusted
+SMSC not using MUX
+DefRoute Count : 0
+--------------------------------------
+SMSC 8 : TMSP22(60) (Port 7100 Weight 100)
+SMSC 8 Aim Type [2700 Only] : SIMPLEX
+SMSC 8 Mux ID [2700 Only] : 0
+Source Validation Expression: 1.1.trusted
+SMSC not using MUX
+DefRoute Count : 0
+--------------------------------------
+-----------------------------------------------------
+
+
+-----------------------------------------------------
+(2)SMSC CONFIGURATION 1
+-----------------------------------------------------
+SMSC Name : SRJO0201
+Target ID : 1
+Enabled : YES
+IP Addr/Domain Name : 10.221.19.33
+SMSC V4.x/5.x
+Weighting Value : 50
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(3)SMSC CONFIGURATION 2
+-----------------------------------------------------
+SMSC Name : SSNE01
+Target ID : 2
+Enabled : YES
+IP Addr/Domain Name : 10.192.14.225
+SMSC V4.x/5.x
+Weighting Value : 50
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(7)SMSC CONFIGURATION 3
+-----------------------------------------------------
+SMSC Name : SRJO0202
+Target ID : 3
+Enabled : YES
+IP Addr/Domain Name : 10.221.19.34
+SMSC V4.x/5.x
+Weighting Value : 50
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(12)SMSC CONFIGURATION 4
+-----------------------------------------------------
+SMSC Name : SSNE02
+Target ID : 4
+Enabled : YES
+IP Addr/Domain Name : 10.192.14.226
+SMSC V4.x/5.x
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(17)SMSC CONFIGURATION 5
+-----------------------------------------------------
+SMSC Name : VIVOSP01
+Target ID : 5
+Enabled : YES
+IP Addr/Domain Name : 10.223.248.142
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(18)SMSC CONFIGURATION 6
+-----------------------------------------------------
+SMSC Name : VIVORJ01
+Target ID : 6
+Enabled : YES
+IP Addr/Domain Name : 10.223.248.143
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(21)SMSC CONFIGURATION 7
+-----------------------------------------------------
+SMSC Name : TMM-RCE01
+Target ID : 7
+Enabled : YES
+IP Addr/Domain Name : 10.212.16.5
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(22)SMSC CONFIGURATION 8
+-----------------------------------------------------
+SMSC Name : TMM-RCE02
+Target ID : 8
+Enabled : YES
+IP Addr/Domain Name : 10.221.16.7
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(25)SMSC CONFIGURATION 9
+-----------------------------------------------------
+SMSC Name : TMM-RCE0101
+Target ID : 9
+Enabled : YES
+IP Addr/Domain Name : 10.212.16.5
+SMSC V4.x/5.x
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(46)SMSC CONFIGURATION 10
+-----------------------------------------------------
+SMSC Name : TMRCE1
+Target ID : 37
+Enabled : YES
+IP Addr/Domain Name : 10.212.16.5
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(47)SMSC CONFIGURATION 11
+-----------------------------------------------------
+SMSC Name : TMRCE2
+Target ID : 38
+Enabled : YES
+IP Addr/Domain Name : 10.212.16.7
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(48)SMSC CONFIGURATION 12
+-----------------------------------------------------
+SMSC Name : TMRJO1
+Target ID : 48
+Enabled : YES
+IP Addr/Domain Name : 10.221.4.5
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(49)SMSC CONFIGURATION 13
+-----------------------------------------------------
+SMSC Name : TMRJO2
+Target ID : 49
+Enabled : YES
+IP Addr/Domain Name : 10.221.4.7
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(51)SMSC CONFIGURATION 14
+-----------------------------------------------------
+SMSC Name : TMCTA2
+Target ID : 60
+Enabled : YES
+IP Addr/Domain Name : 10.208.4.5
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(50)SMSC CONFIGURATION 15
+-----------------------------------------------------
+SMSC Name : TMCTA1
+Target ID : 61
+Enabled : YES
+IP Addr/Domain Name : 10.208.4.7
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(52)SMSC CONFIGURATION 16
+-----------------------------------------------------
+SMSC Name : TMSP21
+Target ID : 64
+Enabled : YES
+IP Addr/Domain Name : 10.216.19.197
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+
+
+-----------------------------------------------------
+(60)SMSC CONFIGURATION 17
+-----------------------------------------------------
+SMSC Name : TMSP22
+Target ID : 65
+Enabled : YES
+IP Addr/Domain Name : 10.216.19.199
+Telepath Version : Other/Unknown
+Weighting Value : 100
+Address Translation Dir : /apps/telepath/config/addr_trans
+FTP Account Name : 
+SMPP Timeout : 300
+Virtual SMSC : NO
+Port Mirroring Enabled : NO
+Account Password : Unconfigured
+SS7 Fault Detection : NO
+-----------------------------------------------------
+
+
+-----------------------------------------------------
+(1)ROUTER NODE CONFIGURATION 1
+-----------------------------------------------------
+Router Name : DBRBT21
+IP Addr/Domain Name : 10.192.13.10
+X25 Network Address : 
+Enabled : YES
+Prevent Binds : NO
+Max Binds : 1000
+-----------------------------------------------------
+
+
+-----------------------------------------------------
+(5)ROUTER NODE CONFIGURATION 2
+-----------------------------------------------------
+Router Name : DBRBT22
+IP Addr/Domain Name : 10.192.13.11
+X25 Network Address : 
+Enabled : YES
+Prevent Binds : NO
+Max Binds : 1000
+-----------------------------------------------------
+
+
+-----------------------------------------------------
+(57)GROUP CONFIGURATION 1
+-----------------------------------------------------
+Group Id : 55
+Decription : SMSCs
+Primary SMSC ID : 0
+Assigned SMSC ID's (4 entries): 
+     2
+     7
+     3
+     12
+
+
+-----------------------------------------------------
+(58)GROUP CONFIGURATION 2
+-----------------------------------------------------
+Group Id : 56
+Decription : SMSC-RIO
+Primary SMSC ID : 0
+Assigned SMSC ID's (2 entries): 
+     2
+     7
+
+
+-----------------------------------------------------
+(59)GROUP CONFIGURATION 3
+-----------------------------------------------------
+Group Id : 57
+Decription : SMSC-SP
+Primary SMSC ID : 0
+Assigned SMSC ID's (2 entries): 
+     3
+     12
+-----------------------------------------------------
+
+
+-----------------------------------------------------
+ROUTER PROVISIONED ADDRESS TRANSLATION FILES
+-----------------------------------------------------
+[NONE]

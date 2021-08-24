@@ -1,0 +1,55 @@
+
+
+Luiz Neto  10h50
+aws ecr get-login --no-include-email --region sa-east-1
+10h51
+$(aws ecr get-login --no-include-email --region sa-east-1)
+
+Luiz Neto  11h19
+mano, o chamado do autoec-api tu tá tocando ainda?
+
+Jefferson Muniz de Moura  11h19
+to
+
+Luiz Neto  11h19
+eu vi que tá dando uns erros, quer que eu veja o que é?
+
+Jefferson Muniz de Moura  11h19
+to nisso agora..
+11h20
+não por enquanto...
+
+Luiz Neto  11h20
+ahh beleza
+11h20
+ok
+
+Jefferson Muniz de Moura  11h20
+acho que vou conseguir zerar
+
+Luiz Neto  11h21
+boa, quando terminar, zera os builds, por favor
+11h21
+com esse comando aqui
+11h21
+def jobName = "EC/est-api-autoec/develop"
+def job = Jenkins.getInstance().getItemByFullName(jobName, Job.class)
+job.getBuilds().each { it.delete() }
+job.nextBuildNumber = 1
+job.save()
+def jobName = "EC/est-api-autoec/staging"
+def job = Jenkins.getInstance().getItemByFullName(jobName, Job.class)
+job.getBuilds().each { it.delete() }
+job.nextBuildNumber = 1
+job.save()
+def jobName = "EC/est-api-autoec/master"
+def job = Jenkins.getInstance().getItemByFullName(jobName, Job.class)
+job.getBuilds().each { it.delete() }
+job.nextBuildNumber = 1
+job.save()
+11h21
+https://jenkins-qa.itpreprodb.com/script
+11h21
+executa cada um desse nesse link que eu mandei
+11h22
+só pra não começar com build em vermelho

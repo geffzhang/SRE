@@ -1,0 +1,6 @@
+/var/cma/staging/HEAD/sysconfig/oeccc11/etc/opt/ngp/ngp-node.ini
+cma.ngp-node.ini
+
+/var/cma/staging/__CMA_FS/oeccc11/etc/opt/ngp/ngp-node.ini
+cmafs.ngp-node.ini
+

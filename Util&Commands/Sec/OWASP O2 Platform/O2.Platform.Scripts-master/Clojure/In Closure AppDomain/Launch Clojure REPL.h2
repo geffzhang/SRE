@@ -1,0 +1,96 @@
+//var topPanel = panel.clear().add_Panel();   
+var topPanel = "Util - Clojure REPL (Lisp)".popupWindow(550,300);
+topPanel.set_Form_Icon("Clojure-icon.png".local().bitmap().asIcon());
+
+CheckBox autoCompile = null;
+ 
+var replGui = topPanel.add_REPL_Gui();
+replGui.Code_Panel.splitContainer().fixedPanel2().splitterDistance(400);
+var codeEditor = replGui.Code_Panel.add_SourceCodeViewer();
+codeEditor.textEditor().showInvalidLines(false);
+ 
+
+var tooStrip = codeEditor.insert_Above_ToolStrip();
+
+var sampleClojureClrCode =  " var code = \"(+ 22 20)\";\n return Compiler.load(new StringReader(code), \".\");\n\n//using clojure.lang\n//O2Ref:Clojure.dll\n//using System.IO";
+
+var samplesMenu = topPanel.mainMenu().clear()
+						  .add_Menu("Samples (start learning LISP here)");
+topPanel.mainMenu()
+		.add_Menu("C# REPL")
+			.add_MenuItem("REPL Clojure-clr engine", ()=> "Clojure-cle engine".popupWindow().add_Script().set_Code(sampleClojureClrCode))			
+			.add_MenuItem("REPL this Form", ()=> topPanel.script_Me())
+			.add_MenuItem("REPL Script that created this GUI", ()=>open.scriptEditor("Launch Clojure REPL.h2".local()));
+
+topPanel.mainMenu().add_Menu("Resources (WebSites)")
+						.add_MenuItem("clojure.org Home Page"								, ()=> "http://clojure.org".startProcess())					
+						.add_MenuItem("tryclj - Online Clojure REPL (with tutorial)"	 	, ()=> "http://tryclj.com/".startProcess())
+						.add_MenuItem("himera - Online Clojure REPL (with 'at a glance')"	, ()=> "http://himera.herokuapp.com/index.html".startProcess())
+						.add_MenuItem("Clojure-Clr (github)"								, ()=> "https://github.com/clojure/clojure-clr".startProcess());						
+
+Action<string, string> add_Example  =
+	(title, code)=>{	
+						samplesMenu.add_MenuItem(title, ()=> codeEditor.set_Text(code));
+					};
+					
+
+
+//Loadup clojure 
+RT.var("clojure.core", "require");
+Var.pushThreadBindings(RT.map(new object[]
+		{
+			Compiler.CompilePathVar, ".",
+			RT.WarnOnReflectionVar, false,
+			RT.UncheckedMathVar, false,
+			Compiler.CompilerOptionsVar, null
+		}));
+		
+//setup REPL GUI
+
+Action execute = 
+	()=>{ 
+			var code = codeEditor.get_Text();
+			
+			try
+			{				
+				var result = Compiler.load(new StringReader(code), ".");				
+				replGui.showOutput(result); 			
+				replGui.Output_View_RichTextBox.green();				
+			}
+			catch(Exception ex)
+			{
+				replGui.showOutput(ex.Message.lines().first()); 
+				replGui.Output_View_RichTextBox.pink();
+			}			
+		}; 
+		
+//replGui.On_ExecuteCode = execute;  
+
+tooStrip.add_Play("Execute", execute)
+		.add_CheckBox("Auto Execute",ref autoCompile); 
+
+codeEditor.onTextChange((text)=> { if (autoCompile.value()) execute();});
+autoCompile.check();
+
+codeEditor.set_Text("(+ 20 22)");
+
+
+add_Example("tutorial"				, "(str \"These examples are the tutorial\" \"\\n\" \"code samples from\" \"\\n\" \"http://tryclj.com/\")");
+add_Example("arithmetic"			, "(+ 3 3)");
+add_Example("division"				, "(/ 10 3)");
+//add_Example("division #2"			, "(/ 10 3.0)");
+add_Example("multiple sums" 		, "(+ 1 2 3 4 5 6)");
+add_Example("our first function"	, "(defn square [x] (* x x)) \n (square 10)");
+add_Example("an anonymous function"	, "(fn [x] (* x x)) \n((fn [x] (* x x)) 20)");
+add_Example("named function" 		, "(def square (fn [x] (* x x)))");
+add_Example("a map"					, "(map inc [1 2 3 4])");
+
+
+//using System.IO
+//using Clojure
+//using clojure.lang
+
+//O2Ref:Clojure.Main.exe
+//O2Ref:Clojure.dll
+
+//O2Tag:SkipGlobalCompilation

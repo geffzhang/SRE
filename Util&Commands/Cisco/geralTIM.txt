@@ -1,0 +1,113 @@
+ACESSO MAR
+
+ip add
+10.192.13.42
+
+user e senha
+root
+
+
+DBRBT21> /apps/mar/gen/bin/
+
+
+aagp
+
+admin
+aagp123
+
+
+
+
+
+
+
+5 no 7 4 no 8
+
+
+interface GigabitEthernet1/0/5
+ description RT02-MgtOa
+switchport mode trunk
+
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 87
+
+ switchport trunk allowed vlan 87
+ 
+!
+
+
+0023 Mar 29 19:19:09.457 UTC: %SW_MATM-4-MACFLAP_NOTIF: Host 0000.5e00.011e in vlan 13 is flapping between port Gi1/0/21 and port Gi2/0/21interface GigabitEthernet1/0/5
+ description RT02-MgtOa
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 12
+ switchport trunk allowed vlan 1,7,12,1002-1005
+ switchport mode trunk
+
+
+interface Vlan91
+ description External Vlan with Tim Network
+ ip address 10.192.14.188 255.255.255.224
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.192.14.185
+ip http server
+ip http secure-server
+!
+
+interface GigabitEthernet1/0/6
+!
+interface GigabitEthernet1/0/7
+ switchport access vlan 12
+ switchport trunk native vlan 12
+ switchport mode access
+ speed 100
+ duplex full
+!
+interface GigabitEthernet1/0/8
+!
+interface GigabitEthernet1/0/9
+ switchport access vlan 7
+ switchport trunk native vlan 7
+ switchport mode access
+ speed 100
+ duplex full
+!
+interface GigabitEthernet1/0/10
+!
+interface GigabitEthernet1/0/11
+!
+interface GigabitEthernet1/0/12
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 12
+ switchport trunk native vlan 12
+ switchport mode access
+ speed 100
+ duplex full
+!
+interface GigabitEthernet1/0/14
+!
+interface GigabitEthernet1/0/15
+!
+interface GigabitEthernet1/0/16
+!
+interface GigabitEthernet1/0/17
+!
+interface GigabitEthernet1/0/18
+!
+interface GigabitEthernet1/0/19
+!
+interface GigabitEthernet1/0/20
+!
+interface GigabitEthernet1/0/21
+ description RT02-P7
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 13
+ switchport trunk allowed vlan 4,13,1002-1005
+ switchport mode trunk
+ speed 100
+ duplex full
+!
+interface GigabitEthernet1/0/22
+!
+interface GigabitEthernet1/0/23

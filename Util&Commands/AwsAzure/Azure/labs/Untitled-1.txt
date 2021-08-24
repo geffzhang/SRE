@@ -1,0 +1,24 @@
+$vm = Get-AzVM -ResourceGroupName westus `
+    -Name vhd1-image-20200829162832
+
+$image = New-AzImageConfig -SourceVirtualMachineId `
+    $vm.ID -Location westus
+
+New-AzImage -Image $image `
+    -ImageName vhd1-image-20200829162832 `
+    -ResourceGroupName westus
+
+
+
+
+
+
+
+
+
+
+New-AzVm `
+    -ResourceGroupName westus `
+    -Name fromvhd `
+    -ImageName vhd1-image-20200829162832`
+    -Location westus `

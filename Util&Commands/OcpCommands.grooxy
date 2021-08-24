@@ -1,0 +1,18 @@
+  1 oc login -u jmoura.ext
+   2 oc get cronjob
+   3 oc delete cronjob/post-gerarpedido
+   4 oc describe rolebinding.rbac -n p1m-repomed-hml
+   5 oc get cronjob
+   6 oc policy add-role-to-user edit system:serviceaccount:cicd-tools:jenkins -n ...
+   7 oc policy add-role-to-user edit system:serviceaccount:cicd-tools:jenkins -n ...
+   8 oc get cronjob
+   9 oc get cronjob -n p1m-repomed-hml
+  10 oc get cronjob -n p1m-repomed-prod
+  11 oc project p1m-repomed-prod
+  12 oc project p1m-repomed-prd
+  13 oc policy add-role-to-user edit system:serviceaccount:cicd-tools:jenkins -n ...
+  14 oc delete cronjob/post-gerarpedido
+  15 oc delete cronjob *
+  16 oc delete cronjob all
+  17 oc delete cronjob
+  18 oc delete cronjob --all

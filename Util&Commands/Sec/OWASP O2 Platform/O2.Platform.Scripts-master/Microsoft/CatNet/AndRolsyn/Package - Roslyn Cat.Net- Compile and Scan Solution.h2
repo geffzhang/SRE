@@ -1,0 +1,43 @@
+//Package - Roslyn Cat.Net- Compile and Scan Solution.h2
+ 
+//var topPanel = "{name}".popupWindow(700,400);
+var scriptFile = "Util - Roslyn Cat.Net- Compile and Scan Solution.h2"; 
+//var scriptFile = "Util - LogViewer.h2"; 
+var pathToAssemblies = ""; 
+var projectFile = "";
+var compiledScript = ""; 
+
+Action<List<string>> beforeAddingReferences =  
+	(referencesToAdd)=> {   
+							foreach(var file in referencesToAdd.toList())
+								if(file.fileName_Is("O2_External_SharpDevelop.dll","Ionic.Zip.dll", "Mono.Cecil.dll","QuickGraph.dll",
+													"Microsoft.ACESec.CATNet.Core.dll" //,"WeifenLuo.WinFormsUI.Docking.dll"
+								
+													//"Roslyn.Compilers.dll","Roslyn.Services.dll","Roslyn.Utilities.dll",
+													))
+								{
+									"[in beforeAddingReferences] removing reference: {0}".debug(file);
+									referencesToAdd.remove(file);
+								}
+							referencesToAdd.add("Roslyn.Services.CSharp.dll".assembly_Location());
+							"[in beforeAddingReferences] assembly references: {0}".debug(referencesToAdd.asString());
+					 	};
+Action<List<string>> beforeEmbedingFiles = 
+	(filesToEmbed)=>{ 						
+						"[in beforeEmbedingFiles] assembly references: {0}".debug(filesToEmbed.asString());								
+					};					
+
+var createdExe = scriptFile.package_Script(ref compiledScript, ref pathToAssemblies, ref projectFile, beforeAddingReferences, beforeEmbedingFiles);
+
+"scriptFile: {0}".info(scriptFile);
+"pathToAssemblies: {0}".info(pathToAssemblies);
+"projectFile: {0}".info(projectFile);
+"compiledScript: {0}".info(compiledScript);
+"createdExe: {0}".info(createdExe);
+var testFolder = "_test_Packages".tempDir(false);
+createdExe.file_Copy(testFolder);
+testFolder.startProcess(); 
+
+//O2File:API_MicrosoftBuild.cs
+
+//using O2.XRules.Database.APIs

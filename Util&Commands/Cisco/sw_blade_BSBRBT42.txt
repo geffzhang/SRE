@@ -1,0 +1,331 @@
+SWITCH ACESSO BLADE 2 => BSBRBT42#
+
+
+
+no service pad
+service tcp-keepalives-in
+service timestamps debug uptime
+service timestamps log datetime msec show-timezone
+service password-encryption
+service sequence-numbers
+service counters max age 5
+!
+hostname BSBRBT42
+!
+boot-start-marker
+boot-end-marker
+!
+logging console errors
+enable secret 5 $1$sayb$/XAFPIB.Jd/AAfox0z9Cd1
+enable password 7 06252206086B3A29
+!
+username admin secret 5 $1$pCg4$3lH3oQ8ySRfE09pzTSi/n/
+no aaa new-model
+clock timezone GMT-3 -3
+clock summer-time GMT-3 recurring
+system mtu routing 1500
+ip subnet-zero
+no ip domain-lookup
+ip domain-name tim.br
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3200408064
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3200408064
+ revocation-check none
+ rsakeypair TP-self-signed-3200408064
+!
+!
+crypto pki certificate chain TP-self-signed-3200408064
+ certificate self-signed 01
+  30820247 308201B0 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33323030 34303830 3634301E 170D3933 30333031 30303031 
+  31395A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 32303034 
+  30383036 3430819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100ED14 7C49EC8D E732DB17 7A91C8B0 4B25745E ABCEF95E 4C5E3C2D 9A61169C 
+  7C24DA08 B88B2D8D 5CCCD8F7 DC670294 A6DA2FCD 462FA2B7 B2874F00 2381DC31 
+  ACB58E98 5955C47D FAB0E6B7 1B306ED0 8D56E4AC 54EAD434 CE7BB15B 0000ED6B 
+  5F518AEF B41D6539 AB457AAE 33EFED75 A5A50FD0 B6526422 BCCB7265 B5A830B8 
+  AFE90203 010001A3 6F306D30 0F060355 1D130101 FF040530 030101FF 301A0603 
+  551D1104 13301182 0F425342 52425434 322E7469 6D2E6272 301F0603 551D2304 
+  18301680 1469EDE5 18CA59CB 55CB349F B88D5D7E D6C05261 B4301D06 03551D0E 
+  04160414 69EDE518 CA59CB55 CB349FB8 8D5D7ED6 C05261B4 300D0609 2A864886 
+  F70D0101 04050003 81810007 DF82EB63 71F25FDB 4DE20C76 EB2050F0 ADF303A7 
+  4D98DDF3 F80A27BA 2D8856C3 2E6300AF DCE16E35 041D6739 5BF4ABFE 8D38E68C 
+  447E9F83 1F8483D3 A0E684A9 B139139C 6D411BFE 569F1754 06FCE6BD B15D4094 
+  473FADEE C963FBC2 68E33758 87FF93C6 6AC25208 10B914DE 064C3BA3 DEDC6BF7 
+  7571F771 E5ACA4DD 916EE3
+  quit
+!
+!
+!
+!
+!
+!
+spanning-tree mode rapid-pvst
+no spanning-tree optimize bpdu transmission
+spanning-tree extend system-id
+spanning-tree backbonefast
+!
+vlan internal allocation policy ascending
+!
+!
+!
+interface FastEthernet0
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+ shutdown
+!
+interface GigabitEthernet0/1
+ switchport access vlan 7
+ speed 1000
+ spanning-tree portfast
+!         
+interface GigabitEthernet0/2
+ switchport access vlan 7
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/3
+ switchport access vlan 7
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/4
+ switchport access vlan 7
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/5
+ switchport access vlan 7
+ shutdown
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/6
+ switchport access vlan 12
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/7
+ switchport access vlan 12
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/8
+ switchport access vlan 12
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/9
+ switchport access vlan 7
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/10
+ switchport access vlan 7
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/11
+ switchport access vlan 7
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/12
+ switchport access vlan 7
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/13
+ switchport access vlan 12
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/14
+ switchport access vlan 12
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/15
+ switchport access vlan 12
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/16
+ switchport access vlan 7
+ speed 1000
+ spanning-tree portfast
+!
+interface GigabitEthernet0/17
+ description SBRBT41 
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 1,7,12,1002-1005
+ switchport mode trunk
+!
+interface GigabitEthernet0/18
+ switchport access vlan 7
+!
+interface GigabitEthernet0/19
+ switchport access vlan 7
+ media-type rj45
+ speed 100
+ duplex full
+!
+interface GigabitEthernet0/20
+ switchport access vlan 7
+ shutdown
+!
+interface GigabitEthernet0/21
+ switchport access vlan 7
+ shutdown
+!
+interface GigabitEthernet0/22
+ switchport access vlan 7
+ shutdown
+!
+interface GigabitEthernet0/23
+ description BLBRBT41
+ switchport access vlan 7
+ spanning-tree portfast
+!
+interface GigabitEthernet0/24
+ description BSBRBT42 Gi0/24
+ switchport trunk native vlan 7
+ switchport trunk allowed vlan 7,1002-1005
+ media-type internal
+!
+interface Vlan1
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan7
+ ip address 10.192.14.199 255.255.255.224
+ no ip route-cache
+ no ip mroute-cache
+!
+interface Vlan12
+ no ip address
+ no ip route-cache
+ no ip mroute-cache
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.192.14.222 254
+ip http server
+ip http secure-server
+!
+snmp-server view cutdown iso included
+snmp-server view cutdown at excluded
+snmp-server view cutdown snmpTargetMIB excluded
+snmp-server view cutdown snmpNotificationMIB excluded
+snmp-server view cutdown snmpVacmMIB excluded
+snmp-server view cutdown ip.21 excluded
+snmp-server view cutdown ip.22 excluded
+snmp-server view cutdown lflash excluded
+snmp-server view cutdown ciscoFlashMIB excluded
+snmp-server view cutdown ciscoCdpMIB excluded
+snmp-server view cutdownpublic system included
+snmp-server community private view cutdown RW
+snmp-server community public view cutdownpublic RO
+snmp-server queue-length 100
+snmp-server location TIM
+snmp-server contact Brazil
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps entity
+snmp-server enable traps vtp
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config
+!
+control-plane
+!
+banner motd ^C
+ ************************************
+ *                                  *
+ *   Acision - Messaging Solution   *
+ *                                  *
+ *               TIM                *
+ *              Brazil              *
+ *             BSBRBT42             *
+ *            BB2.0 3020            *
+ *     Cabinet 04, UBL-01-IConn1    *
+ *                                  *
+ ************************************
+
+--- Unauthorised access prohibited ---
+This is a closed-access system. If you do not have permission
+to access this system, then log off now. If you remain logged on
+you consent to monitoring of your actions.
+^C
+!
+line con 0
+ password 7 13263A354F3A301A
+ login local
+ transport preferred none
+ flowcontrol hardware
+line vty 0 4
+ exec-timeout 480 0
+ password 7 0625220608783D29
+ login local
+line vty 5 15
+ exec-timeout 480 0
+ password 7 0225297C4F303B11
+ login local
+!
+ntp clock-period 36028950
+ntp server 10.192.14.221 prefer
+end
+
+BSBRBT42#                sh vlan
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi0/24
+2    Signalling 1                     active    
+3    Signaling 2                      active    
+4    Messaging                        active    
+7    Operations,ILO                   active    Gi0/1, Gi0/2, Gi0/3, Gi0/4, Gi0/5, Gi0/9, Gi0/10, Gi0/11, Gi0/12, Gi0/16, Gi0/18
+                                                Gi0/19, Gi0/20, Gi0/21, Gi0/22, Gi0/23
+12   VLAN0012                         active    Gi0/6, Gi0/7, Gi0/8, Gi0/13, Gi0/14, Gi0/15
+13   VLAN0013                         active    
+91   VLAN0091                         active    
+1002 fddi-default                     act/unsup 
+1003 trcrf-default                    act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trbrf-default                    act/unsup 
+
+VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2
+---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------
+1    enet  100001     1500  -      -      -        -    -        0      0   
+2    enet  100002     1500  -      -      -        -    -        0      0   
+3    enet  100003     1500  -      -      -        -    -        0      0   
+4    enet  100004     1500  -      -      -        -    -        0      0   
+7    enet  100007     1500  -      -      -        -    -        0      0   
+12   enet  100012     1500  -      -      -        -    -        0      0   
+13   enet  100013     1500  -      -      -        -    -        0      0   
+91   enet  100091     1500  -      -      -        -    -        0      0   
+1002 fddi  101002     1500  -      -      -        -    -        0      0   
+1003 trcrf 101003     4472  1005   3276   -        -    srb      0      0   
+1004 fdnet 101004     1500  -      -      -        ieee -        0      0   
+1005 trbrf 101005     4472  -      -      15       ibm  -        0      0   
+
+
+VLAN AREHops STEHops Backup CRF
+---- ------- ------- ----------
+1003 7       7       off
+
+Remote SPAN VLANs
+------------------------------------------------------------------------------
+
+
+Primary Secondary Type              Ports
+------- --------- ----------------- ------------------------------------------
+
+BSBRBT42#
+BSBRBT42#
+BSBRBT42#

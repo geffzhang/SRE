@@ -1,0 +1,10 @@
+[
+  {
+    "Description": "windows10",
+    "Format": "vmdk",
+    "UserBucket": {
+        "S3Bucket": "s3migratebuck",
+        "S3Key": "VM-Import/MSEdge-Win10-VMware-disk1.vmdk"
+    }
+}]
+

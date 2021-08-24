@@ -1,0 +1,564 @@
+Encryption key storage requirements
+Azure Disk Encryption requires an Azure Key Vault to control and manage disk encryption keys and secrets. Your key vault and VMs must reside in the same Azure region and subscription.
+
+
+
+shell remoto do Windows
+
+Starting in WinRM 2.0, the default listener ports configured by Winrm quickconfig are
+ port 5985 for HTTP transport, and port 5986 for HTTPS
+
+
+Application Administrators can manage application credentials that allows them to impersonate the application. So, users assigned to this role can manage application credentials of only those applications that are either not assigned to any Azure AD roles or those assigned to following admin roles only:
+
+Application Administrator
+Application Developer
+Cloud Application Administrator
+Directory Readers
+If an application is assigned to any other role that are not mentioned above, then Application Administrator cannot manage credentials of that application.
+
+This role also grants the ability to consent to delegated permissions and appli
+
+
+
+DNS
+
+Azure DNS supports importing and exporting zone files by using the Azure command-line interface (CLI). Zone file import is not currently 
+supported via Azure PowerShell or the Azure portal.
+
+
+
+Activity logs
+Logs for 90 days
+
+Service End Points
+On StorageAc blade select firewall
+
+
+STORAGE
+
+LIVE migrations supported for locally or geo redundancy storage only
+Create Storage Account
+
+Access tier
+HOT - Preço de ACESSO mais barato, dadoquente disco de melhor performance, pois os dados já estão disponíveis
+Preço de armazenamento é mais caro
+COOL - Dados estão em área menos nobre então o ACESSO é mais caro
+
+Blob - O disco é mais barato, porém acessa o storage via API REST ou Web Portal
+Crio um contâiner e crio o Blob dentro, mais utilizado para ser consumido por aplicativo
+Antigo, o mais antigo de todos
+File Share - Ou FS ou SMB ou compartilhamento é possível montar no // do Windows através de Power Shell
+
+
+File Sync - Baixo o client no server local, azure file snync agent
+Crio um Resource Group
+Baixo a chave
+Storage Sync Services - Criar Storage Account e os discos eu crio Storage Sync
+Depois crio um grupo para replicar, no grupo digo que tenho um Storage Account o EndPoint na nuvem
+Resgitro a máquina, baixando a chave do Storage Sync Services
+
+Pré-requisistos On Premisses - Instalar o azure file snync agent e Registrar o Server
+
+
+Availability - Revisar
+Fault Domain - 1:50:00
+
+O que você tem que ajustar pro Availability Set - Managed Disks, microsoft recomenda o uso
+
+NETWORK
+
+Se tenho um PEERING ou seja duas VNETs conectadas e preciso alterar o ADDRESS SPACE
+Deleto o PEERING e recrio novamente pois ele cria regras de roteamanto entre os PEERING
+pergunta: O que eu faço pra colocar uma máquima que não está na mimha rede?
+Adicionar ADDRESS SPACE
+
+
+
+
+
+
+Cada VNET tem seu próprio CIDR RFC 1918
+
+Nunca mude o IP via config do SO sempre pelo AZPORTAL ou PS
+
+ADDS - Actvive Directory Domain Services
+
+AAD - Azure Active Directory
+Connects with local DC via AD connect installed on premises server
+
+Password Right Back needs to be enable when insatlling AD Connects
+By default Password hashes synchronizes from OnPremises to AAD
+
+
+
+INITIATIVE definition is a group of policies 
+Create a policy initiative. A policy initiative would include all the policies of interest. 
+Once your initiative is created, you can assign the definition to establish its scope.
+ A scope determines what resources or grouping of resources the policy assignment gets enforced on.
+
+
+
+
+
+
+
+
+
+Global vnet peering is NOT allowed in governement cloud regions (only same region)
+
+Virtual Net GW
+VPN type = Route Based (Dynamic route discovery, new vnets will BE auto discover)
+	   Policy-Based (Static Routing, new vnets will NOT be auto discover)
+
+SKU - To change from basic the you neeed to delete and create a new with desired SKU
+Basic - allow 10 tunnels and 100bps speed connection
+
+Express Route route premium add-on permits connection between Geopolitical regions
+Express Route Global Reach (connects via MS backbone)
+
+
+
+Deployment options for Express Route and VPN s2s co-existing connections
+are only available via Power Shell and NOT the Azure Portal 
+
+HUB and SPOKEN topology
+Access VNET from multiple OP sites (multiple offices sharing same VNET)
+
+VNET 2 VNET VPN
+2 VNET needs reliable comm to public internet
+Require 2 VPNGW allow intra-region traffic among all VNET 
+used for SQL high availability, distributing geo disimilar partition conn 
+from different VNET
+
+
+Each Route table can be associated to multiple subnets
+ but a subnet can be assigned to only one route table
+
+
+Load Balancer
+SKU cannot be changed after LB creation
+Standard SKU is new with more resources
+LB rule cannot spam across 2 VNETs you cannot have 2 vm in different VNET and connect with one single LB
+LB is geo binded to region and VNET
+
+BASIC LB has no charge is open to the public, 100 estances on backend pool
+STANDARD are charged by use, numer of rules and the ammount of data processed
+Zone redundancy zone frontends for IN and OUTbound is closed for public IP y default 
+up~to 1000 estances on backend pool
+
+LB fronte end are not accessible accoress VNET global peering 
+For default LB method is five tuple hash (Source IP Dest Source port Dest port protocol type)
+Mandatory config for LB:
+Front End IP
+Back End pool
+Health probes
+LB rule
+
+Traffic Manager supports non azure products
+LB accross REGIONS
+Multivalue - allow to get multiple healthy end popint in a simgle query DNS
+incrase availability and reduce latency for new DNS quwery
+Subnet - allow to map a set of end user ip add range, inspect the source ip and alolow if exist
+example you have a costumer from  a epecific subnet is reouted to a specific end point
+
+Nested End point - connect other traffic manager configured with a different routing method
+from the one being configured
+
+Higher Weight higher priority - default 1 from 1 to 1000 
+
+
+Security Groups low ID are processed first
+
+Snapshots
+To delete a File share you need to delete Snapshots first
+Snapshots are incrmentally
+You keep only the last Snapshot
+
+key vaults
+may be on different region but not different subscription
+
+
+
+
+
+
+
+
+
+
+
+
+
+Port numbers
+RDP (MSTESC)     - 3389
+SMB (File Share) - 445
+
+
+
+
+APP Service
+Bounded to a Region like a VM
+Auto Scale is not available on DEV tier, only manual scale
+Free tier don't support custom domain names
+
+
+Containers
+Virtual Machine - Virtualizes the hardware
+Containers - Virtulizes the Operation System
+
+Container registry is a personal repository of container images
+az container list -g sales -o table
+
+customer managed key only available on premimum SKU
+
+azaksget-credentials
+
+IIS
+c:/inetpub/wwwroot/index.html
+
+
+
+
+PS commands
+
+install-module az
+
+login-azurermaccount
+login-azaccount
+connect-azaccount
+get-azsubscription
+Get-AzContext
+
+Name                                     Account         SubscriptionNam Environment     TenantId      
+                                                         e                                             
+----                                     -------         --------------- -----------     --------      
+Free Trial (a1f3c97c-21d4-445b-8f6a-b... jmuniz1985@g.
+
+
+no AZ cli
+az login
+
+
+PowerShell, use the cmdlet New-AzureADUser. In the Azure CLI, use az ad user create.
+
+
+New-AzResourceGroup -Name <resource-group-name> -Location <resource-group-location> #use this command when you need to create a new resource group for your deployment
+New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -TemplateUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vm-simple-windows/azuredeploy.json
+
+get-AzVM 
+Remove-Azvm -ResourceGroupName RG1 -name SimpleWinVM
+
+
+SA
+New-AzStorageAccount -name storageaccountjmuniz1985 -location brazilsouth -SkuName Standard_LRS -ResourceGroupName RG1 -kind StorageV2
+
+StorageAccountName       ResourceGroupName PrimaryLocation SkuName      Kind      AccessTier CreationTime        ProvisioningState                                                                                                                     ly
+------------------       ----------------- --------------- -------      ----      ---------- ------------        ----------------- --
+storageaccountjmuniz1985 RG1               brazilsouth     Standard_LRS StorageV2 Hot        8/8/2020 9:19:59 PM Succeeded         Tr
+
+
+
+PS C:\Users\Jeff> 
+
+CSE
+Install IIS via sustom script extension:
+install-windowsfeature -name web-server
+Save as .ps1 file and upload to portal
+
+get-windowsfeature -name webserver
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Cada VNET tem seu próprio CIDR RFC 1918
+
+Nunca mude o IP via config do SO sempre pelo AZPORTAL ou PS
+
+ADDS - Actvive Directory Domain Services
+
+AAD - Azure Active Directory
+Connects with local DC via AD connect installed on premises server
+
+Password Right Back needs to be enable when insatlling AD Connects
+By default Password hashes synchronizes from OnPremises to AAD
+
+
+
+INITIATIVE definition is a group of policies 
+Create a policy initiative. A policy initiative would include all the policies of interest. 
+Once your initiative is created, you can assign the definition to establish its scope.
+ A scope determines what resources or grouping of resources the policy assignment gets enforced on.
+
+
+install-module az
+
+login-azurermaccount
+login-azaccount
+connect-azaccount
+get-azsuscription
+
+
+no AZ cli
+az login
+
+
+
+
+
+
+
+
+?????????????/
+You need to target policies and review spend budgets across several subscriptions you manage. What
+
+should you do?
+Create management groups. Management groups can be used to organize and manage subscriptions
+
+
+Resource groups cannot be nested.
+
+An ExpressRoute circuit with connectivity back to your on-premises network. 
+Resource locks prevent other users in your organization from accidentally deleting or
+ modifying critical resources
+
+Pergunta 5:
+Which of the following would be good example of when to use a resource lock?
+
+
+
+Assign her as a Resource Group owner. The new IT administrator needs to be able to assign permissions.
+
+Pergunta 6:
+Your company hires a new IT administrator. She needs to manage a resource group with first-tier web
+
+servers including assigning permissions . However, she should not have access to other resource groups
+
+inside the subscription. You need to configure role-based access. What should you do?
+
+
+
+Assign the user to the Contributor role on VM3. This means the user will not have access to VM1 or VM2. 
+The Contributor role will allow the user to change the settings on VM1.
+
+Pergunta 7:
+You have three virtual machines (VM1, VM2, and VM3) in a resource group. The Helpdesk hires a new
+
+employee. The new employee must be able to modify the settings on VM3, but not on VM1 and VM2.
+
+Your solution must minimize administrative overhead. What should you do?
+
+
+
+
+
+Each user account can be assigned multiple machines, is not true. The cloud shell is assigned one machine per user account.
+
+Pergunta 1:
+Which of the following is not true about the Cloud Shell?
+
+
+Connect-AzAccount. When you are working locally you are not automatically logged in to Azure. So, the first thing you should do is to connect to Azure and provide your credentials.
+
+Pergunta 2:
+You are managing Azure locally using PowerShell. You have launched the app as an Administrator. Which
+
+of the following commands would you do first?
+
+
+
+Tenant. A tenant cannot be moved between subscriptions
+
+Pergunta 3:
+You have a new Azure subscription and need to move resoures to that subscription. Which of the following
+
+resources cannot be moved?
+
+
+Inputs. Inputs is not a part of the template schema.
+
+Pergunta 4:
+Which of the following is not an element in the template schema?
+
+
+
+Request support increase your limit. If you need to increase a default limit, there is a Request Increase link. You will complete and submit the support request.
+
+Pergunta 6:
+You are reviewing your virtual machine usage. You notice that you have reached the limit for virtual
+
+machines in the US East region. Which of the following provides the easiest solution?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Azure Files and File Sync 
+Files vs Blobs 
+File storage5 offers shared storage for applications using the industry standard SMB protocol6. Microsoft Azure virtual machines and cloud services can share file data across application components via mounted shares, and on-premises applications can also access file data in the share. 
+Applications running in Azure virtual machines or cloud services can mount a file storage share to access file data, just as a desktop application would mount a typical SMB share. Any number of Azure virtual machines or roles can mount and access the File storage share simultaneously. 
+Common uses of file storage 
+1	Replace and supplement. Azure Files can be used to completely replace or supplement traditional on-premises file servers or NAS devices. 
+2	Access anywhere. Popular operating systems such as Windows, macOS, and Linux can directly mount Azure File shares wherever they are in the world. 
+3	Lift and shift. Azure Files makes it easy to “lift and shift” applications to the cloud that expect a file share to store file application or user data. 
+4	Azure File Sync. Azure File shares can also be replicated with Azure File Sync to Windows Servers, either on-premises or in the cloud, for performance and distributed caching of the data where it's being used. 
+5	Shared applications. Storing shared application settings, for example in configuration files. 
+6	Diagnostic data. Storing diagnostic data such as logs, metrics, and crash dumps in a shared location. 
+7	Tools and utilities. Storing tools and utilities needed for developing or administering Azure virtual machines or cloud services. 
+8	
+9	Comparing Files and Blobs 
+Sometimes it is difficult to decide when to use file shares instead of blobs or disk shares. Take a minute to review this table that compares the different features. 
+Feature 	Description 	When to use 
+Azure Files 	Provides an SMB interface, client libraries, and a REST interface that allows access from any¬where to stored files. 	You want to “lift and shift” an application to the cloud which already uses the native file system APIs to share data between it and other applica-tions running in Azure. You want to store development and debugging tools that need to be accessed from many virtual 
+Feature 	Description 	When to use 
+Azure Blobs 	Provides client libraries and a REST interface that allows unstructured data to be stored and accessed at a massive scale in block blobs. 	You want your application to support streaming and ran-dom-access scenarios.You want to be able to access application data from anywhere. 
+
+
+
+
+With the custom IPsec/IKE policy, you can now configure Azure route-based VPN gateways to use prefix-based traffic selectors with option "PolicyBasedTrafficSelectors", to connect to on-premises policy-based VPN devices. This capability allows you to connect from an Azure virtual network and VPN gateway to multiple on-premises policy-based VPN/firewall devices, removing the single connection limit from the current Azure policy-based VPN gateways.
+
+  ssssssssssssssss
+
+
+
+a1f3c97c-21d4-445b-8f6a-b04f55f98f6b
+
+{
+   "Name": "Support Request Contributor (Custom)",
+   "IsCustom": true,
+   "Description": "Allows to create support requests",
+   "Actions": [
+       "Microsoft.Resources/subscriptions/resourceGroups/read",
+       "Microsoft.Support/*"
+   ],
+   "NotActions": [
+   ],
+   "AssignableScopes": [
+       "/providers/Microsoft.Management/managementGroups/az104-02-mg1",
+       "/subscriptions/a1f3c97c-21d4-445b-8f6a-b04f55f98f6b"
+   ]
+}
+
+
+
+
+You can verify that your connection succeeded by using 
+the 'Get-AzVirtualNetworkGatewayConnection' cmdlet, with or without '-Debug'.
+
+Use the following cmdlet example, configuring the values
+ to match your own. If prompted, select 'A' in order to run 
+'All'. In the example, '-Name' refers to the name of the connection
+ that you want to test.
+
+Azure PowerShell
+
+Copy
+
+Try It
+Get-AzVirtualNetworkGatewayConnection -Name VNet1toSite1 -ResourceGroupName TestRG1
+After the cmdlet has finished, view the values. In the example below, the connection status shows as 'Connected' and you can see ingress and egress bytes.
+
+
+Copy
+"connectionStatus": "Connected",
+"ingressBytesTransferred": 3350904
+
+
+
+
+
+
+Get-AzVirtualNetworkGatewayConnection -Name VNet1toVNet4 -ResourceGroupName TestRG1
+
+
+
+
+
+
+
+ Get-AzVirtualNetworkGatewayConnection -Name VNet4toVNet1 -ResourceGroupName VNet4rg
+
+
+ SharedKey               : abc123
+ConnectionStatus        : Connected
+ 
+
+
+PS C:\Users\Jeff> Get-AzVirtualNetworkGatewayConnection -Name VNet1toVNet4 -ResourceGroupName VNet1rg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Example 3: Remove all resource groups
+
+Get-AzResourceGroup | Remove-AzResourceGroup
+
+
+
+
+
+
+
+
+
+
+
+
+
+
