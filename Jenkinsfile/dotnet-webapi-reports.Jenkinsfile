@@ -23,7 +23,7 @@ pipeline {
         JKS_PROJECT = "Gestao de Insumos"
 		VERSION = "${versao}"
         SONAR_PROJECT_URL='http://sonarqube.Machina.local/dashboard?id=Machina-tabela-reports'
-        CHAT_WEBHOOK='https://chat.googleapis.com/v1/spaces/AAAAaXyoe6w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=T3KGSnrUwDfxQjXd82ysNhz3pp1O_TADWdBk8-rWHgc%3D'
+        CHAT_WEBHOOK='https://chat.googleapis.com/v1/spaces/$$$INSERIR-TOKEN'
 		API_NAME = 'reports'
         FORTIFY_PROJECT_NAME='tabela-Machina-webapi-reports'
     }
