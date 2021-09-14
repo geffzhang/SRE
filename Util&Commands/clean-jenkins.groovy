@@ -1,4 +1,6 @@
-def jobName = "EC/est-api-autoec/feature%2FEC-4121-Integracao-PID-socio"
+https://jenkins-qa.itpreprodb.com/script
+
+def jobName = "EC/est-frt-autoec/qa"
 def job = Jenkins.getInstance().getItemByFullName(jobName, Job.class)
 job.getBuilds().each { it.delete() }
 job.nextBuildNumber = 1
